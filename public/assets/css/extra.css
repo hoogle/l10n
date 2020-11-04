@@ -1,0 +1,210 @@
+.loaderWrapper {
+    position: absolute;
+    top: 0;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255, .5);
+    display: none;
+}
+*[data-stat="loading"] > .loaderWrapper {
+    display: block;
+}
+#form-signin #msg {
+    font-size: 16px;
+    color: red;
+}
+#form-signin #msg ul {
+    display: none;
+}
+#form-signin .parsley-errors-list > li { font-size: 16px; }
+#form-signin #msg ul.filled:first-child {
+    display: inline-block;
+}
+#device_status div[id ^="status-"] .my-emptyText{
+    padding: 100px 0;
+    display: none;
+}
+#device_status div[id ^="status-"][data-row="0"] .my-emptyText{
+    display: block;
+}
+#device_status div[id ^="status-"][data-row="0"] .tabContent{
+    display: none;
+}
+#statistics .my-map-card a {
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+div[id^=ann-page] h4.page-title {display: none;}
+div[id^=ann-page] ol.breadcrumb {display: none;}
+#ann-page-add h4:nth-child(1), #ann-page-add ol.breadcrumb.add {
+    display: block;
+}
+#ann-page-edit h4:nth-child(2), #ann-page-edit ol.breadcrumb.edit  {
+    display: block;
+}
+#ann-page-add .delBtn {
+    display: none;
+}
+
+#sys-message {
+    position: absolute;
+    top: -60px;
+    transition: all .5s linear;
+    z-index: 9;
+}
+#sys-message.action {
+    top: 60px;
+}
+.my-emptyText {
+    display: none;
+    text-align: center;
+}
+.my-defaultText {
+    display: none;
+    padding: 100px 0;
+}
+.listWrapper .tableWrapper {
+    display: none;
+}
+.listWrapper[data-size="0"] .my-emptyText {
+    display: block;
+ }
+.listWrapper:not([data-size="-1"]):not([data-size="0"]) .tableWrapper {
+    display: block;
+}
+body[id="admin_announcement_history"] .listWrapper[data-size="-1"] .my-defaultText {
+    display: block;
+ }
+body[id^="admin_announcement"] .listWrapper:not([data-size=""]):not([data-size="0"]):not([data-size="-1"]) .tableWrapper {
+    display: block;
+}
+body[id^="admin_announcement"] .bootstrap-timepicker input[readonly] {background-color: #fff; opacity: 1}
+
+/*genesis & iot*/
+body[data-iot="1"] #sidebar-menu a[href^="/system/psk"] { display: none; }
+body[data-iot="1"] #sidebar-menu a[href^="/organization/vip"] { display: none; }
+#admin_account:not([data-acc-type=root]) *[data-col=acc], #admin_account:not([data-acc-type=root]) *[data-col=org] {
+    display: none;
+}
+#organization_location_detail *[data-proj=iot] .nav-tabs {
+    display: none;
+}
+body[id^="system_device_ui"] #wrapper .side-menu.left {
+    display: none;
+}
+body[id^="system_device_ui"] #wrapper .content-page {
+    margin-left: 0 !important;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: block;
+}
+body[id^="system_device_ui"] #wrapper .content-page > .content {
+    margin-top: 0;
+}
+body[id^="system_device_ui"] .topbar { display: none; }
+body[id^="system_device_ui"] .tab-content { position: relative; }
+body[id^="system_device_ui"] .tab-mask {
+    display: none;
+    position: absolute;
+    z-index: 99;
+    background: #000;
+    opacity: .65;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+body[id^="system_device_ui"] .tab-mask .msg {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+body[id^="system_device_ui"] .tab-mask .msg > p {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+body[id^="system_device_ui"] .tab-mask .msg > p, .tab-mask .loader02 { display: none; }
+#tab-wifi .fa-exclamation-triangle, #device_setting .devicePanel .fa-exclamation-triangle {
+    visibility:  hidden;
+}
+body[id^="system_device_ui"] #sys-message.action {
+    top: 0;
+}
+#device_setting[data-online="0"] .devicePanel .fa-exclamation-triangle, #device_setting[data-online="0"] #tab-wifi .fa-exclamation-triangle {
+    visibility: visible;
+}
+/*#device_setting[data-online="0"]:not([data-page="operation"]) .tab-mask {*/
+#device_setting[data-online="0"]:not([data-page="operation"]) .tab-mask .msg p.offline { display:table-cell; }
+#device_setting[data-online="0"]:not([data-page="operation"]) .tab-mask {
+    display: block;
+}
+#device_setting[data-stat="loading"] .tab-mask .loader02,  #device_setting[data-stat="loading"] .tab-mask {
+    display: block;
+}
+#device_setting #tab-pairedDevice[data-stat=empty] .my-emptyText {
+    display: block;
+}
+#device_setting #tab-pairedDevice[data-stat=empty] table {
+    display: none;
+}
+.devicePanel { color: #5fbeaa; }
+.nav.nav-tabs+.tab-content { min-height: 450px; }
+/*map of IOT */
+body[data-iot="1"] #geochartWrapper {
+    padding: 0;
+    position: relative;
+}
+body[data-iot="1"] #my-map {
+    display: inline-block;
+    text-align: center;
+}
+body[data-iot="1"] #my-map svg {
+    transition: transform .2s;
+}
+body[data-iot="1"] #geochart-colors {
+    min-height: 350px;
+    display: inline-block;
+}
+body[data-iot="1"] #geochart-colors path {
+    z-index: -1;
+    stroke:#fff; /* choose a color for the border */
+    vector-effect: non-scaling-stroke;
+    transition: fill .4s ease;
+    stroke-width:1; /* control the countries borders width */
+    fill: #ccc;
+}
+body[data-iot="1"] #geochart-colors path[data-hasval='1']:hover {
+    stroke-width: 1;
+    stroke: #777;
+ -webkit-filter: drop-shadow( -5px -5px 5px #000 );
+            filter: drop-shadow( -5px -5px 5px #000 );
+    -webkit-filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+    filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));  
+}
+body[data-iot="1"] #regionInfo {
+    opacity: 0;
+    border:solid 1px #bdbdbd;
+    border-radius: 2px;
+    background-color: white;
+    position: absolute;
+    box-shadow: 0px 2px 2px 0px rgba(204, 204, 204, 0.6);
+    font-size: 12px;
+    padding: 10px;
+    -moz-box-shadow: 0px 2px 2px 0px rgba(204, 204, 204, 0.6);
+    -webkit-box-shadow: 0px 2px 2px 0px rgba(204, 204, 204, 0.6);
+    z-index: 9;
+    position: absolute;
+    transition: all .5s;
+}
+body[data-iot="1"] #regionInfo.active {
+    opacity: 1
+}
+body#organization_location[data-iot="1"] .nav-pills {
+    display: none;
+}

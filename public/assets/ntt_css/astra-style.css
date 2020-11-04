@@ -1,0 +1,52 @@
+body {
+	
+}
+.content-page-single .container {
+   max-width: 1024px;
+   margin: 0 auto;
+   display: block;
+}
+
+.contact-card .my-member-info {
+	padding: 0 0 0px 100px;
+}
+
+.contact-card .my-img-rounded {
+	border-radius: 8px;
+}
+
+.contact-card .my-contact-card-title {
+	font-weight: bold;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;		  
+	overflow: hidden;
+	white-space: nowrap;
+	width:95%;
+	display:block;
+}
+
+.my-profile-img {
+	border-radius: 8px;
+	width: 130px;
+	height: 130px;
+}
+
+.my-profile-img2 {
+	width: 100%
+}
+
+.my-vip-info {
+	line-height: 30px;
+}
+.my-vip-info th{
+	width: 100px;
+	vertical-align: text-top;
+}
+
+.my-result-title {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+
+

@@ -1,0 +1,13 @@
+{
+    "name": "genesis-l10n",
+    "require": {
+        "aws/aws-sdk-php": "3.50.0",
+        "monolog/monolog": "1.23.0",
+	    "ramsey/uuid": "3.7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Astra\\": "src"
+        }
+    }
+}

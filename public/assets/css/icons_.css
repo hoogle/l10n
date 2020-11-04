@@ -1,0 +1,69 @@
+.md-add:before {
+  content: "\f0fb";
+}
+.md-edit:before {
+  content: "\f1fc";
+}
+.md-group-add:before {
+  content: "\f2d5";
+}
+.md-people:before {
+  content: "\f2d6";
+}
+.md-people-outline:before {
+  content: "\f2d7";
+}
+.md-phone-iphone:before {
+  content: "\f1c6";
+}
+.md-account-circle:before {
+  content: "\f006";
+}
+.md-close:before {
+  content: "\f29a";
+}
+.md-signal-cellular-0-bar:before {
+  content: "\f151";
+}
+.md-signal-cellular-1-bar:before {
+  content: "\f152";
+}
+.md-signal-cellular-2-bar:before {
+  content: "\f153";
+}
+.md-signal-cellular-3-bar:before {
+  content: "\f154";
+}
+.md-signal-cellular-4-bar:before {
+  content: "\f155";
+}
+.md-face-unlock:before {
+  content: "\f029";
+}
+.md-business:before {
+  content: "\f0d4";
+}
+.md-phone-iphone:before {
+  content: "\f1c6";
+}
+.md-face-unlock:before {
+  content: "\f029";
+}
+.md-replay:before {
+  content: "\f0c4";
+}
+.md-remove:before {
+  content: "\f111";
+}
+.md-album:before {
+  content: "\f0a2";
+}
+.md-menu:before {
+  content: "\f2a1";
+}
+.md-schedule:before {
+  content: "\f05e";
+}
+.md-history:before {
+  content: "\f035";
+}
