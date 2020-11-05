@@ -32,19 +32,19 @@
                     KEY
                     </div>
                     <div class="col-sm-2 text-center">
-                    EN
+                    en-US
                     </div>
                     <div class="col-sm-2 text-center">
-                    JP
+                    ja-JP
                     </div>
                     <div class="col-sm-2 text-center">
-                    ZH 
+                    zh-TW
                     </div>
                     <div class="col-sm-2 text-center">
-                    ID 
+                    id-ID
                     </div>
                     <div class="col-sm-2 text-center">
-                    MY
+                    ms-MY
                     </div>
                     <div class="col-sm-1">
                     </div>
@@ -65,19 +65,19 @@
         <input type="text" class="form-control text-center text-muted" name="keyword" value="{keyword}" readonly/>
         </div>
         <div class="col-sm-2">
-        <input type="text" class="form-control" name="en" value="{en-US}" readonly/>
+        <input type="text" class="form-control" name="enus" value="{en-US}" readonly/>
         </div>
         <div class="col-sm-2">
-        <input type="text" class="form-control" name="ja" value="{ja-JP}" readonly/>
+        <input type="text" class="form-control" name="jajp" value="{ja-JP}" readonly/>
         </div>
         <div class="col-sm-2">
-        <input type="text" class="form-control" name="zh" value="{zh-TW}" readonly/>
+        <input type="text" class="form-control" name="zhtw" value="{zh-TW}" readonly/>
         </div>
         <div class="col-sm-2">
-        <input type="text" class="form-control" name="id" value="{id-ID}" readonly/>
+        <input type="text" class="form-control" name="idid" value="{id-ID}" readonly/>
         </div>
         <div class="col-sm-2">
-        <input type="text" class="form-control" name="my" value="{ms-MY}" readonly/>
+        <input type="text" class="form-control" name="msmy" value="{ms-MY}" readonly/>
         </div>
         <div class="col-sm-1">
         <button type="submit" class="btn btn-default waves-effect waves-light btn-md">Save</button>
@@ -102,33 +102,33 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">EN</label>
+                    <label class="col-md-2 control-label">en-US</label>
                     <div class="col-md-10">
-                        <input type="text" name="en" class="form-control" required>
+                        <input type="text" name="enus" class="form-control" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">JP</label>
+                    <label class="col-md-2 control-label">ja-JP</label>
                     <div class="col-md-10">
-                        <input type="text" name="jp" class="form-control" required>
+                        <input type="text" name="jajp" class="form-control" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">ZH</label>
+                    <label class="col-md-2 control-label">zh-TW</label>
                     <div class="col-md-10">
-                        <input type="text" name="zh" class="form-control" required>
+                        <input type="text" name="zhtw" class="form-control" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">ID</label>
+                    <label class="col-md-2 control-label">id-ID</label>
                     <div class="col-md-10">
-                        <input type="text" name="id" class="form-control" required>
+                        <input type="text" name="idid" class="form-control" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">MY</label>
+                    <label class="col-md-2 control-label">ms-MY</label>
                     <div class="col-md-10">
-                        <input type="text" name="my" class="form-control" required>
+                        <input type="text" name="msmy" class="form-control" required>
                     </div>
                 </div>
             </div>

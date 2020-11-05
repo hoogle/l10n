@@ -61,11 +61,11 @@ class Index extends MY_Controller {
 
     public function update() {
         $id = $this->input->post("id");
-        $lang_en = $this->input->post("en");
-        $lang_ja = $this->input->post("ja");
-        $lang_zh = $this->input->post("zh");
-        $lang_id = $this->input->post("id");
-        $lang_ms = $this->input->post("ms");
+        $lang_en = $this->input->post("enus");
+        $lang_ja = $this->input->post("jajp");
+        $lang_zh = $this->input->post("zhtw");
+        $lang_id = $this->input->post("idid");
+        $lang_ms = $this->input->post("msmy");
         $platform = $this->input->post("platform");
         $db_data = $this->l10n_model->get($id);
         $data = [

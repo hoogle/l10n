@@ -84,7 +84,7 @@ final class L10n_model extends MY_Model
     }
 
     public function update_translate($id, $data) {
-        foreach (["`en-US`", "`ja-JP`", "`zh-TW`"] as $use_lang) {
+        foreach (["`en-US`", "`ja-JP`", "`zh-TW`", "`id-ID`", "`ms-MY`"] as $use_lang) {
             if (isset($data[$use_lang])) {
                 $data[$use_lang] = str_replace("'", "&#39;", $data[$use_lang]);
             }
