@@ -35,15 +35,12 @@
         <div class="account-pages"></div>
         <div class="clearfix"></div>
         <div class="wrapper-page">
-        	<div class=" card-box">
-            <?php echo $layout["content"]; ?>
-            
-            
-        </div>
-        
-        
+        	<div class="card-box">
 
-        
+            <?php echo $layout["content"]; ?>
+ 
+        </div>
+ 
     	<script>
             var resizefunc = [];
         </script>

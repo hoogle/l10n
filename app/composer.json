@@ -1,9 +1,10 @@
 {
-    "name": "genesis-l10n",
+    "name": "astra/l10n",
     "require": {
-        "aws/aws-sdk-php": "3.50.0",
-        "monolog/monolog": "1.23.0",
-	    "ramsey/uuid": "3.7.1"
+        "aws/aws-sdk-php": "^3.91",
+        "monolog/monolog": "^1.24",
+        "ramsey/uuid": "^3.8",
+        "google/apiclient": "^2.7"
     },
     "autoload": {
         "psr-4": {

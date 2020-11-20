@@ -83,7 +83,7 @@ $(function () {
             console.log(rs, 'fetchTranslate');
             if (rs.data.length < 1) {
                 $translateList.find('button[type=submit]').prop('disabled', false);
-                alert('OOOOps! Key not found');
+                alert('Key not found');
                 $searchForm[0].key.value= keyValue;
                 // location.reload();
                 return;

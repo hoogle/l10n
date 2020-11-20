@@ -12,6 +12,7 @@ final class L10n_model extends MY_Model
 		parent::__construct();
 		$this->table = "l10n";
 		$this->table_user = "l10n_user";
+		$this->table_translate = "translate";
 	}
 
 	/**
@@ -100,6 +101,12 @@ final class L10n_model extends MY_Model
         $DB->where("email", $email);
         $DB->update($this->table_user, $data);
         return $DB->affected_rows();
+    }
+
+    public function translator($data) {
+        $DB = $this->_get_db();
+        $DB->insert($this->table_translate, $data);
+        return $DB->insert_id();
     }
 
     public function get_template_error_data($table = "template") {

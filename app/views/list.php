@@ -65,19 +65,19 @@
         <input type="text" class="form-control text-center text-muted" name="keyword" value="{keyword}" readonly/>
         </div>
         <div class="col-sm-2">
-        <input type="text" class="form-control" name="enus" value="{en-US}" readonly/>
+        <input type="text" class="form-control" name="enus" value="{en-US}" placeholder="{en-US}" readonly/>
         </div>
         <div class="col-sm-2">
-        <input type="text" class="form-control" name="jajp" value="{ja-JP}" readonly/>
+        <input type="text" class="form-control" name="jajp" value="{ja-JP}" placeholder="{ja-JP}" readonly/>
         </div>
         <div class="col-sm-2">
-        <input type="text" class="form-control" name="zhtw" value="{zh-TW}" readonly/>
+        <input type="text" class="form-control" name="zhtw" value="{zh-TW}" placeholder="{zh-TW}" readonly/>
         </div>
         <div class="col-sm-2">
-        <input type="text" class="form-control" name="idid" value="{id-ID}" readonly/>
+        <input type="text" class="form-control" name="idid" value="{id-ID}" placeholder="{id-ID}" readonly/>
         </div>
         <div class="col-sm-2">
-        <input type="text" class="form-control" name="msmy" value="{ms-MY}" readonly/>
+        <input type="text" class="form-control" name="msmy" value="{ms-MY}" placeholder="{ms-MY}" readonly/>
         </div>
         <div class="col-sm-1">
         <button type="submit" class="btn btn-default waves-effect waves-light btn-md">Save</button>
@@ -88,17 +88,23 @@
     <div id="myAdd" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form name="addKey" class="form-horizontal" role="form" action="/l10n/translate/add" data-parsley-validate novalidate>
+            <form name="addKey" class="form-horizontal" role="form" action="/index/add" data-parsley-validate novalidate>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">New Key</h4>
+                <h4 class="modal-title" id="myModalLabel">New Keyyyy</h4>
             </div>
             <div class="modal-body">
             <input type="hidden" name="platform" value="<?php echo $platform; ?>">
                 <div class="form-group">
-                    <label class="col-md-1 control-label">Keyword</label>
+                    <label class="col-md-2 control-label">Keyword</label>
                     <div class="col-md-10">
-                        <input type="text" name="keyword" class="form-control" value="" required>
+                        <input type="text" name="keyword" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Default String</label>
+                    <div class="col-md-10">
+                        <input type="text" name="d4str" class="form-control" required>
                     </div>
                 </div>
                 <div class="form-group">
