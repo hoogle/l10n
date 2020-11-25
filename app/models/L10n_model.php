@@ -158,11 +158,15 @@ final class L10n_model extends MY_Model
         return $data ? ["data" => $data, "rows" => $num_rows] : [];
     }
 
-    public function get_translate($platform) {
+    public function get_translate($p) {
+        list($production, $platform) = explode("_", $p);
         $DB = $this->_get_db();
-        $DB->order_by("view_path");
-        $DB->where("platform", $platform);
-        $data = $DB->get($this->table)->result_array();
+        $where_arr = [
+            "production" => $production,
+            "platform"   => $platform,
+        ];
+        $DB->order_by("id ASC");
+        $data = $DB->get_where($this->table_translate, $where_arr)->result_array();
         return $data ?: FALSE;
     }
 

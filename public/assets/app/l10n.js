@@ -29,7 +29,7 @@ $(function () {
     const transListRowTemp = $('#transListRowTemp').html();
     const baseURL = '/index';
     const myURL = new URL(window.location.href);
-    const platform = myURL.searchParams.get('platform') ? myURL.searchParams.get('platform') : $('#platform').html();
+    const platform = myURL.searchParams.get('p') ? myURL.searchParams.get('p') : $('#platform').html();
     let keyValue = '';
     // **********************
     // initPagination
@@ -75,7 +75,7 @@ $(function () {
         const destroyPagi = doDestroyPagi !== undefined ? doDestroyPagi : false;
         let url = '/index/page/' + page;
         const formData = {
-            platform : platform,
+            p: platform,
             key: key
         };
         $translateList.find('button[type=submit]').prop('disabled', true);
@@ -225,6 +225,38 @@ $(function () {
         self.find('button[type=submit]').prop('disabled', true);
         $.post('/index/add', self.serializeArray(), function(rs) {
             $('#myAdd').modal('hide');
+            self[0].reset();
+            self.find('button[type=submit]').prop('disabled', false);
+            if (rs.status === 'ok') {
+                fetchTranslate(1, '', true);
+                swal({
+                    title: "Done",
+                    type: "success",
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                return;
+            } else {
+                swal({
+                    title: "Error",
+                    type: "error",
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                return;
+            }
+        }, 'json');
+    });
+
+    $('form[name=exportIt]').submit(function (e) {
+        e.preventDefault();
+        const self = $(this);
+        self.find('button[type=submit]').prop('disabled', true);
+        const exportPara = {
+            p: platform
+        }
+        $.get('/tool/export', exportPara, function(rs) {
+            $('#myExport').modal('hide');
             self[0].reset();
             self.find('button[type=submit]').prop('disabled', false);
             if (rs.status === 'ok') {

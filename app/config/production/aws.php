@@ -7,9 +7,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $config['s3']['region']  = 'ap-southeast-1';
 $config['s3']['profile'] = '';
 $config['s3']['bucket']  = [
-    'GENESIS_SOUTHEAST' => 'genesis-ap-southeast-1',
-    'PORTAL_ASTRA_CLOUD' => 'portal.astra.cloud',
-    'WAREHOUSE_ASTRA_CLOUD' => 'warehouse.astra.cloud',
     'PORTAL_GOFACE_ME' => 'portal.goface.me',
 ];
 $config['s3']['folder'] = [

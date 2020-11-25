@@ -28,16 +28,22 @@ class Index extends MY_Controller {
 			$this->load->view("layout/layout_l10n_box", ["layout" => $layout]);
         } else {
             $platform_arr = $this->translate_model->get_platforms();
-            $platform = $this->input->get("platform");
+            $p = $this->input->get("p");
             $data["platform_arr"] = $platform_arr;
-            $data["platform"] = $platform ?: $platform_arr[0]["platform"];
+            if ($p) {
+                list($data["production"], $data["platform"]) = explode("_", $p);
+            } else {
+                $data["production"] = $platform_arr[0]["production"];
+                $data["platform"]   = $platform_arr[0]["platform"];
+            }
             $layout["content"] = $this->load->view("/list", $data, TRUE);
             $this->load->view("layout/layout_l10n", ["layout" => $layout, "data" => $data]);
         }
     }
 
     public function page($page = 1) {
-        $platform = $this->input->get_post("platform");
+        $p = $this->input->get_post("p");
+        list($production, $platform) = explode("_", $p);
         if ( ! $per_page = $this->input->get_post("per_page")) {
             $this->config->load("pagination");
             $per_page = $this->config->item("per_page");

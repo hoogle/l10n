@@ -6,14 +6,7 @@
 $config['s3']['region']  = 'ap-southeast-1';
 $config['s3']['profile'] = 'genesis-dev';
 $config['s3']['bucket']  = [
-    'GENESIS_SOUTHEAST' => 'genesis-ap-southeast-1',
-    'PORTAL_ASTRA_CLOUD' => 'portal.astra.cloud',
-    'WAREHOUSE_ASTRA_CLOUD' => 'warehouse.astra.cloud',
-    'PORTAL_GOFACE_ME' => 'portal.goface.me',
-];
-$config['s3']['folder'] = [
-    'DEVICE_REPORT_FILES' => 'device_report_files',
-    'FACE_FOLDER' => 'face',
+    'L10N' => 'l10n-ap-southeast-1',
 ];
 $config['s3']['hostname'] = [
     'S3_HOSTNAME' => 'https://s3-ap-southeast-1.amazonaws.com'
