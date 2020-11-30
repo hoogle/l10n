@@ -7,7 +7,7 @@
 
                 <form class="user">
                     <a href="<?php echo $gl_login_url; ?>" class="btn btn-google btn-user btn-block">
-                        <i class="fab fa-google fa-fw"></i> Login with Google
+                        <i class="fa fa-google fa-fw"></i> Login with Google
                     </a>
                 </form>
 
