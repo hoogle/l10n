@@ -95,9 +95,9 @@ class Tool extends MY_Controller {
             $json_arr["ms-MY"][$row["keyword"]] = $row["ms-MY"];
         }
 
+        $this->load->config("aws");
+        $s3_config = $this->config->item("s3");
         foreach (["en-US", "ja-JP", "zh-TW", "id-ID", "ms-MY"] as $use_lang) {
-            $this->load->config("aws");
-            $s3_config = $this->config->item("s3");
             $filename = $use_lang . ".json";
             $filepath = "{$production}/{$platform}/" . $filename;
             $json_str = json_encode($json_arr[$use_lang]);
@@ -114,6 +114,9 @@ class Tool extends MY_Controller {
                 $resp["status"] = "fail";
                 break;
             }
+        }
+        if ($resp["status"] == "ok") {
+            AwsS3::get_instance()->pub_object($s3_config["bucket"]["L10N"], "{$production}/{$platform}/all_lang.json", json_encode($json_arr));
         }
 
         echo json_encode($resp, TRUE);
