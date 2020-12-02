@@ -5,7 +5,7 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'mysql:host=rds.astra.ap-southeast-1.local;dbname=genesis',
+	'dsn'	=> 'mysql:host=rds.astra.ap-southeast-1.local;dbname=l10n',
 	'hostname' => '',
 	'username' => 'api',
 	'password' => 'H3q94}>UnX',
