@@ -16,7 +16,7 @@ class Index extends MY_Controller {
         $data = [
             "title" => "Translation tool",
         ];
-		if ( ! isset($_SESSION["l10n_email"])) {
+        if ( ! isset($_SESSION["l10n_email"])) {
             $gclient = new Google_Client();
             $gclient->setAuthConfig(GL_OAUTH2_SECRET);
             $gclient->addScope([Google_Service_Oauth2::USERINFO_EMAIL, Google_Service_Oauth2::USERINFO_PROFILE]);
@@ -27,16 +27,13 @@ class Index extends MY_Controller {
             $layout["content"] = $this->load->view("login", $data, TRUE);
 			$this->load->view("layout/layout_l10n_box", ["layout" => $layout]);
         } else {
-            $platform_arr = $this->translate_model->get_platforms();
-            $p = $this->input->get("p");
-            $data["platform_arr"] = $platform_arr;
-            if ($p) {
-                list($data["production"], $data["platform"]) = explode("_", $p);
+            $data["platform_arr"] = $this->translate_model->get_platforms();
+            if ( ! $p = $this->input->get("p")) {
+                $layout["content"] = $this->load->view("/home", $data, TRUE);
             } else {
-                $data["production"] = $platform_arr[0]["production"];
-                $data["platform"]   = $platform_arr[0]["platform"];
+                list($data["production"], $data["platform"]) = explode("_", $p);
+                $layout["content"] = $this->load->view("/list", $data, TRUE);
             }
-            $layout["content"] = $this->load->view("/list", $data, TRUE);
             $this->load->view("layout/layout_l10n", ["layout" => $layout, "data" => $data]);
         }
     }

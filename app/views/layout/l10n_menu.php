@@ -7,11 +7,17 @@
 
                         	<li class="text-muted menu-title">Platform Edit</li>
 
+<?php if ( ! $platform_arr) : ?>
+                            <li class="">
+                                <a class="waves-effect"><i class="fa fa-info-circle"></i><span>No data yet</span></a>
+                            </li>
+<?php else : ?>
 <?php foreach ($platform_arr as $pf) : ?>
                             <li class="">
                                 <a href="/?p=<?php echo $pf["production"] . "_" . $pf["platform"]; ?>" class="waves-effect"><i class="ti-pencil-alt"></i><span><?php echo $pf["production"] . " -> " . $pf["platform"]; ?></span></a>
                             </li>
 <?php endforeach ?>
+<?php endif ?>
 
 
                         </ul>

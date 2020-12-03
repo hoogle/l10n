@@ -124,8 +124,19 @@ final class L10n_model extends MY_Model
 
     public function update_user_data($data) {
         $DB = $this->_get_db();
-        $DB->where("email", $data["email"]);
-        $DB->update($this->table_user, $data);
+        $user = $DB->get_where($this->table_user, ["email" => $data["email"]])->row_array();
+        if ( ! $user) {
+            $data = [
+                "email" => $data["email"],
+                "last_update" => json_encode([], JSON_FORCE_OBJECT),
+                "created_at" => date("Y-m-d H:i:s"),
+                "last_login_at" => date("Y-m-d H:i:s"),
+            ];
+            $DB->insert($this->table_user, $data);
+        } else {
+            $DB->where("email", $data["email"]);
+            $DB->update($this->table_user, $data);
+        }
         return $DB->affected_rows() ? TRUE : FALSE;
     }
 
