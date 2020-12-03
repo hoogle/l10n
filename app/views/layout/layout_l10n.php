@@ -95,7 +95,6 @@
                                 <li class="dropdown top-menu-item-xs">
                                     <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"><i class="md-person-outline my-ti-user"><?php echo $_SESSION["l10n_email"]; ?></i></a>
                                     <ul class="dropdown-menu">
-                                        <li><a id="chgPwdBtn" href="javascript:void(0)"><i class="ti-power-off m-r-10 text-danger"></i> Change password</a></li>
                                         <li><a id="logoutBtn" href="javascript:void(0)"><i class="ti-power-off m-r-10 text-danger"></i> Logout</a></li>
                                     </ul>
                                 </li>
