@@ -7513,3 +7513,6 @@ MIT License: https://github.com/driftyco/ionicons
   content: '\e14f';
   /* '' */
 }
+.rounded-circle {
+    border-radius: 50%!important;
+}

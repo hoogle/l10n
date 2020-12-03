@@ -11,7 +11,6 @@
 
     <link rel="shortcut icon" href="/assets/ntt_images/favicon_1.png" sizes="32x32">
 
-
     <title><?php echo $title; ?></title>
 
     <!--page css-->
@@ -93,7 +92,7 @@
 
                             <ul class="nav navbar-nav navbar-right pull-right">
                                 <li class="dropdown top-menu-item-xs">
-                                    <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"><i class="md-person-outline my-ti-user"><?php echo $_SESSION["l10n_email"]; ?></i></a>
+                                    <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"><?php echo $_SESSION["name"]; ?>&nbsp;<img class="img-profile rounded-circle" src="<?php echo $_SESSION["picture_url"]; ?>"></a>
                                     <ul class="dropdown-menu">
                                         <li><a id="logoutBtn" href="javascript:void(0)"><i class="ti-power-off m-r-10 text-danger"></i> Logout</a></li>
                                     </ul>
