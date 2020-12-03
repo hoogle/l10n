@@ -101,6 +101,7 @@
                 <h4 class="modal-title" id="myModalLabelAdd">New Key</h4>
             </div>
             <div class="modal-body">
+            <input type="hidden" name="production" value="<?php echo $production; ?>">
             <input type="hidden" name="platform" value="<?php echo $platform; ?>">
                 <div class="form-group">
                     <label class="col-md-2 control-label">Keyword</label>

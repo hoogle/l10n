@@ -115,8 +115,10 @@ class Index extends MY_Controller {
         $lang_ms = $this->input->post("msmy");
         $keyword = $this->input->post("keyword");
         $d4str   = $this->input->post("d4str");
+        $production = $this->input->post("production");
         $platform = $this->input->post("platform");
         $data = [
+            "production" => $production,
             "platform" => $platform,
             "keyword"  => $keyword,
             "default_str" => $d4str,
