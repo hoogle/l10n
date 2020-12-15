@@ -26,6 +26,8 @@ $(function () {
     const $logoutBtn = $('#logoutBtn');
     const $translateList = $('#translateList');
     const $pagination = $('#pagination');
+    const $copyURL = $('#copy-url');
+    const $s3URL = $('#s3-url');
     const transListRowTemp = $('#transListRowTemp').html();
     const baseURL = '/index';
     const myURL = new URL(window.location.href);
@@ -138,6 +140,15 @@ $(function () {
     $chgPwdBtn.click(function (e) {
         location.href = "/user/password";
         return;
+    });
+
+    $copyURL.click(function () {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($s3URL.text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+        alert("Copy S3 url to clipboard");
     });
 
     $logoutBtn.click(function (e) {

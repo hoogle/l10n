@@ -112,4 +112,13 @@ final class AwsS3
         return $result;
     }
 
+    public function get_object($bucket, $keyname) {
+        try {
+            $result = $this->_client->getObjectUrl($bucket, $keyname);
+        } catch (S3Exception $e) {
+            throw $e;
+        }
+        return $result;
+    }
+
 }

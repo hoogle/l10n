@@ -13,6 +13,12 @@
         <div class="card-box table-responsive">
             <h4 class="m-t-0 header-title"><b>Key List</b></h4>
             <div class="row">
+                <div class="col-sm-8 pull-left">
+                    <b style="color: #beaf5f">Export to S3 url: </b><br>
+                    <i id="copy-url" style="font-size:13px;cursor:pointer;" class="fa" style="color:red">&#xf0c5;</i>
+                    <a id="s3-url" target="_blank" href="<?php echo $s3_link; ?>"><?php echo $s3_link; ?></a>
+                    <i style="font-size:9px" class="fa">&#xf064;</i>
+                </div>
                 <div class="col-sm-4 pull-right">
                     <form name="searchTranslate" class="form-horizontal" method="post">
                     <div class="form-group m-r-10">
