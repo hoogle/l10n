@@ -85,7 +85,7 @@ class Tool extends MY_Controller {
     public function export() {
         $p = $this->input->get("p");
         list($production, $platform) = explode("_", $p);
-        $db_data = $this->l10n_model->get_translate("goface_portal");
+        $db_data = $this->l10n_model->get_translate($p);
         $json_arr = $resp = [];
         foreach ($db_data as $row) {
             $json_arr["en-US"][$row["keyword"]] = $row["en-US"];
