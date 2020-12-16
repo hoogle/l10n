@@ -16,7 +16,7 @@
                 <div class="col-sm-8 pull-left">
                     <b style="color: #beaf5f">Export to S3 url: </b><br>
                     <i id="copy-url" style="font-size:13px;cursor:pointer;" class="fa" title="Copy S3 url to clipboard">&#xf0c5;</i>
-                    <a id="s3-url" target="_blank" href="<?php echo $s3_link; ?>"><?php echo $s3_link; ?></a>
+                    <a id="s3-url" target="_blank" href="<?php echo $s3_link . "?t=" . time(); ?>"><?php echo $s3_link; ?></a>
                     <i style="font-size:9px" class="fa">&#xf064;</i>
                 </div>
                 <div class="col-sm-4 pull-right">
