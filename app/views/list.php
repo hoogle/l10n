@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-sm-8 pull-left">
                     <b style="color: #beaf5f">Export to S3 url: </b><br>
-                    <i id="copy-url" style="font-size:13px;cursor:pointer;" class="fa" style="color:red">&#xf0c5;</i>
+                    <i id="copy-url" style="font-size:13px;cursor:pointer;" class="fa" title="Copy S3 url to clipboard">&#xf0c5;</i>
                     <a id="s3-url" target="_blank" href="<?php echo $s3_link; ?>"><?php echo $s3_link; ?></a>
                     <i style="font-size:9px" class="fa">&#xf064;</i>
                 </div>
@@ -53,7 +53,7 @@
         <input type="hidden" name="platform" value="<?php echo $platform; ?>"/>
         <div class="col-sm-1">
             <input type="hidden" name="id" value="{id}">
-            <input type="text" class="form-control text-center text-muted" name="keyword" value="{keyword}" readonly/>
+            <input type="text" class="form-control text-center text-muted" name="keyword" value="{keyword}" title="{keyword}" readonly/>
         </div>
         <div class="col-sm-2">
             <input type="text" class="form-control" name="enus" value="{en-US}" placeholder="{en-US}" readonly/>
