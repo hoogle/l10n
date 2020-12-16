@@ -56,19 +56,19 @@
             <input type="text" class="form-control text-center text-muted" name="keyword" value="{keyword}" title="{keyword}" readonly/>
         </div>
         <div class="col-sm-2">
-            <input type="text" class="form-control" name="enus" value="{en-US}" placeholder="{en-US}" readonly/>
+            <input type="text" class="form-control" name="enus" value="{en-US}" placeholder="{en-US}" title="{en-US}" readonly/>
         </div>
         <div class="col-sm-2">
-            <input type="text" class="form-control" name="jajp" value="{ja-JP}" placeholder="{ja-JP}" readonly/>
+            <input type="text" class="form-control" name="jajp" value="{ja-JP}" placeholder="{ja-JP}" title="{ja-JP}" readonly/>
         </div>
         <div class="col-sm-2">
-            <input type="text" class="form-control" name="zhtw" value="{zh-TW}" placeholder="{zh-TW}" readonly/>
+            <input type="text" class="form-control" name="zhtw" value="{zh-TW}" placeholder="{zh-TW}" title="{zh-TW}" readonly/>
         </div>
         <div class="col-sm-2">
-            <input type="text" class="form-control" name="idid" value="{id-ID}" placeholder="{id-ID}" readonly/>
+            <input type="text" class="form-control" name="idid" value="{id-ID}" placeholder="{id-ID}" title="{id-ID}" readonly/>
         </div>
         <div class="col-sm-2">
-            <input type="text" class="form-control" name="msmy" value="{ms-MY}" placeholder="{ms-MY}" readonly/>
+            <input type="text" class="form-control" name="msmy" value="{ms-MY}" placeholder="{ms-MY}" title="{ms-MY}" readonly/>
         </div>
         <div class="col-sm-1">
             <button type="submit" class="btn btn-default waves-effect waves-light btn-md">Save</button>
