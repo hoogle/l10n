@@ -2169,6 +2169,13 @@ body.fixed-left .side-menu.left {
 .waves-block {
   display: block;
 }
+.d-flex { display: flex;}
+.justify-content-around { justify-content: space-around; }
+.translateCol { padding: 6px 1px;  flex: auto;}
+.translateCol textarea { height: 20px;}
+.translateCol textarea:hover { cursor: pointer; background-color:rgba(0, 150, 136, 0.3); border:none;}
+.translateCol textarea:focus { background-color:rgba(0, 150, 136, 0.7); border-color:rgba(0, 150, 136, 0) !important;}
+.translateCol textarea:read-only {border: none; resize: none; min-height:38px;}
 /* =============
    Print css
 ============= */

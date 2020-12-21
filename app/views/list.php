@@ -32,13 +32,15 @@
             </div>
             <div class="p-10">
                 <div class="row m-b-10" style="padding: 8px; font-weight: 600; vertical-align: bottom; border-bottom: 2px solid #ebeff2;">
-                    <div class="col-sm-1 text-center">KEY</div>
-                    <div class="col-sm-2 text-center">en-US</div>
-                    <div class="col-sm-2 text-center">ja-JP</div>
-                    <div class="col-sm-2 text-center">zh-TW</div>
-                    <div class="col-sm-2 text-center">id-ID</div>
-                    <div class="col-sm-2 text-center">ms-MY</div>
-                    <div class="col-sm-1"></div>
+                    <div class="d-flex justify-content-around">
+                        <div class="text-center">KEY</div>
+                        <div class="text-center">en-US</div>
+                        <div class="text-center">ja-JP</div>
+                        <div class="text-center">zh-TW</div>
+                        <div class="text-center">id-ID</div>
+                        <div class="text-center">ms-MY</div>
+                        <div class=""></div>
+                    </div>
                 </div>
                 <div id="translateList" class="col-sm-12"></div>
             </div>
@@ -49,28 +51,28 @@
 
 <template id="transListRowTemp">
     <div class="row translateRow m-b-10">
-        <form name="l10n_{id}">
+        <form name="l10n_{id}" class="d-flex">
         <input type="hidden" name="platform" value="<?php echo $platform; ?>"/>
-        <div class="col-sm-1">
+        <div class="translateCol">
             <input type="hidden" name="id" value="{id}">
-            <input type="text" class="form-control text-center text-muted" name="keyword" value="{keyword}" title="{keyword}" readonly/>
+            <textarea class="form-control text-center text-muted" name="keyword" title="{keyword}" readonly>{keyword}</textarea>
         </div>
-        <div class="col-sm-2">
-            <input type="text" class="form-control" name="enus" value="{en-US}" placeholder="{en-US}" title="{en-US}" readonly/>
+        <div class="translateCol">
+            <textarea class="form-control" name="enus" title="{en-US}" readonly>{en-US}</textarea>
         </div>
-        <div class="col-sm-2">
-            <input type="text" class="form-control" name="jajp" value="{ja-JP}" placeholder="{ja-JP}" title="{ja-JP}" readonly/>
+        <div class="translateCol">
+            <textarea class="form-control" name="jajp" title="{ja-JP}" readonly>{ja-JP}</textarea>
         </div>
-        <div class="col-sm-2">
-            <input type="text" class="form-control" name="zhtw" value="{zh-TW}" placeholder="{zh-TW}" title="{zh-TW}" readonly/>
+        <div class="translateCol">
+            <textarea  class="form-control" name="zhtw" title="{zh-TW}" readonly>{zh-TW}</textarea>
         </div>
-        <div class="col-sm-2">
-            <input type="text" class="form-control" name="idid" value="{id-ID}" placeholder="{id-ID}" title="{id-ID}" readonly/>
+        <div class="translateCol">
+            <textarea class="form-control" name="idid" title="{id-ID}" readonly>{id-ID}</textarea>
         </div>
-        <div class="col-sm-2">
-            <input type="text" class="form-control" name="msmy" value="{ms-MY}" placeholder="{ms-MY}" title="{ms-MY}" readonly/>
+        <div class="translateCol">
+            <textarea class="form-control" name="msmy" title="{ms-MY}" readonly>{ms-MY}</textarea>
         </div>
-        <div class="col-sm-1">
+        <div class="translateCol">
             <button type="submit" class="btn btn-default waves-effect waves-light btn-md">Save</button>
         </div>
         </form>
@@ -112,43 +114,43 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">Keyword</label>
                     <div class="col-md-10">
-                        <input type="text" name="keyword" class="form-control" required>
+                        <input type="text" name="keyword" class="form-control" required/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">Default String</label>
                     <div class="col-md-10">
-                        <input type="text" name="d4str" class="form-control" required>
+                        <textarea name="d4str" class="form-control" required rows="2"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">en-US</label>
                     <div class="col-md-10">
-                        <input type="text" name="enus" class="form-control" required>
+                        <textarea name="enus" class="form-control" required rows="2"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">ja-JP</label>
                     <div class="col-md-10">
-                        <input type="text" name="jajp" class="form-control" required>
+                        <textarea name="jajp" class="form-control" required rows="2"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">zh-TW</label>
                     <div class="col-md-10">
-                        <input type="text" name="zhtw" class="form-control" required>
+                        <textarea name="zhtw" class="form-control" required rows="2"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">id-ID</label>
                     <div class="col-md-10">
-                        <input type="text" name="idid" class="form-control" required>
+                        <textarea name="idid" class="form-control" required rows="2"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">ms-MY</label>
                     <div class="col-md-10">
-                        <input type="text" name="msmy" class="form-control" required>
+                        <textarea name="msmy" class="form-control" required rows="2"></textarea>
                     </div>
                 </div>
             </div>

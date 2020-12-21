@@ -6,6 +6,17 @@
 //********************************
 $.fn.replaceElString = function (target, value) {
     //console.log("replaceElStrig is executed.");
+    function escapeHtml(text) {
+        var map = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        };
+        
+        return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+      }
     $.each(value, function ( i , item) {
         if (item === null) {
             return;
@@ -13,7 +24,8 @@ $.fn.replaceElString = function (target, value) {
         var reg = new RegExp("{" + i + "}", "g");
         //console.log(reg.exec(target));
         //console.log("replace param:" + reg + ", value:" + item);
-        target = target.replace(reg, item);
+
+        target = target.replace(reg, escapeHtml(item));
     });
         //console.log("replace finished target:" + target);
         return target;
@@ -65,7 +77,7 @@ $(function () {
         console.log(eleBtn, 'targetBtn');
         $.post(url, formData, function (rs) {
             if (rs.status === 'ok') {
-                eleBtn.removeClass('btn-info').prop('disabled', false);
+                eleBtn.removeClass('btn-warning').prop('disabled', false);
                 return;
             }
         }, 'json');
@@ -78,7 +90,8 @@ $(function () {
         let url = '/index/page/' + page;
         const formData = {
             p: platform,
-            key: key
+            key: key,
+            per_page: 25
         };
         $translateList.find('button[type=submit]').prop('disabled', true);
         $.get(url, formData, function (rs) {
@@ -98,22 +111,38 @@ $(function () {
             $.each(rs.data, function (i, row) {
                 const temp = $($.fn.replaceElString(transListRowTemp, row));
                 const form = temp.find('form');
-                const targetInput = temp.find('input');
+                const targetInput = temp.find('textarea');
+                const targetCol = temp.find('.translateCol');
                 const submitBtn = temp.find('button[type=submit]');
+                let mobile = false;
                 $translateList.append(temp);
-                targetInput.click(function (e) {
-                    e.stopPropagation();
+                targetInput.on('focus touchstart', function (e) {
                     const name = $(this)[0].name;
+                    console.log(e,':click event');
+                    console.log(name + ':click');
+                    if (e.type === 'touchstart') {
+                        mobile = true;
+                        targetCol.parent().find('textarea:not([readOnly])').blur();
+                    }
                     if (name === 'id') {
+                        return;
+                    }
+                    $(this).parent().css('flex', '0 0 50%');
+                    if (name === 'keyword') {
                         return;
                     }
                     $(this).prop('readonly', false);
                 });
-                targetInput.change(function (e) {
-                    submitBtn.addClass('btn-info');
+                targetInput.on('change keyup paste', function (e) {
+                    console.log(e, ':change');
+                    console.log($(this).val());
+                    console.log($(this).attr('title'));
+                    submitBtn.addClass('btn-warning');
                 });
-                targetInput.blur(function (e) {
+                targetInput.on('focusout', function (e) {
+                    console.log(e, ':focus out');
                     $(this).prop('readonly', true);
+                    $(this).parent().css('flex', 'auto');
                 });
                 //
                 form.submit(function (e) {
