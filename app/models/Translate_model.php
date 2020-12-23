@@ -155,6 +155,9 @@ final class Translate_model extends MY_Model
             $DB->group_start();
             $DB->like("keyword", $key);
             $DB->or_like("default_str", $key);
+            foreach (["`en-US`", "`ja-JP`", "`zh-TW`", "`id-ID`", "`ms-MY`"] as $lang) {
+                $DB->or_like($lang, $key);
+            }
             $DB->group_end();
         }
         $tempdb = clone $DB;
