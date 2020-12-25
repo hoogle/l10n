@@ -31,6 +31,15 @@ $.fn.replaceElString = function (target, value) {
         return target;
 };
 
+function copyToClipboard(element) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    console.log($(element).text());
+    document.execCommand("copy");
+    $temp.remove();
+}
+  
 $(function () {
     const $signInForm = $('form[name=signIn]');
     const $searchForm = $('form[name=searchTranslate');
@@ -129,6 +138,7 @@ $(function () {
                     }
                     $(this).parent().css('flex', '0 0 50%');
                     if (name === 'keyword') {
+                        copyToClipboard($(this)[0]);
                         return;
                     }
                     $(this).prop('readonly', false);
