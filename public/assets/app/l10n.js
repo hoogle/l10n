@@ -74,7 +74,7 @@ $(function () {
     const updateLan = (formData, eleBtn) => {
         eleBtn.prop('disabled', true);
         let url = '/index/update';
-        console.log(eleBtn, 'targetBtn');
+        formData.map( item => (Object.assign(item, { value: item.value.replace(/'/g, "’") })))
         $.post(url, formData, function (rs) {
             if (rs.status === 'ok') {
                 eleBtn.removeClass('btn-warning').prop('disabled', false);
