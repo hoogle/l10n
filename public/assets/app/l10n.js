@@ -31,6 +31,15 @@ $.fn.replaceElString = function (target, value) {
         return target;
 };
 
+function copyToClipboard(element) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    console.log($(element).text());
+    document.execCommand("copy");
+    $temp.remove();
+}
+  
 $(function () {
     const $signInForm = $('form[name=signIn]');
     const $searchForm = $('form[name=searchTranslate');
@@ -76,7 +85,7 @@ $(function () {
     const updateLan = (formData, eleBtn) => {
         eleBtn.prop('disabled', true);
         let url = '/index/update';
-        console.log(eleBtn, 'targetBtn');
+        formData.map( item => (Object.assign(item, { value: item.value.replace(/'/g, "’") })))
         $.post(url, formData, function (rs) {
             if (rs.status === 'ok') {
                 eleBtn.removeClass('btn-warning').prop('disabled', false);
@@ -131,6 +140,7 @@ $(function () {
                     }
                     $(this).parent().css('flex', '0 0 50%');
                     if (name === 'keyword') {
+                        copyToClipboard($(this)[0]);
                         return;
                     }
                     $(this).prop('readonly', false);
