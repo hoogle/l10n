@@ -2,7 +2,7 @@
     <div class="col-sm-12">
         <div class="btn-group pull-right">
             <!-- Button trigger modal -->
-            <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#myAdd"><i class="fa fa-plus"></i> New Key</button>
+            <button class="btn btn-primary waves-effect waves-light" id="NewKeyBtn" data-toggle="modal" data-target="#myAdd"><i class="fa fa-plus"></i> New Key</button>
             <button class="btn btn-warning waves-effect waves-light" data-toggle="modal" data-target="#myExport"><i class="fa fa-share"></i> Export</button>
         </div>
         <h4 class="page-title">Environment : <span id="platform"><?php echo $production; ?> / <?php echo $platform; ?></span></h4>
@@ -111,46 +111,41 @@
             <div class="modal-body">
             <input type="hidden" name="production" value="<?php echo $production; ?>">
             <input type="hidden" name="platform" value="<?php echo $platform; ?>">
-                <div class="form-group">
-                    <label class="col-md-2 control-label">Keyword</label>
-                    <div class="col-md-10">
-                        <input type="text" name="keyword" class="form-control" required/>
-                    </div>
-                </div>
+            <input type="hidden" name="keyword" value="">
                 <div class="form-group">
                     <label class="col-md-2 control-label">Default String</label>
                     <div class="col-md-10">
-                        <textarea name="d4str" class="form-control" required rows="2"></textarea>
+                        <textarea name="d4str" class="form-control" rows="2"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">en-US</label>
                     <div class="col-md-10">
-                        <textarea name="enus" class="form-control" required rows="2"></textarea>
+                        <textarea name="enus" class="form-control" rows="2"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">ja-JP</label>
                     <div class="col-md-10">
-                        <textarea name="jajp" class="form-control" required rows="2"></textarea>
+                        <textarea name="jajp" class="form-control" rows="2"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">zh-TW</label>
                     <div class="col-md-10">
-                        <textarea name="zhtw" class="form-control" required rows="2"></textarea>
+                        <textarea name="zhtw" class="form-control" rows="2"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">id-ID</label>
                     <div class="col-md-10">
-                        <textarea name="idid" class="form-control" required rows="2"></textarea>
+                        <textarea name="idid" class="form-control" rows="2"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">ms-MY</label>
                     <div class="col-md-10">
-                        <textarea name="msmy" class="form-control" required rows="2"></textarea>
+                        <textarea name="msmy" class="form-control" rows="2"></textarea>
                     </div>
                 </div>
             </div>

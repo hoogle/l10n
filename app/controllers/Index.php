@@ -45,6 +45,13 @@ class Index extends MY_Controller {
     }
 
     public function page($page = 1) {
+        $order = $this->input->get_post("order");
+        $by = $this->input->get_post("by");
+        $order_arr = ["keyword", "en-US", "zh-TW", "ja-JP", "id-ID", "ms-MY"];
+        $by_arr = ["ASC", "DESC"];
+        if ( ! in_array($order, $order_arr)) $order = "keyword";
+        if ( ! in_array($by, $by_arr)) $by = "ASC";
+        $orderby_arr = [$order, $by];
         $p = $this->input->get_post("p");
         list($production, $platform) = explode("_", $p);
         if ( ! $per_page = $this->input->get_post("per_page")) {
@@ -55,9 +62,8 @@ class Index extends MY_Controller {
         $config["base_url"] = $this->config->item("base_url") . "/index/page/";
         $limit_start = ($page - 1) * $per_page;
         $key = $this->input->get_post("key");
-        $db_data = $this->translate_model->get_translate_by_page($limit_start, $per_page, $platform, $key);
+        $db_data = $this->translate_model->get_translate_by_page($limit_start, $per_page, $platform, $orderby_arr, $key);
         $config["total_rows"] = isset($db_data["rows"]) ? $db_data["rows"] : 0;
-        $this->pagination->initialize($config); 
         $data = $db_data ? $db_data["data"] : [];
 
         echo json_encode([
@@ -65,7 +71,6 @@ class Index extends MY_Controller {
             "pages"     => (int) ceil($config["total_rows"] / $per_page),
             "rows"      => $config["total_rows"],
             "curr_page" => $page,
-            "links"     => $this->pagination->create_links(),
         ], JSON_PARTIAL_OUTPUT_ON_ERROR);
     }
 
@@ -162,6 +167,10 @@ class Index extends MY_Controller {
             $resp["status"] = "fail";
         }
         echo json_encode($resp, TRUE);
+    }
+
+    public function get_last_id() {
+        echo $this->translate_model->get_last_id();
     }
 
     public function login() {

@@ -146,11 +146,11 @@ final class Translate_model extends MY_Model
         return $data ?: FALSE;
     }
 
-    public function get_translate_by_page($limit_start, $limit_length, $pf, $key = "") {
-        $this->load->library("pagination");
+    public function get_translate_by_page($limit_start, $limit_length, $pf, $orderby_arr = ["keyword", "DESC"], $key = "") {
         $DB = $this->_get_db();
         $DB->from($this->table);
         $DB->where("platform", $pf);
+        list($order, $by) = $orderby_arr;
         if ( ! empty($key)) {
             $DB->group_start();
             $DB->like("keyword", $key);
@@ -162,7 +162,7 @@ final class Translate_model extends MY_Model
         }
         $tempdb = clone $DB;
         $num_rows = $tempdb->count_all_results();
-        $DB->order_by("id", "ASC");
+        $DB->order_by($order, $by);
         $DB->limit($limit_length, $limit_start);
         $data = $DB->get()->result_array();
         log_message("INFO", "SQL : translate_model->get_translate_by_page() " . $DB->result_id->queryString);
@@ -175,6 +175,15 @@ final class Translate_model extends MY_Model
         $DB->order_by("id", "ASC");
         $data = $DB->get($this->table)->result_array();
         return $data ?: FALSE;
+    }
+
+    public function get_last_id() {
+        $DB = $this->_get_db();
+        $DB->select("id");
+        $DB->order_by("id", "DESC");
+        $DB->limit(1);
+        $data = $DB->get($this->table)->row_array();
+        return $data["id"] + 1 ?: FALSE;
     }
 
 }

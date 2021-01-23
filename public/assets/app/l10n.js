@@ -34,12 +34,14 @@ $.fn.replaceElString = function (target, value) {
 $(function () {
     const $signInForm = $('form[name=signIn]');
     const $searchForm = $('form[name=searchTranslate');
+    const $addkeyForm = $('form[name=addKey');
     const $chgPwdBtn = $('#chgPwdBtn');
     const $logoutBtn = $('#logoutBtn');
     const $translateList = $('#translateList');
     const $pagination = $('#pagination');
     const $copyURL = $('#copy-url');
     const $s3URL = $('#s3-url');
+    const $newkeyBtn = $('#NewKeyBtn');
     const transListRowTemp = $('#transListRowTemp').html();
     const baseURL = '/index';
     const myURL = new URL(window.location.href);
@@ -169,6 +171,12 @@ $(function () {
     $chgPwdBtn.click(function (e) {
         location.href = "/user/password";
         return;
+    });
+
+    $newkeyBtn.click(function (e) {
+        $.get('/index/get_last_id', function(data) {
+            $addkeyForm[0].keyword.value= data;
+        });
     });
 
     $copyURL.click(function () {
