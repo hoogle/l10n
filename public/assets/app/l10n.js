@@ -55,6 +55,7 @@ $(function () {
     const platform = myURL.searchParams.get('p') ? myURL.searchParams.get('p') : $('#platform').html();
     const $showKeyBtn = $('#showKeyBtn');
     const canModifyKey = $('input[name=email]').val() === 'mei@astra.cloud';
+    let curOrder = 'en-US';
     let keyValue = '';
     // **********************
     // initPagination
@@ -79,6 +80,12 @@ $(function () {
         });
     }
 
+    $('#mainColGroup div').click(function (e) {
+        console.log(e);
+        const order = e.currentTarget.id.replace('col_', '');
+        curOrder = order;
+        fetchTranslate(1, '', true);
+    });
     //
     //**/index/page/1?platform=genesis_msp_php
     //**id, en, ja
@@ -110,7 +117,7 @@ $(function () {
         const destroyPagi = doDestroyPagi !== undefined ? doDestroyPagi : false;
         let url = '/index/page/' + page;
         const formData = {
-            order: 'en-US',
+            order: curOrder,
             p: platform,
             key: key,
             per_page: 25,
@@ -131,6 +138,7 @@ $(function () {
                 $pagination.twbsPagination('destroy');
             }
             $translateList.empty();
+            $('#mainColGroup').attr('data-sort', curOrder);
             $.each(rs.data, function (i, row) {
                 const temp = $($.fn.replaceElString(transListRowTemp, row));
                 const form = temp.find('form');

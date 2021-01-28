@@ -2178,13 +2178,49 @@ body.fixed-left .side-menu.left {
 .translateCol textarea:focus { background-color:rgba(0, 150, 136, 0.7); border-color:rgba(0, 150, 136, 0) !important;}
 .translateCol textarea:read-only {border: none; resize:none; min-height:46px;}
 .keyCol { display: none;}
-#mainTable #showKeyBtn::before {
-}
 #mainTable[data-key = '1'] .keyCol {
   display: flex;
 }
 #mainTable[data-key = '1'] #showKeyBtn::before {
   content: "\e646";
+}
+#mainColGroup div {
+  cursor: pointer;
+}
+#mainColGroup[data-sort='en-US'] #col_en-US::after {
+  content: "\e71d";
+  padding: 6px;
+}
+#mainColGroup[data-sort='en-US'] #col_en-US {
+  color: #5fbeaa;
+}
+#mainColGroup[data-sort='ja-JP'] #col_ja-JP::after {
+  content: "\e71d";
+  padding: 6px;
+}
+#mainColGroup[data-sort='ja-JP'] #col_ja-JP {
+  color: #5fbeaa;
+}
+#mainColGroup[data-sort='zh-TW'] #col_zh-TW::after {
+  content: "\e71d";
+  padding: 6px;
+}
+#mainColGroup[data-sort='zh-TW'] #col_zh-TW {
+  color: #5fbeaa;
+}
+#mainColGroup[data-sort='id-ID'] #col_id-ID::after {
+  content: "\e71d";
+  padding: 6px;
+}
+#mainColGroup[data-sort='id-ID'] #col_id-ID {
+  color: #5fbeaa;
+}
+#mainColGroup[data-sort='ms-MY'] #col_ms-MY::after {
+  content: "\e71d";
+  padding: 6px;
+}
+#mainColGroup[data-sort='ms-MY'] #col_ms-MY {
+  color: #5fbeaa;
 }
 /* =============
    Print css

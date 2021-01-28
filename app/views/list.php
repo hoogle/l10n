@@ -38,14 +38,14 @@
             </div>
             <div class="p-10">
                 <div class="row m-b-10" style="padding: 8px; font-weight: 600; vertical-align: bottom; border-bottom: 2px solid #ebeff2;">
-                    <div class="d-flex justify-content-around">
+                    <div class="d-flex justify-content-around" id="mainColGroup">
                         <div class="text-center keyCol">KEY</div>
-                        <div class="text-center">en-US</div>
-                        <div class="text-center">ja-JP</div>
-                        <div class="text-center">zh-TW</div>
-                        <div class="text-center">id-ID</div>
-                        <div class="text-center">ms-MY</div>
-                        <div class=""></div>
+                        <div id="col_en-US" class="text-center ti-">en-US</div>
+                        <div id="col_ja-JP" class="text-center ti-">ja-JP</div>
+                        <div id="col_zh-TW" class="text-center ti-">zh-TW</div>
+                        <div id="col_id-ID" class="text-center ti-">id-ID</div>
+                        <div id="col_ms-MY" class="text-center ti-">ms-MY</div>
+                        <div class="text-white">.</div>
                     </div>
                 </div>
                 <div id="translateList" class="col-sm-12"></div>
