@@ -30,6 +30,7 @@ class Index extends MY_Controller {
 			$this->load->view("layout/layout_l10n_box", ["layout" => $layout]);
         } else {
             $data["platform_arr"] = $this->translate_model->get_platforms();
+            $data["email"] = $_SESSION["l10n_email"];
             if ( ! $p = $this->input->get("p")) {
                 $layout["content"] = $this->load->view("/home", $data, TRUE);
             } else {
@@ -81,6 +82,7 @@ class Index extends MY_Controller {
         $lang_zh = $this->input->post("zhtw");
         $lang_id = $this->input->post("idid");
         $lang_ms = $this->input->post("msmy");
+        $keyword = $this->input->post("keyword");
         $platform = $this->input->post("platform");
         $db_data = $this->translate_model->get($id);
         $data = [
@@ -89,6 +91,8 @@ class Index extends MY_Controller {
             "`zh-TW`"  => $lang_zh,
             "`id-ID`"  => $lang_id,
             "`ms-MY`"  => $lang_ms,
+            "`ms-MY`"  => $lang_ms,
+            "keyword"  => $keyword,
             "last_editor"  => $_SESSION["l10n_email"],
         ];
         $resp = [];

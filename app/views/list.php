@@ -10,7 +10,8 @@
     </div>
      
     <div class="col-sm-12">
-        <div class="card-box table-responsive">
+        <div class="card-box table-responsive" id="mainTable">
+            <input type="hidden" name="email" value="<?php echo $email; ?>">
             <h4 class="m-t-0 header-title"><b>Key List</b></h4>
             <div class="row">
                 <div class="col-sm-8 pull-left">
@@ -19,7 +20,12 @@
                     <a id="s3-url" target="_blank" href="<?php echo $s3_link . "?t=" . time(); ?>"><?php echo $s3_link; ?></a>
                     <i style="font-size:9px" class="fa">&#xf064;</i>
                 </div>
-                <div class="col-sm-4 pull-right">
+            </div>
+            <div class="row">
+                <div class="col-xs-6 m-t-10">
+                <button type="button" class="btn btn-white btn-sm ti-eye btn-rounded" id="showKeyBtn"> Key</button>
+                </div>
+                <div class="col-xs-6 pull-right">
                     <form name="searchTranslate" class="form-horizontal" method="post">
                     <div class="form-group m-r-10">
                         <label class="col-md-4 control-label">Search:</label>
@@ -33,7 +39,7 @@
             <div class="p-10">
                 <div class="row m-b-10" style="padding: 8px; font-weight: 600; vertical-align: bottom; border-bottom: 2px solid #ebeff2;">
                     <div class="d-flex justify-content-around">
-                        <div class="text-center">KEY</div>
+                        <div class="text-center keyCol">KEY</div>
                         <div class="text-center">en-US</div>
                         <div class="text-center">ja-JP</div>
                         <div class="text-center">zh-TW</div>
@@ -53,9 +59,10 @@
     <div class="row translateRow m-b-10">
         <form name="l10n_{id}" class="d-flex">
         <input type="hidden" name="platform" value="<?php echo $platform; ?>"/>
-        <div class="translateCol">
+        <div class="translateCol keyCol">
             <input type="hidden" name="id" value="{id}">
-            <textarea class="form-control text-center text-muted" name="keyword" title="{keyword}" readonly>{keyword}</textarea>
+            <textarea class="form-control text-center" name="keyword" title="{keyword}" readonly>{keyword}</textarea>
+
         </div>
         <div class="translateCol">
             <textarea class="form-control" name="enus" title="{en-US}" readonly>{en-US}</textarea>

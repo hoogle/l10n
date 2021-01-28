@@ -18,14 +18,12 @@ $.fn.replaceElString = function (target, value) {
         return text.replace(/[&<>"']/g, function(m) { return map[m]; });
       }
     $.each(value, function ( i , item) {
-        if (item === null) {
-            return;
-        }
+        const nullVal = !item;
         var reg = new RegExp("{" + i + "}", "g");
         //console.log(reg.exec(target));
         //console.log("replace param:" + reg + ", value:" + item);
 
-        target = target.replace(reg, escapeHtml(item));
+        target = nullVal ? target.replace(reg, '') : target.replace(reg, escapeHtml(item));
     });
         //console.log("replace finished target:" + target);
         return target;
@@ -55,6 +53,8 @@ $(function () {
     const baseURL = '/index';
     const myURL = new URL(window.location.href);
     const platform = myURL.searchParams.get('p') ? myURL.searchParams.get('p') : $('#platform').html();
+    const $showKeyBtn = $('#showKeyBtn');
+    const canModifyKey = $('input[name=email]').val() === 'mei@astra.cloud';
     let keyValue = '';
     // **********************
     // initPagination
@@ -82,10 +82,20 @@ $(function () {
     //
     //**/index/page/1?platform=genesis_msp_php
     //**id, en, ja
-    const updateLan = (formData, eleBtn) => {
+    const updateLan = (formData, eleBtn, orRow) => {
         eleBtn.prop('disabled', true);
         let url = '/index/update';
-        formData.map( item => (Object.assign(item, { value: item.value.replace(/'/g, "’") })))
+        formData.map( item => {
+            // console.log(item.name, ':row modify name');
+            // console.log(orRow, ':row origin name');
+            /*
+            if ( item.name !== 'keyword' && item.name !== 'id' && item.name !== 'platform' && orRow[item.name] === item.value ) {
+                delete item.name;
+                return;
+            }
+            */
+            return (Object.assign(item, { value: item.value.replace(/'/g, "’") }))
+        })
         $.post(url, formData, function (rs) {
             if (rs.status === 'ok') {
                 eleBtn.removeClass('btn-warning').prop('disabled', false);
@@ -100,9 +110,11 @@ $(function () {
         const destroyPagi = doDestroyPagi !== undefined ? doDestroyPagi : false;
         let url = '/index/page/' + page;
         const formData = {
+            order: 'en-US',
             p: platform,
             key: key,
-            per_page: 25
+            per_page: 25,
+            by: 'ASC'
         };
         $translateList.find('button[type=submit]').prop('disabled', true);
         $.get(url, formData, function (rs) {
@@ -140,8 +152,10 @@ $(function () {
                     }
                     $(this).parent().css('flex', '0 0 50%');
                     if (name === 'keyword') {
-                        copyToClipboard($(this)[0]);
-                        return;
+                        if (! canModifyKey) {
+                            copyToClipboard($(this)[0]);
+                            return;
+                        }
                     }
                     $(this).prop('readonly', false);
                 });
@@ -159,7 +173,11 @@ $(function () {
                 //
                 form.submit(function (e) {
                     e.preventDefault();
-                    updateLan($(this).serializeArray(), submitBtn);
+                    Object.keys(row).map(function(key, index) {
+                        const shortcutKey = key.replace(/-/g, '').toLowerCase();
+                        row[shortcutKey] = row[key];
+                    });
+                    updateLan($(this).serializeArray(), submitBtn, row);
                 });
             });
             //init pagination
@@ -336,5 +354,11 @@ $(function () {
                 return;
             }
         }, 'json');
+    });
+
+    $showKeyBtn.click( function (e) {
+        const $targetTable = $('#mainTable');
+        const val = $targetTable.attr('data-key') === '1' ? '0' : '1';
+        $('#mainTable').attr('data-key', val);
     });
 });
