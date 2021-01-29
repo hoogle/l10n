@@ -85,16 +85,17 @@ class Index extends MY_Controller {
         $keyword = $this->input->post("keyword");
         $platform = $this->input->post("platform");
         $db_data = $this->translate_model->get($id);
+
         $data = [
-            "`en-US`"  => $lang_en,
-            "`ja-JP`"  => $lang_ja,
-            "`zh-TW`"  => $lang_zh,
-            "`id-ID`"  => $lang_id,
-            "`ms-MY`"  => $lang_ms,
-            "`ms-MY`"  => $lang_ms,
             "keyword"  => $keyword,
             "last_editor"  => $_SESSION["l10n_email"],
         ];
+        strlen($lang_en) && $data["`en-US`"] = $lang_en;
+        strlen($lang_ja) && $data["`ja-JP`"] = $lang_ja;
+        strlen($lang_zh) && $data["`zh-TW`"] = $lang_zh;
+        strlen($lang_id) && $data["`id-ID`"] = $lang_id;
+        strlen($lang_ms) && $data["`ms-MY`"] = $lang_ms;
+
         $resp = [];
         if ($this->translate_model->update_translate($id, $data)) {
             $last_updated_arr = ["platform" => $platform];
