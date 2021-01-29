@@ -91,20 +91,29 @@ $(function () {
     //**id, en, ja
     const updateLan = (formData, eleBtn, orRow) => {
         eleBtn.prop('disabled', true);
+        console.log(orRow, ':orRow');
         let url = '/index/update';
+        const myformData = {};
+        let needToUpdate = false;
         formData.map( item => {
             // console.log(item.name, ':row modify name');
             // console.log(orRow, ':row origin name');
-            /*
-            if ( item.name !== 'keyword' && item.name !== 'id' && item.name !== 'platform' && orRow[item.name] === item.value ) {
-                delete item.name;
+            if (item.name !== 'id' && item.name !== 'platform' && orRow[item.name] === item.value ) {
                 return;
             }
-            */
-            return (Object.assign(item, { value: item.value.replace(/'/g, "’") }))
+            needToUpdate = item.name !== 'id' && item.name !== 'platform';
+            myformData[item.name] = item.value.replace(/'/g, "’");
+            //return (Object.assign(item, { value: item.value.replace(/'/g, "’") }))
         })
-        $.post(url, formData, function (rs) {
+
+        if (! needToUpdate ) {
+            eleBtn.removeClass('btn-warning').prop('disabled', false);
+            return;
+        }
+        
+        $.post(url, myformData, function (rs) {
             if (rs.status === 'ok') {
+                Object.assign(orRow, myformData);
                 eleBtn.removeClass('btn-warning').prop('disabled', false);
                 return;
             }
@@ -183,6 +192,9 @@ $(function () {
                     e.preventDefault();
                     Object.keys(row).map(function(key, index) {
                         const shortcutKey = key.replace(/-/g, '').toLowerCase();
+                        if (row.hasOwnProperty([shortcutKey])) {
+                            return;
+                        }
                         row[shortcutKey] = row[key];
                     });
                     updateLan($(this).serializeArray(), submitBtn, row);
