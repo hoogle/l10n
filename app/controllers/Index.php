@@ -87,9 +87,9 @@ class Index extends MY_Controller {
         $db_data = $this->translate_model->get($id);
 
         $data = [
-            "keyword"  => $keyword,
             "last_editor"  => $_SESSION["l10n_email"],
         ];
+        strlen($keyword) && $data["keyword"] = $keyword;
         strlen($lang_en) && $data["`en-US`"] = $lang_en;
         strlen($lang_ja) && $data["`ja-JP`"] = $lang_ja;
         strlen($lang_zh) && $data["`zh-TW`"] = $lang_zh;
