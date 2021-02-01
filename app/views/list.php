@@ -39,13 +39,14 @@
             <div class="p-10">
                 <div class="row m-b-10" style="padding: 8px; font-weight: 600; vertical-align: bottom; border-bottom: 2px solid #ebeff2;">
                     <div class="d-flex justify-content-around" id="mainColGroup">
-                        <div class="text-center keyCol">KEY</div>
+                        <div class="text-center idCol">ID</div>
+                        <div id="col_keyword" class="text-center ti- keyCol">KEY</div>
                         <div id="col_en-US" class="text-center ti-">en-US</div>
                         <div id="col_ja-JP" class="text-center ti-">ja-JP</div>
                         <div id="col_zh-TW" class="text-center ti-">zh-TW</div>
                         <div id="col_id-ID" class="text-center ti-">id-ID</div>
                         <div id="col_ms-MY" class="text-center ti-">ms-MY</div>
-                        <div class="text-white">.</div>
+                        <div class="text-white translateSubmit">.</div>
                     </div>
                 </div>
                 <div id="translateList" class="col-sm-12"></div>
@@ -57,8 +58,9 @@
 
 <template id="transListRowTemp">
     <div class="row translateRow m-b-10">
-        <form name="l10n_{id}" class="d-flex">
+        <form name="l10n_{id}" class="d-flex align-item-center">
         <input type="hidden" name="platform" value="<?php echo $platform; ?>"/>
+        <div class="idCol">{id}</div>
         <div class="translateCol keyCol">
             <input type="hidden" name="id" value="{id}">
             <textarea class="form-control text-center" name="keyword" title="{keyword}" readonly>{keyword}</textarea>
@@ -79,7 +81,7 @@
         <div class="translateCol">
             <textarea class="form-control" name="msmy" title="{ms-MY}" readonly>{ms-MY}</textarea>
         </div>
-        <div class="translateCol">
+        <div class="translateSubmit">
             <button type="submit" class="btn btn-default waves-effect waves-light btn-md">Save</button>
         </div>
         </form>

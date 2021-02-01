@@ -175,6 +175,7 @@ $(function () {
                         }
                     }
                     $(this).prop('readonly', false);
+                    $('#mainColGroup').attr('data-edit', name);
                 });
                 targetInput.on('change keyup paste', function (e) {
                     console.log(e, ':change');
@@ -185,7 +186,8 @@ $(function () {
                 targetInput.on('focusout', function (e) {
                     console.log(e, ':focus out');
                     $(this).prop('readonly', true);
-                    $(this).parent().css('flex', 'auto');
+                    $(this).parent().css('flex', '1');
+                    $('#mainColGroup').attr('data-edit', '');
                 });
                 //
                 form.submit(function (e) {

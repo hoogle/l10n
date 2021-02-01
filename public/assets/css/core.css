@@ -2171,12 +2171,14 @@ body.fixed-left .side-menu.left {
 }
 .d-flex { display: flex;}
 .justify-content-around { justify-content: space-around; }
-.translateCol { padding: 6px 1px;  flex: auto;}
-.translateCol Button { min-height: 46px;}
+.align-item-center { align-items: center;}
+.translateCol { padding: 6px 1px;  flex: 1;}
 .translateCol textarea { height: 20px; resize:vertical;}
 .translateCol textarea:hover { cursor: pointer; background-color:rgba(0, 150, 136, 0.3); border:none;}
 .translateCol textarea:focus { background-color:rgba(0, 150, 136, 0.7); border-color:rgba(0, 150, 136, 0) !important;}
 .translateCol textarea:read-only {border: none; resize:none; min-height:46px;}
+.translateSubmit{ flex: 0.25 !important;}
+.translateSubmit Button { min-height: 46px;}
 .keyCol { display: none;}
 #mainTable[data-key = '1'] .keyCol {
   display: flex;
@@ -2186,41 +2188,112 @@ body.fixed-left .side-menu.left {
 }
 #mainColGroup div {
   cursor: pointer;
+  flex: 1;
+  padding: 7px 12px;
+  border-radius: 2px;
+  font-weight: bold;
+  border: 1px solid white;
+}
+#mainColGroup div::after {
+  content: "...";
+  color: white;
+}
+#mainColGroup div:hover::after {
+  content: "\e71d";
+  color: #5ebeaa;
+}
+.idCol {
+  flex: 0 !important;
+  min-width: 40px;
 }
 #mainColGroup[data-sort='en-US'] #col_en-US::after {
   content: "\e71d";
   padding: 6px;
 }
 #mainColGroup[data-sort='en-US'] #col_en-US {
-  color: #5fbeaa;
+  color: white;
+  background: #98a6ad;
 }
 #mainColGroup[data-sort='ja-JP'] #col_ja-JP::after {
   content: "\e71d";
   padding: 6px;
 }
 #mainColGroup[data-sort='ja-JP'] #col_ja-JP {
-  color: #5fbeaa;
+  color: white;
+  background: #98a6ad;
 }
 #mainColGroup[data-sort='zh-TW'] #col_zh-TW::after {
   content: "\e71d";
   padding: 6px;
 }
 #mainColGroup[data-sort='zh-TW'] #col_zh-TW {
-  color: #5fbeaa;
+  color: white;
+  background: #98a6ad;
 }
 #mainColGroup[data-sort='id-ID'] #col_id-ID::after {
   content: "\e71d";
   padding: 6px;
 }
 #mainColGroup[data-sort='id-ID'] #col_id-ID {
-  color: #5fbeaa;
+  color: white;
+  background: #98a6ad;
 }
 #mainColGroup[data-sort='ms-MY'] #col_ms-MY::after {
   content: "\e71d";
   padding: 6px;
 }
 #mainColGroup[data-sort='ms-MY'] #col_ms-MY {
-  color: #5fbeaa;
+  color: white;
+  background: #98a6ad;
+}
+
+#mainColGroup[data-edit='enus'] #col_en-US::after {
+  content: "\e61c";
+  padding: 6px;
+}
+#mainColGroup[data-edit='enus'] #col_en-US {
+  color: #5ebeaa;
+  background: #98a6ad5c;
+}
+#mainColGroup[data-edit='jajp'] #col_ja-JP::after {
+  content: "\e61c";
+  padding: 6px;
+}
+#mainColGroup[data-edit='jajp'] #col_ja-JP {
+  color: #5ebeaa;
+  background: #98a6ad5c;
+}
+#mainColGroup[data-edit='zhtw'] #col_zh-TW::after {
+  content: "\e61c";
+  padding: 6px;
+}
+#mainColGroup[data-edit='zhtw'] #col_zh-TW {
+  color: #5ebeaa;
+  background: #98a6ad5c;
+}
+#mainColGroup[data-edit='idid'] #col_id-ID::after {
+  content: "\e61c";
+  padding: 6px;
+}
+#mainColGroup[data-edit='idid'] #col_id-ID {
+  color: #5ebeaa;
+  background: #98a6ad5c;
+}
+#mainColGroup[data-edit='msmy'] #col_ms-MY::after {
+  content: "\e61c";
+  padding: 6px;
+}
+#mainColGroup[data-edit='msmy'] #col_ms-MY {
+  color: #5ebeaa;
+  background: #98a6ad5c;
+}
+#mainColGroup[data-edit='keyword'] #col_keyword::after {
+  content: "\e61c";
+  padding: 6px;
+}
+#mainColGroup[data-edit='keyword'] #col_keyword {
+  color: #5ebeaa;
+  background: #98a6ad5c;
 }
 /* =============
    Print css
