@@ -57,6 +57,7 @@ $(function () {
     const canModifyKey = $('input[name=email]').val() === 'mei@astra.cloud';
     let curOrder = 'en-US';
     let keyValue = '';
+    const autoXHR = {};
     // **********************
     // initPagination
     // **********************
@@ -75,7 +76,7 @@ $(function () {
             initiateStartPageClick: false,
             onPageClick: function (event, page) {
                 console.log('page click');
-                fetchTranslate(page);
+                fetchTranslate(page, keyValue);
             }
         });
     }
@@ -84,9 +85,26 @@ $(function () {
         console.log(e);
         const order = e.currentTarget.id.replace('col_', '');
         curOrder = order;
-        fetchTranslate(1, '', true);
+        // $searchForm.find('input').val('');
+        // keyValue = '';
+        fetchTranslate(1, keyValue, true);
     });
     //
+    const autoUpdateLan = (formData, orRow ) => {
+        const url = '/index/update';
+        $('.topbar').addClass('actionBar');
+        $.post(url, formData, function (rs) {
+            $('.topbar').removeClass('actionBar');
+            if (rs.status === 'ok') {
+                Object.assign(orRow, formData);
+                console.log(orRow, ':orRow');
+                autoXHR[formData.id] = null;
+                // eleBtn.removeClass('btn-warning').prop('disabled', false);
+                return;
+            }
+        }, 'json');
+        
+    }
     //**/index/page/1?platform=genesis_msp_php
     //**id, en, ja
     const updateLan = (formData, eleBtn, orRow) => {
@@ -129,7 +147,7 @@ $(function () {
             order: curOrder,
             p: platform,
             key: key,
-            per_page: 25,
+            per_page: 20,
             by: 'ASC'
         };
         $translateList.find('button[type=submit]').prop('disabled', true);
@@ -178,10 +196,21 @@ $(function () {
                     $('#mainColGroup').attr('data-edit', name);
                 });
                 targetInput.on('change keyup paste', function (e) {
-                    console.log(e, ':change');
-                    console.log($(this).val());
-                    console.log($(this).attr('title'));
+                    // console.log(e, ':change');
+                    // console.log(row, ':row change');
+                    // console.log($(this).val());
+                    // console.log($(this).attr('title'));
                     submitBtn.addClass('btn-warning');
+                    const val = $(this).val();
+                    const name = e.currentTarget.name;
+                    if ( row[name] === val ) {
+                        console.log('The value is the same. Do not update.')
+                        return;
+                    }
+                    if (autoXHR[row.id]) { clearTimeout(autoXHR[row.id]) }
+                    autoXHR[row.id] = setTimeout(function () {
+                       autoUpdateLan( {id: row.id, [name]: val === '' ? ' ' : val, platform: row.platform }, row ) ;
+                    }, 500);
                 });
                 targetInput.on('focusout', function (e) {
                     console.log(e, ':focus out');
@@ -211,7 +240,8 @@ $(function () {
     }
     $searchForm.submit(function (e) {
         e.preventDefault();
-        fetchTranslate(1, $(this)[0].key.value, true);
+        keyValue = $(this)[0].key.value;
+        fetchTranslate(1, keyValue, true);
     });
     //init
     if ($signInForm.length > 0) {

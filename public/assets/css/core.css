@@ -1115,6 +1115,8 @@ pre {
   right: 0;
   top: 0px;
   z-index: 999;
+  border-bottom: 2px solid rgb(78, 136, 250, 0);
+  transition: border-color .25s;
 }
 .topbar .topbar-left {
   float: left;
@@ -1127,6 +1129,9 @@ pre {
 }
 .topbar .waves-effect.waves-light .waves-ripple {
   background-color: rgba(54, 64, 74, 0.4);
+}
+.topbar.actionBar {
+  border-color: rgba(78, 136, 250, 1);
 }
 .logo {
   color: #36404a !important;
@@ -2195,8 +2200,7 @@ body.fixed-left .side-menu.left {
   border: 1px solid white;
 }
 #mainColGroup div::after {
-  content: "...";
-  color: white;
+  content: "   ";
 }
 #mainColGroup div:hover::after {
   content: "\e71d";
