@@ -54,7 +54,8 @@ $(function () {
     const myURL = new URL(window.location.href);
     const platform = myURL.searchParams.get('p') ? myURL.searchParams.get('p') : $('#platform').html();
     const $showKeyBtn = $('#showKeyBtn');
-    const canModifyKey = $('input[name=email]').val() === 'mei@astra.cloud';
+    const canModifyKeyAcc = ['mei@astra.cloud', 'hoogle@astra.cloud', 'max@astra.cloud', 'milo@astra.cloud'];
+    const canModifyKey = canModifyKeyAcc.indexOf($('input[name=email]').val()) > -1;
     let curOrder = 'en-US';
     let keyValue = '';
     const autoXHR = {};
