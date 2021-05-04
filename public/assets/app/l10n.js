@@ -54,8 +54,11 @@ $(function () {
     const myURL = new URL(window.location.href);
     const platform = myURL.searchParams.get('p') ? myURL.searchParams.get('p') : $('#platform').html();
     const $showKeyBtn = $('#showKeyBtn');
-    const canModifyKeyAcc = ['mei@astra.cloud', 'hoogle@astra.cloud', 'max@astra.cloud', 'milo@astra.cloud'];
-    const canModifyKey = canModifyKeyAcc.indexOf($('input[name=email]').val()) > -1;
+    const canModifyKeyAcc = {
+        portal: ['mei@astra.cloud', 'hoogle@astra.cloud'],
+        gf: ['max@astra.cloud', 'milo@astra.cloud']
+    };
+    const canModifyKey = canModifyKeyAcc[$('input[name=platform]').val()].indexOf($('input[name=email]').val()) > -1;
     let curOrder = 'en-US';
     let keyValue = '';
     const autoXHR = {};
