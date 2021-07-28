@@ -11,7 +11,7 @@ class Tool extends MY_Controller {
         parent::__construct();
 
         $this->load->helper("directory");
-        $this->load->model(["l10n_model"]);
+        $this->load->model(["l10n_model", "translate_model"]);
     }
 
     public function compare($platform = "goface", $use_lang = "en-US") {
@@ -37,6 +37,104 @@ class Tool extends MY_Controller {
             }
         }
         echo "</table>";
+    }
+
+    public function parse_xml($pf, $use_lang) {
+        //$str_arr = explode("\n", file_get_contents(APPPATH . "controllers/{$use_lang}/strings.xml"));
+        $str_arr = explode("\n", file_get_contents(APPPATH . "controllers/{$use_lang}/string.txt"));
+        $arr = [];
+        foreach ($str_arr as $line) {
+            if (strstr($line, "\" = \"")) {
+                //preg_match("/^<string name=\"(.*?)\">(.*)<\/string>$/", trim($line), $matches);
+                //echo $matches[1] . " : " . $matches[2] . "\n";
+
+                preg_match("/^\"(.*)\" = \"(.*)\";$/", $line, $matches);
+                $trans_data = [
+                    "production" => "goface",
+                    "platform" => $pf,
+                    "keyword" => $matches[1],
+                    "`{$use_lang}`" => $matches[2],
+                    "last_editor" => "system",
+                ];
+                $arr[$matches[1]] = $trans_data;
+            }
+        }
+        ksort($arr);
+        foreach ($arr as $ary) {
+            //$this->translate_model->update($ary, $use_lang);
+        }
+        echo "<pre>";print_r($arr);exit;
+    }
+
+    public function download($p) {
+        list($production, $platform) = explode("_", $p);
+        $db_data = $this->l10n_model->get_translate($p);
+        $json_arr = $resp = [];
+        foreach ($db_data as $row) {
+            $json_arr["en-US"][$row["keyword"]] = $row["en-US"];
+            $json_arr["ja-JP"][$row["keyword"]] = $row["ja-JP"];
+            $json_arr["zh-TW"][$row["keyword"]] = $row["zh-TW"];
+            $json_arr["id-ID"][$row["keyword"]] = $row["id-ID"];
+            $json_arr["ms-MY"][$row["keyword"]] = $row["ms-MY"];
+        }
+
+        //Android
+        if ($platform == "Android") {
+            $path = APPPATH . "/tmp/{$production}_{$platform}";
+            $header_str = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<resources>\n";
+            $end_str = "</resources>\n";
+            $lang_arr = array_keys($json_arr);
+            //$lang_arr = ["zh-TW"];
+
+            $lang_folder = [];
+            foreach ($lang_arr as $curr_lang) {
+                //mkdir
+                switch ($curr_lang) {
+                    case "zh-TW":
+                        $lang_folder["zh-TW"] = "values-zh-rTW";
+                        break;
+                    case "ja-JP":
+                        $lang_folder["ja-JP"] = "values-ja";
+                        break;
+                    case "id-ID":
+                        $lang_folder["id-ID"] = "values-in";
+                        break;
+                    case "ms-MY":
+                        $lang_folder["ms-MY"] = "values-ms";
+                        break;
+                    case "en-US":
+                        $lang_folder["en-US"] = "values";
+                        break;
+                }
+                $filepath = $path . "/" . $lang_folder[$curr_lang];
+                if ( ! is_dir($filepath)) {
+                    mkdir($filepath, 0777, true);
+                }
+
+                //prepare
+                $body_str = "";
+                foreach ($json_arr[$curr_lang] as $key => $val) {
+                    $body_str.= "    <string name=\"{$key}\">{$val}</string>\n";
+                }
+                $contents = $header_str . $body_str . $end_str;
+
+                //write
+                $fp = fopen($filepath . "/strings.xml", "w");
+                fwrite($fp, $contents);
+                fclose($fp);
+            }
+
+            //zip
+            $zip = new ZipArchive();
+            $filename = $path . "/strings.zip";
+            if ($zip->open($filename, ZipArchive::CREATE) === TRUE) {
+                foreach ($lang_folder as $lang => $folder) {
+                    $zip->addFile($filepath . "/strings.xml");
+                }
+            }
+            $zip->close();
+
+        }
     }
 
     public function exportt() {

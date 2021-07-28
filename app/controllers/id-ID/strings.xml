@@ -1,0 +1,303 @@
+<resources>
+    <string name="app_name">GoFace</string>
+    <string name="login_title_text">Manajemen Pegawai </string>
+    <string name="login_power_text">Powered by Astra</string>
+    <string name="login_with_google">Masuk melalui akun Google </string>
+    <string name="nav_report">Data Histori</string>
+    <string name="nav_report_staff">Pengelolaan Setelan</string>
+    <string name="nav_noti">Notifikasi</string>
+    <string name="nav_profile">Profil</string>
+    <string name="nav_roster">Shift</string>
+    <string name="btn_add_staff">Tunjukkan kode QR untuk bergabung dengan perusahaan </string>
+    <string name="clock_working_hours">Waktu kerja : </string>
+    <string name="clock_first_in">Jam pertama masuk</string>
+    <string name="clock_last_out">Jam terakhir keluar </string>
+    <string name="post_registration_button">Histori Perubahan</string>
+    <string name="done_button">Selesai</string>
+    <string name="report_list_sub_title">Akan Diubah</string>
+    <string name="detail_info_time">Perubahan Waktu</string>
+    <string name="detail_info_remark">Alasan perubahan</string>
+    <string name="detail_info_person">Penanggung Jawab</string>
+    <string name="detail_info_post_registration">Merubah sekarang</string>
+    <string name="detail_info_msg">Komentar (250 karakter)</string>
+    <string name="detail_info_msg_normal">Komentar</string>
+    <string name="clock_in">Jam Masuk</string>
+    <string name="clock_out">Jam Keluar </string>
+    <string name="clock_remark">Alasan perubahan*(250 karakter)</string>
+    <string name="number_picker_formatter_hours">%02d</string>
+    <string name="number_picker_formatter_mins">%02d</string>
+    <string name="date_formatter_day">%02d</string>
+
+    <string name="notification_title">Notifikasi</string>
+    <string name="profile_title">Profil</string>
+
+    <string name="total_hours_format">(%shr)</string>
+    <string name="total_working_hours_format">%shr</string>
+    <string name="updated_by_name_date">updated by %1$s at %2$s</string>
+    <string name="updated_by_name">Diperbarui pada %s</string>
+    <string name="report_history_to_be_confirmed">Akan Direvisi</string>
+    <string name="post_registration_fail">Perubahan gagal</string>
+    <string name="post_registration_waiting">Menunggu persetujuan</string>
+    <string name="post_registration_success">Perubahan berhasil dibuat</string>
+    <string name="post_registration_create_time">Waktu pengajuan %s</string>
+    <string name="list_empty">Tidak ada data</string>
+    <string name="notification_empty">Tidak ada data</string>
+    <string name="dialog_title_oops">Oops!</string>
+    <string name="dialog_text_post_time_wrong">pilih waktu yang tepat</string>
+
+    <string name="noti_join_success">Berhasil Bergabung dengan %s</string>
+    <string name="noti_clock_success">Jam Masuk  %s Diubah</string>
+    <string name="noti_clock_fail">Jam Masuk %s Ditolak </string>
+    <string name="noti_clock_set_success">Jam Keluar %s Diubah </string>
+    <string name="noti_clock_set_fail">Jam Masuk %s Ditolak</string>
+    <string name="noti_admin_process">Diproses oleh %s</string>
+    <string name="noti_admin_gfpc_process">Diproses oleh Admin</string>
+    <string name="tab_waiting">Dalam tugas</string>
+    <string name="tab_pass">disetujui</string>
+    <string name="tab_fail">tidak disetujui</string>
+
+    <string name="post_apply_clockin">%1$s Menerapkan jam masuk %2$s</string>
+    <string name="post_apply_clockout">%1$s Menerapkan jam keluar %2$s</string>
+
+    <string name="radio_button_yes">IYA</string>
+    <string name="radio_button_no">TIDAK</string>
+
+    <string name="review_success">Perubahan berhasil dibuat</string>
+    <string name="review_fail">Perubahan gagal</string>
+    <string name="button_ok">OK</string>
+    <string name="button_close">tutup</string>
+    <string name="button_confirm">Konfirm</string>
+
+    <string name="profile_store_title"> Perusahaan/org </string>
+    <string name="profile_log_out">Log Out</string>
+    <string name="profile_join_at">Tanggal bergabung : </string>
+    <string name="role_staff">Staff</string>
+    <string name="role_admin">Manager</string>
+    <string name="profile_staff">(Staff)</string>
+    <string name="profile_admin">(Manager)</string>
+    <string name="profile_no_id">(Nomer ID)</string>
+    <string name="add_qrcode_hint">Kode QR atau Kode Pariring dapat digunakan untuk menambahkan Anda sebagai anggota</string>
+    <string name="add_qrcode_title">Bergabung</string>
+    <string name="add_self_store_hint">Buat Perusahaan/Org</string>
+    <string name="add_qrcode_renew_button">Refresh kode </string>
+    <string name="button_cancel">Batalkan </string>
+    <string name="profile_no_customer_text">Anda belum tergabung dalam perusahaan, tolong tunjukkan QR Code kepada HR Anda</string>
+
+    <string name="week_sun">Minggu</string>
+    <string name="week_mon">Senin</string>
+    <string name="week_tue">Selasa</string>
+    <string name="week_wed">Rabu</string>
+    <string name="week_thu">Kamis</string>
+    <string name="week_fri">Jumat</string>
+    <string name="week_sat">Sabtu</string>
+
+
+    <string name="invalid_layout_hint">akun GoFace Anda belum diaktifkan perusahaan</string>
+    <string name="no_permission_hint">Proses Log in tidak sah, silahkan hubungi perusahaan Anda</string>
+    <string name="staff_member_empty">Tidak ada data</string>
+    <string name="app_version">3.7.0</string>
+    <string name="app_version_title">Software Version</string>
+
+    <string name="error_401">Tidak sah (401)</string>
+    <string name="error_404">kesalahan parameter (404)</string>
+    <string name="error_405">kesalahan parameter (405)</string>
+    <string name="error_4000">kesalahan parameter (4000)</string>
+    <string name="error_4001">Tidak sah (4001)</string>
+    <string name="error_4100">Tidak sah (4100)</string>
+    <string name="error_4101">kesalahan parameter (4101)</string>
+    <string name="error_4102">ID Perusahaan/Org, ID Staf atau kata sandi salah (4102)</string>
+    <string name="error_4103">kesalahan waktu lokal, silahkan coba lagi atau hubungi admin (4103)</string>
+    <string name="error_4104">deteksi gagal (4104)</string>
+    <string name="error_4105">belum diaktifkan, silahkan kontak admin (4105)</string>
+    <string name="error_4106">belum diaktifkan, silahkan kontak admin (4106)</string>
+    <string name="error_4210">tidak sah (4210)</string>
+    <string name="error_4231">tidak dapat dikirimkan, duplikat waktu tidak dapat dirubah (4231)</string>
+    <string name="error_4232">tidak dapat mengirimkan waktu perubahan (4232)</string>
+    <string name="error_4233">menunggu persetujuan (4233)</string>
+
+    <string name="error_4234">sudah diproses (4234)</string>
+    <string name="error_4235">當日為公休日 (4235)</string>
+    <string name="error_4236">shift belum dibuka, silahkan mencoba kembali nanti atau hubungi admin (4236)</string>
+    <string name="error_4237">shift ini belum dibuka, silahkan mencoba kembali nanti atau hubungi admin (4237)</string>
+    <string name="error_4238">Manajemen shift sudah tertutup, silahkan masuk kembali (4238)</string>
+
+    <string name="error_4239">Kode pasangan kedaluwarsa atau tidak valid (4239)</string>
+    <string name="error_4240">Identifikasi wajah gagal (4240)</string>
+    <string name="error_4241">Lebih dari satu user (4241)</string>
+    <string name="error_4242">ID sudah digunakan, silahkan memilih ID baru (4242)</string>
+    <string name="error_4243">Limit pengguna melebihi batas (4243)</string>
+    <string name="error_4244">Batas pengguna harian Tercapai, harap hubungi bagian pelanggan goFace (4244)</string>
+    <string name="error_4245">Pengguna ini ada di data staf (4245)</string>
+    <string name="error_4246">Pengguna tidak terdaftar (4246)</string>
+    <string name="error_4247">Diluar waktu set masuk dan keluar (4247)</string>
+    <string name="error_4248">Email pengguna sudah digunakan, harap periksa kembali (4248)</string>
+    <string name="error_4249">Akun sudah digunakan, harap periksa kembali (4249)</string>
+    <string name="error_4250">Akun pengguna hanya boleh berisi 4–20 nilai alfanumerik. Spasi dan karakter khusus tidak diperbolehkan (4250)</string>
+    <string name="error_4251">Kata sandi baru harus sepanjang 8–32 karakter, dan harus menyertakan setidaknya satu huruf dan angka. (4251)</string>
+    <string name="error_4252">ID harus terdiri dari 1–10 karakter. (4252)</string>
+
+    <string name="error_4253">Terjadi kesalahan, silahkan periksa jam (4253)</string>
+    <string name="error_4254">Jam kerja sudah berubah, jika staf membutuhkan untuk mengirim ulang perubahan, silahkan klik "Tidak" untuk membatalkan perubahan ini. (4254)</string>
+    <string name="error_423">Masa waktu akun sudah berakhir (423)</string>
+
+    <string name="error_500">Sistem sibuk, silahkan mencoba kembali nanti (500)</string>
+    <string name="error_5000">Sistem sibuk, silahkan mencoba kembali nanti (5000)</string>
+    <string name="error_5001">Sistem sibuk, silahkan mencoba kembali nanti (5001)</string>
+    <string name="error_5002">Sistem sibuk, silahkan mencoba kembali nanti (5002)</string>
+    <string name="error_5003">kesalahan data, silahkan hubungi admin (5003)</string>
+    <string name="network_error">Koneksi tidak stabil, Tolong periksa koneksi Anda.</string>
+
+    <string name="roster_btn_text">Tambahkan Shift</string>
+    <string name="roster_bottom_hint_less">Kelebihan pekerja：</string>
+    <string name="roster_over_title_dialog">Kelebihan pekerja</string>
+
+    <string name="roster_no_roster">Anda tidak memiliki Shift hari ini</string>
+    <string name="roster_no_work">Hari libur</string>
+    <string name="roster_btn_send">Simpan</string>
+
+    <string name="roster_shift_less">Kekurangan pekerja</string>
+    <string name="roster_shift_fit">Pekerja lengkap</string>
+    <string name="roster_shift_over">Kelebihan pekerja</string>
+
+    <string name="roster_delete_title">Hapus semua shift</string>
+    <string name="roster_delete_hint">Apakah Anda yakin ingin menghapus semua jadwal shifts?</string>
+
+    <string name="roster_update_title">Update Shifts</string>
+    <string name="roster_change_title">Tukar jadwal shift</string>
+    <string name="roster_update_content">Tukar jadwal shift sekarang?</string>
+
+    <string name="roster_not_yet">Anda tidak bisa menambahkan shift</string>
+    <string name="roster_ok_dialog">Iya</string>
+    <string name="roster_giveup_dialog">Tidak</string>
+
+    <string name="roster_fast_roster">Mengulang Shift</string>
+    <string name="roster_fast_repeat">Mohon Ulangi %s</string>
+
+
+    <string name="notifi_roster_change">Perubahan Shift: %s</string>
+    <string name="notifi_roster_add">\u0020%s Shift telah ditambahkan ke Anda.</string>
+    <string name="notifi_roster_remove">\u0020%s Shift telah dibatalkan dari Anda.</string>
+    <string name="notifi_roster_one_day">Anda dapat memperbarui / mengedit Shift untuk %1$s hingga %2$s </string>
+    <string name="notifi_roster_open">Shift untuk %1$s terbuka untuk pembaruan / pengeditan hingga %2$s </string>
+    <string name="notifi_roster_release">Jadwal shift pribadi untuk %s tidak lagi tersedia untuk diedit. Klik untuk melihat hasilnya.</string>
+    <string name="profile_group_title">Grup</string>
+
+
+
+
+    <!-- v2.5 使用 -->
+    <string name="title_choose_image_provider">Pilih</string>
+    <string name="action_cancel">Batalkan</string>
+    <string name="title_gallery">Galeri foto</string>
+    <string name="title_camera">Kamera</string>
+    <string name="message_gallery_permission_denied">Tempat penyimpanan eksternal membutuhkan izin untuk memilih gambar. Aktifkan permintaan izin dari pengaturan> izin</string>
+    <string name="message_camera_permission_denied">Kamera dan penyimpanan eksternal membutuhkan izin untuk mengambil gambar.Mematikan izin kan membuat aplikasi tidak beroperasi dengan lancar. Nyalakan semua permintaan izin dari pengaturan >izin</string>
+    <string name="permission_gallery_denied"><![CDATA[Tempat penyimpanan membutuhkan izin untuk memilih gambar dari galeri. Aktifkan izin untuk mengakses tempat penyimpanan dari pengaturan >izin ]]></string>
+    <string name="permission_camera_extended_denied"><![CDATA[Kamera dan tempat penyimpanan membutuhkan izin untuk mengambil gambar. Aktifkan kedua permintaan izin dari pengaturan > izin ]]></string>
+    <string name="permission_camera_denied"><![CDATA[Tempat penyimpanan membutuhkan izin untuk mengambil gambar. Aktifkan izin tempat penyimpanan dari pengaturan > izin ]]></string>
+    <string name="button_delete">DELETE</string>
+
+    <string name="close_face">Pastikan wajah Anda dekat dengan kamera</string>
+    <string name="face_detect_fail">Deteksi gagal</string>
+
+    <string name="custom_sign_in"><u>Masuk dengan akun lain</u></string>
+    <string name="button_back_text">Kembali</string>
+
+    <string name="login_org_id"> ID Perusahaan/Org </string>
+    <string name="login_staff_id">ID staf</string>
+    <string name="login_passwd">password/kata kunci</string>
+    <string name="login_text">log in</string>
+    <string name="default_notification_channel_id">astra_goface_channel</string>
+    <string name="default_notification_channel_name">GoFace</string>
+    <string name="face_detect_name">Halo, %s !</string>
+
+
+    <string name="add_member_title">Tambahan Staf</string>
+    <string name="add_member_re_capture">Ambil ulang </string>
+    <string name="add_member_next">Selanjutnya </string>
+    <string name="add_member_step_1">Langkah 1: Ambil foto staf yang jelas</string>
+    <string name="add_member_step_2">Langkah 2: Masukkan informasi staf (wajib)</string>
+    <string name="add_member_step_3">Langkah 3: Login staf dari perangkat seluler</string>
+    <string name="add_member_name">Nama</string>
+    <string name="add_member_id">ID staf</string>
+    <string name="add_member_group">Grup </string>
+    <string name="add_member_category">Tipe Pegawai</string>
+    <string name="add_member_category_part">Paruh waktu </string>
+    <string name="add_member_category_full">Pegawai Tetap </string>
+    <string name="add_member_name_error">1–40 karakter</string>
+    <string name="add_member_id_error">1–10 karakter dan angka bahasa Inggris</string>
+    <string name="add_member_mobile_login">Log in dari perangkat handphone</string>
+    <string name="add_member_enable">Diaktifkan</string>
+    <string name="add_member_disable">Non-aktifkan</string>
+    <string name="add_member_mobile_login_hint_1">1. Pekerja dapat melakukan log in ke GoFace dari perangkat handphone untuk memeriksa catatan pribadi</string>
+    <string name="add_member_mobile_login_hint_2">2. Setiap karyawan diharuskan mengunduh aplikasi GoFace di perangkat mobile dan mengesahkan terlebih dahulu untuk melakukan log in </string>
+    <string name="add_member_login_info">Info Masuk</string>
+    <string name="add_member_login_account">Info Akun：</string>
+    <string name="add_member_login_google">Masuk dengan Gmail atau Apple ID</string>
+    <string name="add_member_login_passwd">Login dengan ID Staf dan kata sandi </string>
+    <string name="add_member_login_passwd_text">Kata sandi masuk</string>
+    <string name="add_member_login_title">Log in </string>
+    <string name="add_member_binding_title">Mengikat</string>
+    <string name="add_member_binding_process_title">Selesai </string>
+    <string name="add_member_binding_passwd_hint">Kata sandi harus berisi 8–12 karakter dan disertai setidaknya satu huruf dan nomer </string>
+    <string name="add_member_binding_passwd_limit">8–32 karakter alfanumerik</string>
+    <string name="add_member_binding_fail">Gagal</string>
+    <string name="roster_clock_comment">Catatan</string>
+    <string name="roster_clock_comment_text_limit">Catatan (250 karakter)</string>
+    <string name="admin_roster_clockin">Jam Masuk Diubah : %s</string>
+    <string name="admin_roster_clockout">Jam Keluar Diubah : %s</string>
+    <string name="add_member_binding_hint">Harap pindai kode QR di perangkat seluler staf untuk menambahkan staf</string>
+    <string name="add_member_qr_exist_list">Pengguna ini ada di data pelanggan</string>
+    <string name="add_new_store_title">Tambah Perusahaan/Org baru</string>
+    <string name="add_store_detail_hint">Informasi Perusahaan/Org (wajib diisi)</string>
+    <string name="add_store_account"> ID Perusahaan/Org (Untuk admin manajemen)</string>
+    <string name="add_store_passwd">Kata sandi </string>
+    <string name="add_store_name">Nama Perusahaan/Org </string>
+    <string name="add_store_your_name">Nama Anda </string>
+    <string name="add_store_your_employee_id">ID Anda</string>
+    <string name="add_store_account_hint">4–20 karakter alfanumerik</string>
+    <string name="add_store_name_hint">1–20 karakter bahasa Inggris</string>
+    <string name="add_store_your_name_hint">1–40 karakter bahasa Inggris</string>
+    <string name="add_store_your_employee_id_hint">1–10 karakter dan angka bahasa Inggris</string>
+    <string name="add_store_passwd_hint">8–32 karakter alfanumerik</string>
+    <string name="add_store_success_hint">Gunakan GoFace Sekarang!</string>
+    <string name="gfpc_download_text">Unduh jam punch GoFace! (pilihan)</string>
+    <string name="gfpc_download_goto">Go</string>
+    <string name="gfpc_download_hint">Biasanya digunakan untuk check-in / out beberapa staf pada satu ponsel atau pad</string>
+    <string name="gfpc_name">GoFace Punch Clock</string>
+    <string name="gf_portal_manager">Masuk Portal </string>
+    <string name="gf_portal_name">GoFace Portal</string>
+    <string name="gf_portal_hint">https://portal.goface.me/ \nFitur Manajemen seperti informasi, jam kerja &#38; info gaji, manajemen shift dan pelaporan</string>
+    <string name="profile_pos_pp"><![CDATA[Ketika menggunakan GoFace, pastikan ada membaca, mengerti, dan setuju akan<a href="https://api.goface.me/gf/v1/redirect/tos?lang=%1$s"/> persyaratan </a> dan <a href="https://api.goface.me/gf/v1/redirect/privacy_policy?lang=%2$s"/>kebijakan privasi</a> GoFace]]></string>
+    <string name="qr_remain_title">Kode akan berakhir pada</string>
+    <string name="qr_error_msg">Kode QR tidak sah </string>
+    <string name="cross_clock_in">"Jam Masuk Lewat Hari "</string>
+    <string name="cross_clock_out">"Jam Keluar Lewat Hari "</string>
+
+
+    <string name="sign_in_google_text">Tetap gunakan akun Google</string>
+    <string name="my_report_record_title">Catatan Saya</string>
+    <string name="apply_amend_title">Kirim Perubahan</string>
+    <string name="detail_info_device">Dikirimkan Dari</string>
+    <string name="report_ststus_discard">Hapus</string>
+    <string name="report_discard_title_dialog">Konfirm?</string>
+    <string name="report_discard_content_dialog">Catatan tertentu tidak valid?</string>
+    <string name="report_detail_discard_title">Catatan tidak valid </string>
+    <string name="edit_member_title">Edit Staf</string>
+    <string name="edit_member_step_1">Ambil foto staf yang jelas</string>
+    <string name="edit_member_step_qr">Login staf dari perangkat seluler</string>
+    <string name="edit_member_passwd_setup_already">Kata sandi sudah ditetapkan </string>
+    <string name="sns_event_23">Pastikan untuk memeriksa shift Anda %1$s Pada %2$s %3$s</string>
+    <string name="sns_event_2">%1$s Jam Masuk Diterapkan: %2$s</string>
+    <string name="sns_event_3">%1$s Jam Keluar Diterapkan: %2$s</string>
+    <string name="sns_event_12">Jam Masuk Invalid: %s</string>
+    <string name="sns_event_13">Jam Keluar Invalid: %s</string>
+    <string name="error_4255">Pengaturan diubah, silahkan masuk/keluar lagi (4255)</string>
+    <string name="personal_temp_hint">"Masukan suhu badan yang sudah diukur "</string>
+    <string name="success_temp_unit">Suhu terukur   %1$s %2$s</string>
+    <string name="member_reset_passwd">"Reset kata sandi "</string>
+    <string name="manual_clockin">Perubahan Jam Masuk : %s</string>
+    <string name="manual_clockout">Perubahan Jam Keluar : %s</string>
+    <string name="no_punch_device">"Tidak ada perangkat jam punch "</string>
+</resources>
+

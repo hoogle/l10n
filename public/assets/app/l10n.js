@@ -55,6 +55,8 @@ $(function () {
     const platform = myURL.searchParams.get('p') ? myURL.searchParams.get('p') : $('#platform').html();
     const $showKeyBtn = $('#showKeyBtn');
     const canModifyKeyAcc = {
+        Android: ['ray@astra.cloud', 'hoogle@astra.cloud'],
+        iOS: ['timmy@astra.cloud', 'hoogle@astra.cloud'],
         portal: ['mei@astra.cloud', 'hoogle@astra.cloud'],
         gf: ['max@astra.cloud', 'milo@astra.cloud']
     };

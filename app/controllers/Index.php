@@ -34,11 +34,13 @@ class Index extends MY_Controller {
             if ( ! $p = $this->input->get("p")) {
                 $layout["content"] = $this->load->view("/home", $data, TRUE);
             } else {
-                $this->load->config("aws");
-                $bucket = $this->config->item("s3")["bucket"]["L10N"];
-                $s3_key = str_replace("_", "/", $p);
-                $data["s3_link"] = AwsS3::get_instance()->get_object($bucket, $s3_key . "/all_lang.json");
                 list($data["production"], $data["platform"]) = explode("_", $p);
+                if ( ! in_array($data["platform"], ["Android", "iOS"])) {
+                    $this->load->config("aws");
+                    $bucket = $this->config->item("s3")["bucket"]["L10N"];
+                    $s3_key = str_replace("_", "/", $p);
+                    $data["s3_link"] = AwsS3::get_instance()->get_object($bucket, $s3_key . "/all_lang.json");
+                }
                 $layout["content"] = $this->load->view("/list", $data, TRUE);
             }
             $this->load->view("layout/layout_l10n", ["layout" => $layout, "data" => $data]);

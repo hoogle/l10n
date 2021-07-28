@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GoFace</string>
+    <string name="add_qrcode_hint">連携用のQRコードやピンコードを会社/店舗に提示すれば、スタッフとして当該会社/店舗の打刻システムに加入することができます！</string>
+    <string name="add_qrcode_title">加入</string>
+    <string name="add_qrcode_renew_button">コードの再発行</string>
+    <string name="add_self_store_hint">会社/店舗を登録しましょう</string>
+    <string name="btn_add_staff">QRコードで会社/店舗と連携してください</string>
+    <string name="button_cancel">キャンセル</string>
+    <string name="button_ok">OK</string>
+    <string name="clock_first_in">出勤 (最も早い) </string>
+    <string name="clock_last_out">退勤 (最も遅い)</string>
+    <string name="clock_in">出勤</string>
+    <string name="clock_out">退勤</string>
+    <string name="clock_working_hours">"勤務時間 : "</string>
+    <string name="detail_info_person">承認者</string>
+    <string name="detail_info_post_registration">申請内容の承認状態</string>
+    <string name="detail_info_time">対象日時</string>
+    <string name="dialog_text_post_time_wrong">正しい日付を選択してください</string>
+    <string name="dialog_title_oops">エラー</string>
+    <string name="done_button">完成</string>
+    <string name="list_empty">記録がありません</string>
+    <string name="login_power_text">Powered by Astra</string>
+    <string name="login_title_text">勤怠管理</string>
+    <string name="login_with_google">Googleアカウントでログイン</string>
+    <string name="nav_roster">シフト</string>
+    <string name="nav_noti">お知らせ</string>
+    <string name="nav_profile">プロファイル</string>
+
+    <string name="noti_clock_fail">出勤申請却下 : %s</string>
+    <string name="noti_clock_set_fail">退勤申請却下 : %s</string>
+    <string name="noti_clock_set_success">退勤申請承認 : %s</string>
+    <string name="noti_clock_success">出勤申請承認 : %s</string>
+
+    <string name="notification_empty">記録がありません</string>
+    <string name="notification_title">お知らせ</string>
+    <string name="post_apply_clockin">%1$s 出勤打刻申請 %2$s</string>
+    <string name="post_apply_clockout">%1$s 退勤打刻申請 %2$s</string>
+    <string name="post_registration_create_time">申請時点 %s</string>
+    <string name="post_registration_fail">申請が否認されました</string>
+    <string name="post_registration_success">申請が承認されました</string>
+    <string name="post_registration_waiting">承認待ち</string>
+    <string name="profile_join_at">入社日 : </string>
+    <string name="profile_log_out">ログアウト</string>
+    <string name="profile_store_title">会社/店舗</string>
+    <string name="profile_title">プロファイル</string>
+    <string name="radio_button_no">却下</string>
+    <string name="radio_button_yes">承認済み</string>
+    <string name="report_list_sub_title">打刻修正</string>
+    <string name="review_fail">申請が却下されました</string>
+    <string name="review_success">申請が承認されました</string>
+    <string name="tab_fail">否認</string>
+    <string name="tab_pass">承認</string>
+    <string name="noti_admin_process">%s が処理しました</string>
+    <string name="noti_admin_gfpc_process">管理者が処理しました</string>
+    <string name="tab_waiting">承認待ち</string>
+    <string name="updated_by_name_date">" %1$sが %2$sに更新しました"</string>
+    <string name="updated_by_name">%s に更新しました</string>
+    <string name="noti_join_success">%s に加入できました</string>
+    <string name="role_staff">社員</string>
+    <string name="role_admin">管理者</string>
+    <string name="profile_staff">(社員)</string>
+    <string name="profile_admin">(管理者)</string>
+    <string name="profile_no_id">(不明なアカウント)</string>
+    <string name="nav_report">打刻履歴</string>
+    <string name="nav_report_staff">スタッフ管理</string>
+    <string name="post_registration_button">打刻修正</string>
+    <string name="detail_info_remark">申請理由</string>
+    <string name="clock_remark">申請理由*(250 文字)</string>
+    <string name="detail_info_msg">メッセージ(250 文字)</string>
+    <string name="detail_info_msg_normal">メッセージ</string>
+    <string name="report_history_to_be_confirmed">確認中</string>
+    <string name="profile_no_customer_text">QRコードとペアリングコードを管理者に見せて、スタッフになりましょう。</string>
+    <string name="number_picker_formatter_hours">%02d</string>
+    <string name="number_picker_formatter_mins">%02d</string>
+
+
+    <string name="week_sun">日</string>
+    <string name="week_mon">月</string>
+    <string name="week_tue">火</string>
+    <string name="week_wed">水</string>
+    <string name="week_thu">木</string>
+    <string name="week_fri">金</string>
+    <string name="week_sat">土</string>
+
+    <string name="invalid_layout_hint">この店のGoFaceサービス期間が切れています。</string>
+    <string name="staff_member_empty">記録がありません</string>
+    <string name="button_close">閉じる</string>
+    <string name="button_confirm">無効にする</string>
+    <string name="date_formatter_day">%02d</string>
+    <string name="total_hours_format">(%shr)</string>
+    <string name="total_working_hours_format">%shr</string>
+    <string name="app_version">3.7.0</string>
+    <string name="app_version_title">ソフトウェアバージョン</string>
+
+    <string name="error_401">アクセスする権限がありません (401)</string>
+    <string name="error_404">パラメータエラー (404)</string>
+    <string name="error_405">パラメータエラー (405)</string>
+    <string name="error_4000">パラメータエラー (4000)</string>
+    <string name="error_4001">アクセスする権限がありません (4001)</string>
+    <string name="error_4100">アクセスする権限がありません (4100)</string>
+    <string name="error_4101">パラメータエラー (4101)</string>
+    <string name="error_4102">会社/店舗 IDか、スタッフ ID、あるいはパスワードが間違っています。 (4102)</string>
+    <string name="error_4103">打刻時間が異常です。しばらくしたら再度試すか、管理者に連絡してください。 (4103)</string>
+    <string name="error_4104">認識失敗 (4104)</string>
+    <string name="error_4105">携帯の打刻機能が有効に設定されていません。管理者に連絡してください。 (4105)</string>
+    <string name="error_4106">IDとパスワードによるログインが有効にされていません。管理者に連絡してください。 (4106)</string>
+    <string name="error_4210">アクセスする権限がありません (4201)</string>
+    <string name="error_4231">打刻修正申請が重複しています (4231)</string>
+    <string name="error_4232">打刻修正申請の時刻が間違っています。当日以降の時間を入力してはいけません (4232)</string>
+    <string name="error_4233">打刻修正申請の承認待ち (4233)</string>
+    <string name="error_423">アカウントの期限が切れました (423)</string>
+
+    <string name="error_4234">エラーが発生しました。この打刻記録追加の申し込みはすでに処理済みです。 (4234)</string>
+    <string name="error_4235">當日為公休日 (4235)</string>
+    <string name="error_4236">シフト募集はまだ始まっていません。しばらくしてからもう一度お試しください。または管理者に連絡してください。 (4236)</string>
+    <string name="error_4237">このシフトパターンの募集はまだ始まっていません。しばらくしてからもう一度お試しください。または管理者に連絡してください。 (4237)</string>
+    <string name="error_4238">シフト機能が無効になってます。一度ログアウトして、再ログインしてください。 (4238)</string>
+
+
+    <string name="error_4239">識別コードの入力間違いや有効期限切れの可能性があります。新しいPINコードを入力してください (4239)</string>
+
+    <string name="error_4240">顔認証失敗 (4240)</string>
+    <string name="error_4241">該当するスタッフの顔データは登録済です (4241)</string>
+    <string name="error_4242">入力されたIDは既に使用されています。他のIDを入力してください (4242)</string>
+    <string name="error_4243">追加できるアカウント数が上限に達しているため、カスタマーサービスにご連絡ください (4243)</string>
+    <string name="error_4244">打刻可能な人数が上限に達しました (4244)</string>
+    <string name="error_4245">該当するスタッフのアカウントは既に登録済です (4245)</string>
+    <string name="error_4246">該当するスタッフは存在しません (4246)</string>
+    <string name="error_4247">入力された時刻は打刻できません (4247)</string>
+    <string name="error_4248">入力されたメールアドレスは既に使用されています。カスタマーサポートに連絡してください (4248)</string>
+    <string name="error_4249">入力されたアカウント名は既に使用されています。他のアカウント名を入力してください (4249)</string>
+    <string name="error_4250">アカウントは4~20文字の英数で入力してください。空白を含む特殊文字を使用しないでください。 (4250)</string>
+    <string name="error_4251">パスワードは 8~32 文字の半角英数で、少なくとも一つの英文字と一つの数字が必要です。 (4251)</string>
+    <string name="error_4252">従業員IDは1~10文字の半角英数字が必要です。 (4252)</string>
+
+    <string name="error_4253">不適切な時間設定です。正しい時間を設定してください。 (4253)</string>
+    <string name="error_4254">営業日時間帯が変更されたため、本スタッフの打刻追加申請を提出し直す必要があります。"却下”をタップして本申請を却下してください。 (4254)</string>
+    <string name="error_500">通信エラーが発生しました。しばらくたってから再度操作してください (500)</string>
+    <string name="error_5000">通信エラーが発生しました。しばらくたってから再度操作してください (5000)</string>
+    <string name="error_5001">通信エラーが発生しました。しばらくたってから再度操作してください (5001)</string>
+    <string name="error_5002">通信エラーが発生しました。しばらくたってから再度操作してください (5002)</string>
+
+    <string name="error_5003">データが異常しました。管理者に連絡してください。 (5003)</string>
+
+    <string name="network_error">通信状態が不安定です。通信環境を確認してください。</string>
+    <string name="no_permission_hint">この携帯は機能を利用する権限がない。店に連絡しアクセスの許可を取得してください</string>
+
+
+    <string name="roster_btn_text">シフト登録</string>
+    <string name="roster_bottom_hint_less">人員オーバー：</string>
+    <string name="roster_over_title_dialog">人員オーバー</string>
+
+    <string name="roster_no_roster">あなたのシフトがありません。</string>
+    <string name="roster_no_work">休日</string>
+    <string name="roster_btn_send">保存</string>
+
+    <string name="roster_shift_less">人員不足</string>
+    <string name="roster_shift_fit">満員</string>
+    <string name="roster_shift_over">人員オーバー</string>
+
+    <string name="roster_delete_title">シフトを一括削除</string>
+    <string name="roster_delete_hint">この時間帯のシフトを全部削除しますか？</string>
+
+    <string name="roster_update_title">シフトを更新する</string>
+    <string name="roster_change_title">シフト時間帯を切り替える</string>
+    <string name="roster_update_content">このシフト時間帯に変更を保存しますか？</string>
+
+    <string name="roster_not_yet">シフト登録が開放されていません。</string>
+    <string name="roster_ok_dialog">保存する</string>
+    <string name="roster_giveup_dialog">保存しない</string>
+
+    <string name="roster_fast_roster">繰り返しシフト</string>
+    <string name="roster_fast_repeat">繰り返し %s</string>
+
+
+    <string name="notifi_roster_change">シフト変更：%s</string>
+    <string name="notifi_roster_add">\u0020%s にあなたのシフトが登録されました。</string>
+    <string name="notifi_roster_remove">\u0020%s からあなたのシフトが取り消されました。</string>
+    <string name="notifi_roster_one_day">%1$s 個人シフト表の編集は %2$s に終了します。</string>
+    <string name="notifi_roster_open">%1$s 個人シフト表の編集が開放されました。終了日は %2$s です</string>
+    <string name="notifi_roster_release">%s 個人シフト表の編集が終了しました。タップして確認してください。</string>
+    <string name="profile_group_title">グループ</string>
+
+
+    <!-- v2.5 使用 -->
+    <string name="title_choose_image_provider">選択</string>
+    <string name="action_cancel">キャンセル</string>
+    <string name="title_gallery">アルバム</string>
+    <string name="title_camera">ストレージ</string>
+    <string name="message_gallery_permission_denied">カメラかストレージにアクセスできません。アプリ設定で権限を許可してください。</string>
+    <string name="message_camera_permission_denied">カメラかストレージにアクセスできません。アプリ設定で権限を許可してください。</string>
+    <string name="permission_gallery_denied"><![CDATA[カメラかストレージにアクセスできません。アプリ設定で権限を許可してください。]]></string>
+    <string name="permission_camera_extended_denied"><![CDATA[カメラかストレージにアクセスできません。アプリ設定で権限を許可してください。]]></string>
+    <string name="permission_camera_denied"><![CDATA[カメラかストレージにアクセスできません。アプリ設定で権限を許可してください。]]></string>
+    <string name="button_delete">取り消しました</string>
+    <string name="close_face">顔がはっきり映るよう近づいてください。</string>
+    <string name="face_detect_fail">認識失敗</string>
+    <string name="custom_sign_in"><u>他の方法でログインする</u></string>
+    <string name="button_back_text">戻る</string>
+
+    <string name="login_org_id">会社/店舗 ID</string>
+    <string name="login_staff_id">スタッフ ID</string>
+    <string name="login_passwd">パスワード</string>
+    <string name="login_text">ログイン</string>
+    <string name="face_detect_name">こんにちは、%s！</string>
+
+
+    <string name="add_member_title">新規スタッフ</string>
+    <string name="add_member_re_capture">再撮影</string>
+    <string name="add_member_next">次へ</string>
+    <string name="add_member_step_1">ステップ1:スタッフの顔写真を明るく鮮明に撮影してください</string>
+    <string name="add_member_step_2">ステップ2:スタッフの情報を入力してください(必須)</string>
+    <string name="add_member_step_3">ステップ3:携帯のログイン機能</string>
+    <string name="add_member_name">氏名</string>
+    <string name="add_member_id">スタッフ ID</string>
+    <string name="add_member_group">グループ</string>
+    <string name="add_member_category">給与形態</string>
+    <string name="add_member_category_part">パートタイム</string>
+    <string name="add_member_category_full">フルタイム</string>
+    <string name="add_member_name_error">1–40文字</string>
+    <string name="add_member_id_error">1–10文字の半角英数字</string>
+    <string name="add_member_mobile_login">携帯のログイン機能</string>
+    <string name="add_member_enable">有効</string>
+    <string name="add_member_disable">無効</string>
+    <string name="add_member_mobile_login_hint_1">1.携帯のログイン機能をオンさせることによって、打刻状況を把握できる</string>
+    <string name="add_member_mobile_login_hint_2">2.この機能をオンすると、スタッフは携帯にGoFaceのアプリをダウンロードし、アカウントの登録とログインが必要</string>
+    <string name="add_member_login_info">ログイン情報</string>
+    <string name="add_member_login_account">ログインアカウント：</string>
+    <string name="add_member_login_google">GmailかApple IDでログイン</string>
+    <string name="add_member_login_passwd">スタッフ IDとパスワードでログイン</string>
+    <string name="add_member_login_passwd_text">ログインパスワード</string>
+    <string name="add_member_login_title">ログイン方法</string>
+    <string name="add_member_binding_title">バインディング</string>
+    <string name="add_member_binding_hint">スタッフの携帯に表示されたQRコードを読み取ってください</string>
+    <string name="add_member_binding_process_title">紐付け済み</string>
+    <string name="add_member_binding_passwd_hint">パスワードは 8 – 32文字の半角英数で、少なくとも一つの英文字と一つの数字が必要です。</string>
+    <string name="add_member_binding_passwd_limit">8 – 32文字の半角英数字</string>
+
+    <string name="add_member_binding_fail">紐付け失敗</string>
+    <string name="roster_clock_comment">付注</string>
+    <string name="roster_clock_comment_text_limit">付注 (250 文字)</string>
+    <string name="admin_roster_clockin">出勤打刻追加：%s</string>
+    <string name="admin_roster_clockout">退勤打刻追加：%s</string>
+    <string name="default_notification_channel_name">GoFace</string>
+    <string name="default_notification_channel_id">astra_goface_channel</string>
+
+    <string name="add_member_qr_exist_list">該当するスタッフのアカウントは既に登録済です</string>
+    <string name="add_new_store_title">会社/店舗 登録</string>
+    <string name="add_store_detail_hint">会社/店舗 情報 (入力必須)</string>
+    <string name="add_store_account">会社/店舗 ID (ポータル管理者アカウント)</string>
+    <string name="add_store_passwd">パスワード</string>
+    <string name="add_store_name">会社/店舗 名</string>
+    <string name="add_store_your_name">お名前</string>
+    <string name="add_store_your_employee_id">スタッフID</string>
+    <string name="add_store_account_hint">半角英数字4–20文字</string>
+    <string name="add_store_passwd_hint">半角英数字8–32文字</string>
+    <string name="add_store_name_hint">1–20文字</string>
+    <string name="add_store_your_name_hint">1–40文字</string>
+    <string name="add_store_your_employee_id_hint">1～10文字の半角英数字</string>
+    <string name="add_store_success_hint">今からGoFaceのご利用いただけます！</string>
+    <string name="gfpc_download_text">GoFace Punch Clockをダウンロードしてください</string>
+    <string name="gfpc_download_goto">Go</string>
+    <string name="gfpc_download_hint">スマートフォンとタブレットの両方に対応し、1台のデバイスを複数人で共有して打刻可能で、会社/店舗内での設置利用に向いています。</string>
+    <string name="gfpc_name">GoFace Punch Clock</string>
+    <string name="gf_portal_manager">ポータルサイト</string>
+    <string name="gf_portal_name">GoFace Portal</string>
+    <string name="gf_portal_hint">https://portal.goface.me/ \nスタッフ詳細、会社/店舗の出退勤時間設定、シフト設定、打刻記録の表示/出力などの管理設定機能を備えているポータルサイトです。</string>
+    <string name="profile_pos_pp"><![CDATA[お客様はGoFaceサービスを利用した時点を以て、本サービスの<a href="https://api.goface.me/gf/v1/redirect/tos?lang=%1$s"/> 利用規約 </a> と <a href="https://api.goface.me/gf/v1/redirect/privacy_policy?lang=%2$s"/>プライバシーポリシー</a>の内容をすべて承諾したものとみなされます。]]></string>
+    <string name="qr_remain_title">コードの有効期限</string>
+    <string name="qr_error_msg">無効なQRコード</string>
+    <string name="cross_clock_in">翌日出勤</string>
+    <string name="cross_clock_out">翌日退勤</string>
+
+    <string name="sign_in_google_text">Googleで続ける</string>
+    <string name="my_report_record_title">マイ打刻記録</string>
+    <string name="apply_amend_title">打刻修正申請</string>
+    <string name="detail_info_device">打刻修正装置</string>
+    <string name="report_ststus_discard">無効</string>
+    <string name="report_discard_title_dialog">無効にしますか？</string>
+    <string name="report_discard_content_dialog">この打刻記録を無効にしますか？</string>
+    <string name="report_detail_discard_title">無効な打刻記録</string>
+    <string name="edit_member_title">スタッフを追加</string>
+    <string name="edit_member_step_1">スタッフの顔写真を明るく鮮明に撮影してください</string>
+    <string name="edit_member_step_qr">携帯のログイン機能</string>
+    <string name="edit_member_passwd_setup_already">パスワード設定済</string>
+    <string name="sns_event_23">%3$s %2$s は出勤日です！シフトパターン：%1$s</string>
+    <string name="sns_event_2">%1$s 出勤打刻申請 : %2$s</string>
+    <string name="sns_event_3">%1$s 退勤打刻申請 : %2$s</string>
+    <string name="sns_event_12">出勤打刻無効：%s</string>
+    <string name="sns_event_13">退勤打刻無効：%s</string>
+    <string name="error_4255">設定が変更されました。もう一度打刻してください。(4255)</string>
+    <string name="personal_temp_hint">現在の体温を入力してください。</string>
+    <string name="success_temp_unit">体温  %1$s %2$s</string>
+    <string name="member_reset_passwd">パスワードの再設定</string>
+    <string name="manual_clockin">出勤打刻追加 : %s</string>
+    <string name="manual_clockout">退勤打刻追加 : %s</string>
+    <string name="no_punch_device">打刻端末未設置</string>
+</resources>

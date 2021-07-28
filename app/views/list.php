@@ -3,7 +3,11 @@
         <div class="btn-group pull-right">
             <!-- Button trigger modal -->
             <button class="btn btn-primary waves-effect waves-light" id="NewKeyBtn" data-toggle="modal" data-target="#myAdd"><i class="fa fa-plus"></i> New Key</button>
+<?php if (isset($s3_link)) : ?>
             <button class="btn btn-warning waves-effect waves-light" data-toggle="modal" data-target="#myExport"><i class="fa fa-share"></i> Export</button>
+<?php else : ?>
+            <button class="btn btn-info waves-effect waves-light" id="download"><a href="/tool/download/<?php echo $production; ?>_<?php echo $platform; ?>"><i class="fa fa-download"></i> Download</a></button>
+<?php endif ?>
         </div>
         <h4 class="page-title">Environment : <span id="platform"><?php echo $production; ?> / <?php echo $platform; ?></span></h4>
         <ol class="breadcrumb"></ol>
@@ -13,6 +17,7 @@
         <div class="card-box table-responsive" id="mainTable">
             <input type="hidden" name="email" value="<?php echo $email; ?>">
             <h4 class="m-t-0 header-title"><b>Key List</b></h4>
+<?php if (isset($s3_link)) : ?>
             <div class="row">
                 <div class="col-sm-8 pull-left">
                     <b style="color: #beaf5f">Export to S3 url: </b><br>
@@ -21,6 +26,7 @@
                     <i style="font-size:9px" class="fa">&#xf064;</i>
                 </div>
             </div>
+<?php endif ?>
             <div class="row">
                 <div class="col-xs-6 m-t-10">
                 <button type="button" class="btn btn-white btn-sm ti-eye btn-rounded" id="showKeyBtn"> Key</button>

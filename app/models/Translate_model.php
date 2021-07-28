@@ -55,7 +55,7 @@ final class Translate_model extends MY_Model
         {
             if ($key == "created_at") continue;
             $value = str_replace("'", "&#39;", $value);
-            if ($key != "`{$use_lang}`")
+            //if ($key != "`{$use_lang}`")
             {
                 $update_fields[] = $key . " = '{$value}'";
             }

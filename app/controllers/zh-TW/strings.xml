@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GoFace</string>
+    <string name="add_qrcode_hint">"出示 QR Code 或代碼，給 店家/公司 掃描或網頁輸入，將可成為店員 !"</string>
+    <string name="add_qrcode_title">加入</string>
+    <string name="add_qrcode_renew_button">刷新代碼</string>
+    <string name="add_self_store_hint">新增自己的 店家/公司</string>
+    <string name="btn_add_staff">顯示 QR Code 加入 店家/公司</string>
+    <string name="button_cancel">取消</string>
+    <string name="button_ok">好</string>
+    <string name="button_delete">刪除</string>
+    <string name="clock_first_in">上班 (最早)</string>
+    <string name="clock_last_out">下班 (最晚)</string>
+    <string name="clock_in">上班</string>
+    <string name="clock_out">下班</string>
+    <string name="clock_working_hours">"工作時數 : "</string>
+    <string name="detail_info_person">處理人</string>
+    <string name="detail_info_post_registration">是否補登？</string>
+    <string name="detail_info_time">補登時間</string>
+    <string name="dialog_text_post_time_wrong">補登時間有誤，請選擇正確時間</string>
+    <string name="dialog_title_oops">哎呀！</string>
+    <string name="done_button">完成</string>
+    <string name="list_empty">目前沒有資料</string>
+    <string name="login_power_text">Powered by Astra</string>
+    <string name="login_title_text">人力管理最佳化</string>
+    <string name="login_with_google">使用 google 登入</string>
+    <string name="nav_roster">排班</string>
+    <string name="nav_noti">通知</string>
+    <string name="nav_profile">個人設定</string>
+
+    <string name="noti_clock_fail">上班補登未通過： %s</string>
+    <string name="noti_clock_set_fail">下班補登未通過 : %s</string>
+    <string name="noti_clock_set_success">下班補登通過 : %s</string>
+    <string name="noti_clock_success">上班補登通過 : %s</string>
+
+    <string name="notification_empty">目前沒有資料</string>
+    <string name="notification_title">通知</string>
+    <string name="post_apply_clockin">"%1$s 申請上班打卡%2$s "</string>
+    <string name="post_apply_clockout">%1$s 申請下班打卡 %2$s</string>
+    <string name="post_registration_create_time">申請時間 %s</string>
+    <string name="post_registration_fail">補登失敗</string>
+    <string name="post_registration_success">補登成功</string>
+    <string name="post_registration_waiting">審核中</string>
+    <string name="profile_join_at">到職日 : "</string>
+    <string name="profile_log_out">登出</string>
+    <string name="profile_store_title"> 店家/公司 </string>
+    <string name="profile_title">個人設定</string>
+    <string name="radio_button_no">否</string>
+    <string name="radio_button_yes">是</string>
+    <string name="report_list_sub_title">補登事項</string>
+    <string name="review_fail">補登失敗</string>
+    <string name="review_success">補登成功</string>
+    <string name="tab_fail">未通過</string>
+    <string name="tab_pass">通過</string>
+    <string name="noti_admin_process">%1$s 已處理</string>
+    <string name="noti_admin_gfpc_process">管理員 已處理</string>
+    <string name="tab_waiting">待處理</string>
+    <string name="updated_by_name_date">%1$s 在 %2$s更新</string>
+    <string name="updated_by_name">%s 更新</string>
+    <string name="noti_join_success">"您加入%s 成功 "</string>
+    <string name="role_staff">員工</string>
+    <string name="role_admin">主管</string>
+    <string name="profile_staff">(員工)</string>
+    <string name="profile_admin">(主管)</string>
+    <string name="profile_no_id">(無身分)</string>
+    <string name="nav_report">打卡記錄</string>
+    <string name="nav_report_staff">員工管理</string>
+    <string name="post_registration_button">補登</string>
+    <string name="detail_info_remark">申請理由</string>
+    <string name="clock_remark">申請理由*(250字)</string>
+    <string name="detail_info_msg">留言(250字)</string>
+    <string name="detail_info_msg_normal">留言</string>
+    <string name="report_history_to_be_confirmed">待確認</string>
+    <string name="profile_no_customer_text">目前沒有加入店家/公司\n出示 QR Code 或代碼，給店家/公司掃描或網頁輸入，將可成為店員 !"</string>
+    <string name="number_picker_formatter_hours">%02d</string>
+    <string name="number_picker_formatter_mins">%02d</string>
+
+    <string name="week_sun">星期日</string>
+    <string name="week_mon">星期一</string>
+    <string name="week_tue">星期二</string>
+    <string name="week_wed">星期三</string>
+    <string name="week_thu">星期四</string>
+    <string name="week_fri">星期五</string>
+    <string name="week_sat">星期六</string>
+
+    <string name="invalid_layout_hint">您加入的店家沒有使用此服務</string>
+    <string name="staff_member_empty">目前沒有資料</string>
+    <string name="button_close">關閉</string>
+    <string name="button_confirm">確認</string>
+    <string name="total_hours_format">(%shr)</string>
+    <string name="total_working_hours_format">%shr</string>
+    <string name="date_formatter_day">%02d</string>
+    <string name="app_version">3.7.0</string>
+    <string name="app_version_title">軟體版本</string>
+
+    <string name="error_401">權限不足 (401)</string>
+    <string name="error_404">參數錯誤 (404)</string>
+    <string name="error_405">參數錯誤 (405)</string>
+    <string name="error_4000">參數錯誤 (4000)</string>
+    <string name="error_4001">權限不足 (4001)</string>
+    <string name="error_4100">權限不足 (4100)</string>
+    <string name="error_4101">參數錯誤 (4101)</string>
+    <string name="error_4102">店家/公司 代碼或員工編號、密碼錯誤 (4102)</string>
+    <string name="error_4103">打卡時間異常，請稍後重試或聯繫管理員。 (4103)</string>
+    <string name="error_4104">辨認失敗 (4104)</string>
+    <string name="error_4105">尚未啟用人臉辨識打卡功能，請聯繫管理員。 (4105)</string>
+    <string name="error_4106">尚未啟用帳號密碼登入功能，請聯繫管理員。 (4106)</string>
+
+
+
+
+    <string name="error_4210">權限不足 (4210)</string>
+    <string name="error_4231">當日尚有未簽核補登記錄，不可重複提交。 (4231)</string>
+    <string name="error_4232">不可補登未來時間 (4232)</string>
+    <string name="error_4233">管理者尚未簽核此補登申請 (4233)</string>
+    <string name="error_4234">發生錯誤，因該筆補登申請已處理完成。 (4234)</string>
+    <string name="error_423">帳號已過期 (423)</string>
+
+    <string name="error_4235">當日為公休日 (4235)</string>
+    <string name="error_4236">尚未開放排班，請稍後重試或聯繫管理員。 (4236)</string>
+    <string name="error_4237">該班別尚未開放排班，請稍後重試或聯繫管理員。 (4237)</string>
+    <string name="error_4238">排班功能已關閉，請重新登入 (4238)</string>
+    <string name="error_4239">代碼錯誤或過期，請重新輸入 (4239)</string>
+
+    <string name="error_4240">辨識失敗 (4240)</string>
+    <string name="error_4241">已存在於員工名單 (4241)</string>
+    <string name="error_4242">ID已有人使用，請更換ID (4242)</string>
+    <string name="error_4243">員工數已達上限，請聯繫客服。 (4243)</string>
+    <string name="error_4244">當日打卡人數超過上限 (4244)</string>
+    <string name="error_4245">此帳號已存在於員工名單中 (4245)</string>
+    <string name="error_4246">此員工已不存在 (4246)</string>
+    <string name="error_4247">超過可打卡區間 (4247)</string>
+    <string name="error_4248">您登入的 E-mail Account 已被用來建立其他店家，請聯絡客服。 (4248)</string>
+    <string name="error_4249">您輸入的管理帳號重覆，請重新輸入。 (4249)</string>
+    <string name="error_4250">帳號請使用 4~20個英數字，不能含有空白及特殊符號。 (4250)</string>
+    <string name="error_4251">密碼必須為 8~32 個半形英數字，且同時具有 1 個以上的英文和數字 (4251)</string>
+    <string name="error_4252">員工編號必須為1~10 個半形英數字 (4252)</string>
+
+    <string name="error_4253">時間有誤，請選擇正確時間 (4253)</string>
+    <string name="error_4254">工作日區間已變更，需此員工重新申請補登，請選擇”否”以拒絕此申請 (4254)</string>
+    <string name="error_500">系統忙碌，請稍後再試。 (500)</string>
+    <string name="error_5000">系統忙碌，請稍後再試。 (5000)</string>
+    <string name="error_5001">系統忙碌，請稍後再試。 (5001)</string>
+    <string name="error_5002">系統忙碌，請稍後再試。 (5002)</string>
+    <string name="error_5003">資料異常，請聯繫管理員。 (5003)</string>
+
+    <string name="network_error">網路訊號不穩定，請檢查網路連線</string>
+    <string name="no_permission_hint">您沒有手機權限，請聯絡店家開啟</string>
+
+
+    <string name="roster_btn_text">排班</string>
+    <string name="roster_bottom_hint_less">超過預設人數：</string>
+    <string name="roster_over_title_dialog">超過預設人數</string>
+    <string name="roster_no_roster">本日無您的班次</string>
+    <string name="roster_no_work">公休日</string>
+    <string name="roster_btn_send">送出</string>
+
+
+    <string name="roster_shift_less">人數未滿</string>
+    <string name="roster_shift_fit">人數已滿</string>
+    <string name="roster_shift_over">超過預設人數</string>
+    <string name="roster_delete_title">刪除所有班次</string>
+    <string name="roster_delete_hint">確定刪除本時段所有班次？？</string>
+
+
+
+    <string name="roster_update_title">更新排班</string>
+    <string name="roster_change_title">切換時段</string>
+    <string name="roster_update_content">是否儲存本時段修改結果？</string>
+
+    <string name="roster_not_yet">尚未開放排班</string>
+    <string name="roster_ok_dialog">儲存</string>
+    <string name="roster_giveup_dialog">不儲存</string>
+
+    <string name="roster_fast_roster">重複排班</string>
+    <string name="roster_fast_repeat">重複%s</string>
+
+
+    <string name="notifi_roster_change">排班異動：%s</string>
+    <string name="notifi_roster_add">\u0020%s 新增了您的班次。</string>
+    <string name="notifi_roster_remove">\u0020%s 您的班次已被取消。</string>
+    <string name="notifi_roster_one_day">%1$s 班表將於 %2$s 結束排班。</string>
+    <string name="notifi_roster_open">%1$s 班表開放排班，於 %2$s 結束排班。</string>
+    <string name="notifi_roster_release">%s 班表的修改時間已結束，請點擊查看結果。</string>
+    <string name="profile_group_title">群組</string>
+
+<!-- v2.5 使用 -->
+    <string name="title_choose_image_provider">選擇</string>
+    <string name="action_cancel">取消</string>
+    <string name="title_gallery">相簿</string>
+    <string name="title_camera">相機</string>
+    <string name="message_gallery_permission_denied">選擇圖像需要讀取外部存儲權限。 請從"設置">"權限"中打開請求的權限。</string>
+    <string name="message_camera_permission_denied">拍攝照片需要具有相機和存儲權限。 關閉任何權限將無法讓應用程式平穩運行。 請從"設置">"權限"中打開所有請求的權限。</string>
+    <string name="permission_gallery_denied"><![CDATA[選擇圖庫圖像需要存儲權限。 請在"設置">"權限"中允許存儲權限。]]></string>
+    <string name="permission_camera_extended_denied"><![CDATA[拍攝照片需要具有相機和存儲權限。 請同時從"設置">"權限"中允許所有請求的權限。]]></string>
+    <string name="permission_camera_denied"><![CDATA[拍攝照片需要存儲權限。 請在"設置">"權限"中允許存儲權限。]]></string>
+    <string name="close_face">請將臉盡量靠近螢幕</string>
+    <string name="face_detect_fail">辨認失敗</string>
+    <string name="custom_sign_in"><u>使用其他方式登入</u></string>
+    <string name="button_back_text">返回</string>
+
+    <string name="login_org_id"> 店家/公司 代碼</string>
+    <string name="login_staff_id">員工編號</string>
+    <string name="login_passwd">密碼</string>
+    <string name="login_text">登入</string>
+    <string name="face_detect_name">你好, %s!</string>
+
+
+<!-- v3.3 使用 -->
+    <string name="add_member_title">新增員工</string>
+    <string name="add_member_re_capture">重拍</string>
+    <string name="add_member_next">下一步</string>
+    <string name="add_member_step_1">步驟1: 拍下員工清晰明亮的大頭照</string>
+    <string name="add_member_step_2">步驟2: 填寫員工資訊（必填）</string>
+    <string name="add_member_step_3">步驟3: 員工手機登入</string>
+    <string name="add_member_name">姓名</string>
+    <string name="add_member_id">員工編號</string>
+    <string name="add_member_group">群組</string>
+    <string name="add_member_category">工作類型</string>
+    <string name="add_member_category_part">時薪制</string>
+    <string name="add_member_category_full">全職制</string>
+    <string name="add_member_name_error">1&#8211;40 個字</string>
+    <string name="add_member_id_error">1&#8211;10 個半形英數字</string>
+    <string name="add_member_mobile_login">手機登入</string>
+    <string name="add_member_enable">啟用中</string>
+    <string name="add_member_disable">停用中</string>
+    <string name="add_member_mobile_login_hint_1">1. 員工可以從手機登入，查詢打卡資訊</string>
+    <string name="add_member_mobile_login_hint_2">2. 這個步驟需員工手機下載並驗證後登入GoFace</string>
+    <string name="add_member_login_info">登入資訊</string>
+    <string name="add_member_login_account">登入帳號：</string>
+    <string name="add_member_login_google">使用Gmail或Apple ID登入</string>
+    <string name="add_member_login_passwd">使用員工編號與密碼登入</string>
+    <string name="add_member_login_passwd_text">登入密碼</string>
+    <string name="add_member_login_title">登入方式</string>
+    <string name="add_member_binding_title">綁定</string>
+    <string name="add_member_binding_hint">請掃描員工手機上的GoFace QRcode加入公司群組</string>
+    <string name="add_member_binding_process_title">完成連結</string>
+    <string name="add_member_binding_passwd_hint">密碼必須為8 – 32 個半形英數字，且同時具有1個以上的英文和數字。</string>
+    <string name="add_member_binding_passwd_limit">8 – 32 個半形英數字</string>
+    <string name="add_member_binding_fail">連結失敗</string>
+    <string name="roster_clock_comment">備註</string>
+    <string name="roster_clock_comment_text_limit">備註 (250字)</string>
+    <string name="admin_roster_clockin">補登上班：%s</string>
+    <string name="admin_roster_clockout">補登下班：%s</string>
+    <string name="default_notification_channel_name">GoFace</string>
+    <string name="default_notification_channel_id">astra_goface_channel</string>
+    <string name="add_member_qr_exist_list">此帳號已存在於員工名單中</string>
+    <string name="add_new_store_title">新增 店家/公司</string>
+    <string name="add_store_detail_hint">填寫 店家/公司 帳號資訊 (必填)</string>
+    <string name="add_store_account"> 店家/公司 代碼(後台管理帳號)</string>
+    <string name="add_store_passwd">管理密碼</string>
+    <string name="add_store_name"> 店家/公司 名稱</string>
+    <string name="add_store_your_name">您的姓名</string>
+    <string name="add_store_your_employee_id">您的員工編號</string>
+    <string name="add_store_account_hint">4–20個半形英數字</string>
+    <string name="add_store_name_hint">1–20個字</string>
+    <string name="add_store_your_name_hint">1–40個字</string>
+    <string name="add_store_your_employee_id_hint">1~10 個半形英數字</string>
+    <string name="add_store_passwd_hint">8–32 個半形英數字</string>
+    <string name="add_store_success_hint">可以開始使用人臉辨識打卡摟！</string>
+    <string name="gfpc_download_text">下載打卡鐘</string>
+    <string name="gfpc_download_goto">前往</string>
+    <string name="gfpc_download_hint">支援平板與手機，適合放在公司中統一打卡。</string>
+    <string name="gfpc_name">GoFace Punch Clock</string>
+    <string name="gf_portal_manager">登入後台</string>
+    <string name="gf_portal_name">GoFace Portal</string>
+    <string name="gf_portal_hint">https://portal.goface.me/ \n完整的設定平台 ex: 員工的詳細資訊、店家/公司 的上班時間、排班設定，並提供每日報表 &#38; 每月報表。</string>
+    <string name="profile_pos_pp"><![CDATA[當您使用 GoFace 服務時，即表示您已詳細閱讀、明確瞭解並同意接受本服務之<a href="https://api.goface.me/gf/v1/redirect/tos?lang=%1$s"/> 服務條款 </a> 及 <a href="https://api.goface.me/gf/v1/redirect/privacy_policy?lang=%2$s">隱私權政策</a>所有內容。]]></string>
+
+    <string name="qr_remain_title">代碼剩餘時間</string>
+    <string name="qr_error_msg">QR Code 格式不符</string>
+    <string name="cross_clock_in">隔日上班</string>
+    <string name="cross_clock_out">隔日下班</string>
+
+    <string name="sign_in_google_text">透過 Google 帳戶繼續操作</string>
+    <string name="my_report_record_title">我的打卡記錄</string>
+    <string name="apply_amend_title">申請補登</string>
+    <string name="detail_info_device">補登裝置</string>
+    <string name="report_ststus_discard">無效</string>
+
+    <string name="report_discard_title_dialog">確定？</string>
+    <string name="report_discard_content_dialog">確定要使此筆打卡記錄無效？</string>
+    <string name="report_detail_discard_title">打卡記錄無效</string>
+    <string name="edit_member_title">編輯員工</string>
+    <string name="edit_member_step_1">拍下員工清晰明亮的大頭照</string>
+    <string name="edit_member_step_qr">員工手機登入</string>
+    <string name="edit_member_passwd_setup_already">已設定密碼</string>
+
+
+    <string name="sns_event_23">%3$s %2$s:要上班喔！班別：%1$s</string>
+    <string name="sns_event_2">%1$s 申請上班: %2$s</string>
+    <string name="sns_event_3">%1$s 申請下班: %2$s</string>
+    <string name="sns_event_12">取消上班: %s</string>
+    <string name="sns_event_13">取消下班: %s</string>
+    <string name="error_4255">設定已變更，請重新打卡。(4255)</string>
+    <string name="personal_temp_hint">請輸入你現在的體溫</string>
+    <string name="success_temp_unit">體溫 %1$s %2$s</string>
+    <string name="member_reset_passwd">重設密碼</string>
+    <string name="manual_clockin">補登上班 : %s</string>
+    <string name="manual_clockout">補登下班 : %s</string>
+    <string name="no_punch_device">無打卡鐘裝置</string>
+</resources>
