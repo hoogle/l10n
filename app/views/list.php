@@ -6,7 +6,7 @@
 <?php if (isset($s3_link)) : ?>
             <button class="btn btn-warning waves-effect waves-light" data-toggle="modal" data-target="#myExport"><i class="fa fa-share"></i> Export</button>
 <?php else : ?>
-            <button class="btn btn-info waves-effect waves-light" id="download"><a href="/tool/download/<?php echo $production; ?>_<?php echo $platform; ?>"><i class="fa fa-download"></i> Download</a></button>
+            <button class="btn btn-success waves-effect waves-light" id="downloadBtn"><i class="fa fa-download"></i> Download</button>
 <?php endif ?>
         </div>
         <h4 class="page-title">Environment : <span id="platform"><?php echo $production; ?> / <?php echo $platform; ?></span></h4>

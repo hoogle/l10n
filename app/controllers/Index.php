@@ -92,11 +92,14 @@ class Index extends MY_Controller {
             "last_editor"  => $_SESSION["l10n_email"],
         ];
         strlen($keyword) && $data["keyword"] = $keyword;
-        strlen($lang_en) && $data["`en-US`"] = $lang_en;
         strlen($lang_ja) && $data["`ja-JP`"] = $lang_ja;
         strlen($lang_zh) && $data["`zh-TW`"] = $lang_zh;
         strlen($lang_id) && $data["`id-ID`"] = $lang_id;
         strlen($lang_ms) && $data["`ms-MY`"] = $lang_ms;
+        if (strlen($lang_en)) {
+            $data["`en-US`"] = $lang_en;
+            if ($platform == "iOS") $data["keyword"] = $lang_en;
+        }
 
         $resp = [];
         if ($this->translate_model->update_translate($id, $data)) {

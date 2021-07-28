@@ -49,6 +49,7 @@ $(function () {
     const $copyURL = $('#copy-url');
     const $s3URL = $('#s3-url');
     const $newkeyBtn = $('#NewKeyBtn');
+    const $downloadBtn = $('#downloadBtn');
     const transListRowTemp = $('#transListRowTemp').html();
     const baseURL = '/index';
     const myURL = new URL(window.location.href);
@@ -263,6 +264,13 @@ $(function () {
         $.get('/index/get_last_id', function(data) {
             $addkeyForm[0].keyword.value= data;
         });
+    });
+
+    $downloadBtn.click(function (e) {
+        var url = new URLSearchParams(window.location.search);
+        var link = document.createElement("a");
+        link.href = '/tool/download/' + url.get('p');
+        link.click();
     });
 
     $copyURL.click(function () {
