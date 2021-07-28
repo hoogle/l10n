@@ -10,6 +10,7 @@ RUN apt-get update && \
         libjpeg-dev \
         libfreetype6-dev \
         libmcrypt-dev \
+	libzip-dev \
         curl \
         && pecl install mcrypt-1.0.1 \
         && docker-php-ext-enable mcrypt \
@@ -17,6 +18,7 @@ RUN apt-get update && \
         && docker-php-ext-install gd \
         && docker-php-ext-install mysqli \
         && docker-php-ext-install pdo_mysql \
+	&& docker-php-ext-install zip \
         && mkdir -p /usr/src/php/ext/redis \
         && curl -L https://github.com/phpredis/phpredis/archive/4.3.0.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 \
         && echo 'redis' >> /usr/src/php-available-exts \
