@@ -48,23 +48,16 @@ final class Translate_model extends MY_Model
 	 * @param  $data  [description]
 	 * @return [type] [description]
 	 */
-	public function update(Array $data, $use_lang) {
-		$data["created_at"] = $data["updated_at"] = date("Y-m-d H:i:s");
-        $update_fields = [];
-        foreach($data as $key => &$value)
-        {
-            if ($key == "created_at") continue;
-            $value = str_replace("'", "&#39;", $value);
-            //if ($key != "`{$use_lang}`")
-            {
-                $update_fields[] = $key . " = '{$value}'";
-            }
-        }
+	public function update(Array $data) {
+		$data["updated_at"] = date("Y-m-d H:i:s");
         $DB = $this->_get_db();
-        $sql = $DB->insert_string($this->table, $data) . " ON DUPLICATE KEY UPDATE " . implode(", ", $update_fields);
-        log_message("INFO", "SQL1: (translate->update) " . $sql);
-        //echo "SQL : " . $sql . "<br>\n";
-        $DB->query($sql);
+        $DB->where([
+            "production" => $data["production"],
+            "platform" => $data["platform"],
+            "keyword" => $data["keyword"]
+        ]);
+        $DB->update($this->table, $data);
+        log_message("INFO", "SQL : translate_model->update() " . $DB->result_id->queryString);
         return $DB->affected_rows();
 	}
 
@@ -78,6 +71,7 @@ final class Translate_model extends MY_Model
     }
 
     public function add_translate($data) {
+        $data["created_at"] = $data["updated_at"] = date("Y-m-d H:i:s");
         $DB = $this->_get_db();
         $DB->insert($this->table, $data);
         return $DB->insert_id();
@@ -102,10 +96,10 @@ final class Translate_model extends MY_Model
         return $DB->affected_rows();
     }
 
-    public function translator($data) {
+    public function get_pfk_exists($data) {
         $DB = $this->_get_db();
-        $DB->insert($this->table, $data);
-        return $DB->insert_id();
+        $DB->where($data);
+        return $DB->get($this->table)->result_array() ?: [];
     }
 
     public function get_template_error_data($table = "template") {

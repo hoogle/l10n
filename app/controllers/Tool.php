@@ -40,15 +40,37 @@ class Tool extends MY_Controller {
     }
 
     public function parse_xml($pf, $use_lang) {
-        //$str_arr = explode("\n", file_get_contents(APPPATH . "controllers/{$use_lang}/strings.xml"));
-        $str_arr = explode("\n", file_get_contents(APPPATH . "controllers/{$use_lang}/string.txt"));
+        if ( ! in_array($pf, ["Android", "iOS"])) {
+            echo "'pf' have to be Android or iOS";
+            exit;
+        }
+
+        if ($pf == "Android") {
+            $string_file = "strings.xml";
+        } else {
+            $string_file = "string.txt";
+        }
+
+        $string_file = APPPATH . "import/goface_{$pf}/{$use_lang}/{$string_file}";
+        if ( ! file_exists($string_file)) {
+            echo "goface {$pf} {$use_lang} string file not exists!";
+            exit;
+        }
+        $str_arr = explode("\n", file_get_contents($string_file));
         $arr = [];
         foreach ($str_arr as $line) {
-            if (strstr($line, "\" = \"")) {
-                //preg_match("/^<string name=\"(.*?)\">(.*)<\/string>$/", trim($line), $matches);
-                //echo $matches[1] . " : " . $matches[2] . "\n";
+            $matches = [];
+            if ($pf == "Android") {
+                if (strstr($line, "<string name=\"")) {
+                    preg_match("/^<string name=\"(.*?)\">(.*)<\/string>$/", trim($line), $matches);
+                }
+            } else {
+                if (strstr($line, "\" = \"")) {
+                    preg_match("/^\"(.*)\" = \"(.*)\";$/", $line, $matches);
+                }
+            }
 
-                preg_match("/^\"(.*)\" = \"(.*)\";$/", $line, $matches);
+            if ($matches) {
                 $trans_data = [
                     "production" => "goface",
                     "platform" => $pf,
@@ -61,14 +83,26 @@ class Tool extends MY_Controller {
         }
         ksort($arr);
         foreach ($arr as $ary) {
-            //$this->translate_model->update($ary, $use_lang);
+            $data = [
+                "production" => $ary["production"],
+                "platform" => $ary["platform"],
+                "keyword" => $ary["keyword"],
+            ];
+            if ( ! $this->translate_model->get_pfk_exists($data)) {
+                $this->translate_model->add_translate($ary);
+            } else {
+                $this->translate_model->update($ary);
+            }
         }
         echo "<pre>";print_r($arr);exit;
     }
 
     public function download($p) {
         list($production, $platform) = explode("_", $p);
-        $db_data = $this->l10n_model->get_translate($p);
+        if ( ! $db_data = $this->l10n_model->get_translate($p)) {
+            echo "There is no any {$production} {$platform} translation string yet.";
+            exit;
+        }
         $json_arr = $resp = [];
         foreach ($db_data as $row) {
             $json_arr["en-US"][$row["keyword"]] = $row["en-US"];
@@ -80,74 +114,143 @@ class Tool extends MY_Controller {
 
         //Android
         if ($platform == "Android") {
-            $path = APPPATH . "/tmp/{$production}_{$platform}";
-            $header_str = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<resources>\n";
-            $end_str = "</resources>\n";
-            $lang_arr = array_keys($json_arr);
-            //$lang_arr = ["zh-TW"];
-
-            $lang_folder = [];
-            foreach ($lang_arr as $curr_lang) {
-                //mkdir
-                switch ($curr_lang) {
-                    case "zh-TW":
-                        $lang_folder["zh-TW"] = "values-zh-rTW";
-                        break;
-                    case "ja-JP":
-                        $lang_folder["ja-JP"] = "values-ja";
-                        break;
-                    case "id-ID":
-                        $lang_folder["id-ID"] = "values-in";
-                        break;
-                    case "ms-MY":
-                        $lang_folder["ms-MY"] = "values-ms";
-                        break;
-                    case "en-US":
-                        $lang_folder["en-US"] = "values";
-                        break;
-                }
-                $filepath = $path . "/" . $lang_folder[$curr_lang];
-                if ( ! is_dir($filepath)) {
-                    mkdir($filepath, 0777, true);
-                }
-
-                //prepare
-                $body_str = "";
-                foreach ($json_arr[$curr_lang] as $key => $val) {
-                    $body_str.= "    <string name=\"{$key}\">{$val}</string>\n";
-                }
-                $contents = $header_str . $body_str . $end_str;
-
-                //write
-                $fp = fopen($filepath . "/strings.xml", "w");
-                fwrite($fp, $contents);
-                fclose($fp);
-            }
-
-            //zip
-            $zip = new ZipArchive();
-            $filename = $path . "/strings.zip";
-            if ($zip->open($filename, ZipArchive::CREATE) === TRUE) {
-                foreach ($lang_folder as $lang => $folder) {
-                    $zip->addFile($filepath . "/strings.xml");
-                }
-            }
-            $zip->close();
-
+            $this->_goface_android($json_arr, $production, $platform);
+            echo "Done!";
+        } else {
+            //iOS
+            $this->_goface_ios($json_arr, $production, $platform);
+            echo "Done!";
         }
+        $this->_remove_folder(APPPATH . "tmp");
     }
 
-    public function exportt() {
-        $p = $this->input->get("p");
-        switch ($p) {
-        case "api_error_code" :
-            $this->_api_error_code();
-            break;
-        case "goface_portal" :
-            $this->_goface_portal();
-            break;
+    private function _goface_ios($json_arr, $production, $platform) {
+        $path = APPPATH . "tmp/{$production}_{$platform}";
+        if ( ! is_dir($path)) {
+            mkdir($path, 0777, true);
         }
-        echo "OK";
+        $header_str = "/*\n  Localizable.strings\n  GoFace\n\n  Created by Shrimp Hsieh on 2020/1/7.\n  Copyright © 2020 Shrimp Hsieh. All rights reserved.\n*/\n\n";
+        $lang_arr = array_keys($json_arr);
+        $filename = [];
+        foreach ($lang_arr as $curr_lang) {
+            if ($curr_lang == "en-US") continue;
+            switch ($curr_lang) {
+                case "zh-TW":
+                    $filename["zh-TW"] = "Chinese.txt";
+                    break;
+                case "ja-JP":
+                    $filename["ja-JP"] = "Japanese.txt";
+                    break;
+                case "id-ID":
+                    $filename["id-ID"] = "Indonesian.txt";
+                    break;
+                case "ms-MY":
+                    $filename["ms-MY"] = "Malaysia.txt";
+                    break;
+            }
+
+            //prepare
+            $body_str = "";
+            foreach ($json_arr[$curr_lang] as $key => $val) {
+                $body_str.= "\"{$key}\" = \"{$val}\";\n";
+            }
+            $contents = $header_str . $body_str . "\n";
+
+            //write
+            $fp = fopen($path . "/" . $filename[$curr_lang], "w");
+            fwrite($fp, $contents);
+            fclose($fp);
+        }
+
+        //zip
+        $zip = new ZipArchive();
+        $zipfile = $path . "/{$platform}_strings.zip";
+        if ($zip->open($zipfile, ZipArchive::CREATE) === TRUE) {
+            foreach ($lang_arr as $lang) {
+                if ($lang != "en-US") {
+                    $zip->addFile($path . "/" . $filename[$lang], $filename[$lang]);
+                }
+            }
+        }
+        $zip->close();
+
+        //Download file
+        $this->_download_file($zipfile);
+    }
+
+    private function _goface_android($json_arr, $production, $platform) {
+        $header_str = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<resources>\n";
+        $end_str = "</resources>\n";
+        $lang_arr = array_keys($json_arr);
+        $path = APPPATH . "tmp/{$production}_{$platform}";
+
+        $lang_folder = [];
+        foreach ($lang_arr as $curr_lang) {
+            switch ($curr_lang) {
+                case "zh-TW":
+                    $lang_folder["zh-TW"] = "values-zh-rTW";
+                    break;
+                case "ja-JP":
+                    $lang_folder["ja-JP"] = "values-ja";
+                    break;
+                case "id-ID":
+                    $lang_folder["id-ID"] = "values-in";
+                    break;
+                case "ms-MY":
+                    $lang_folder["ms-MY"] = "values-ms";
+                    break;
+                case "en-US":
+                    $lang_folder["en-US"] = "values";
+                    break;
+            }
+
+            //mkdir
+            $filepath = $path . "/" . $lang_folder[$curr_lang];
+            if ( ! is_dir($filepath)) {
+                mkdir($filepath, 0777, true);
+            }
+
+            //prepare
+            $body_str = "";
+            foreach ($json_arr[$curr_lang] as $key => $val) {
+                if ( ! empty($val)) {
+                    $body_str.= "    <string name=\"{$key}\">{$val}</string>\n";
+                }
+            }
+            $contents = $header_str . $body_str . $end_str;
+
+            //write
+            $fp = fopen($filepath . "/strings.xml", "w");
+            fwrite($fp, $contents);
+            fclose($fp);
+        }
+
+        //zip
+        $zip = new ZipArchive();
+        $zipfile = $path . "/{$platform}_strings.zip";
+        if ($zip->open($zipfile, ZipArchive::CREATE) === TRUE) {
+            foreach ($lang_folder as $lang => $folder) {
+                $addedfile = $folder . "/strings.xml";
+                $zip->addFile($path . "/" . $addedfile, $addedfile);
+            }
+        }
+        $zip->close();
+
+        //Download file
+        $this->_download_file($zipfile);
+    }
+
+    private function _download_file($file) {
+        if (file_exists($file)) {
+            header("Content-Description: File Transfer");
+            header("Content-Type: application/octet-stream");
+            header("Content-Disposition: attachment; filename=" . basename($file));
+            header("Expires: 0");
+            header("Cache-Control: must-revalidate");
+            header("Pragma: public");
+            header("Content-Length: " . filesize($file));
+            readfile($file);
+        }
     }
 
     private function _api_error_code() {
@@ -218,6 +321,15 @@ class Tool extends MY_Controller {
         }
 
         echo json_encode($resp, TRUE);
+    }
+
+    private function _remove_folder($path) {
+        $files = glob($path . '/*');
+        foreach ($files as $file) {
+            is_dir($file) ? $this->_remove_folder($file) : unlink($file);
+        }
+        rmdir($path);
+        return;
     }
 }
 

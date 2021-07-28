@@ -207,7 +207,7 @@
 
 "Start Using GoFace Now!" = "Gunakan GoFace Sekarang!";
 "Add New Store/Org" = "Tambah Syarikat/Org baru";
-"Store/Org Information (mandatory))" = "Isi maklumat akaun syarikat (diperlukan)";
+"Store/Org Information (mandatory)" = "Isi maklumat akaun syarikat (diperlukan)";
 "Store/Org ID (For Admin management)" = "ID Syarikat/Org (akaun admin manajemen)";
 "Management Password" = "Kata Laluan";
 "Store/Org Name" = "Nama Syarikat/Org";

@@ -214,6 +214,8 @@ class Index extends MY_Controller {
         echo json_encode($resp, TRUE);
     }
 
+    /**
+     * DEPRECATED
     public function trans($platform = "goface") {
         $db_data = $this->translate_model->get_l10n_old($platform);
         foreach ($db_data as $row) {
@@ -231,9 +233,10 @@ class Index extends MY_Controller {
                 "created_at" => date("Y-m-d H:i:s"),
                 "updated_at" => date("Y-m-d H:i:s"),
             ];
-            $this->translate_model->translator($data);
+            $this->translate_model->add_translate($data);
         }
     }
+     */
 }
 
 /* End of file index.php */

@@ -212,8 +212,6 @@
     <string name="login_staff_id">Staff ID</string>
     <string name="login_passwd">Password</string>
     <string name="login_text">Log In</string>
-    <string name="default_notification_channel_id">astra_goface_channel</string>
-    <string name="default_notification_channel_name">GoFace</string>
     <string name="face_detect_name">Hi, %s !</string>
 
 
