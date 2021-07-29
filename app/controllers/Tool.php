@@ -98,6 +98,7 @@ class Tool extends MY_Controller {
     }
 
     public function download($p) {
+        $this->_remove_folder(APPPATH . "tmp");
         list($production, $platform) = explode("_", $p);
         if ( ! $db_data = $this->l10n_model->get_translate($p)) {
             echo "There is no any {$production} {$platform} translation string yet.";
@@ -121,7 +122,6 @@ class Tool extends MY_Controller {
             $this->_goface_ios($json_arr, $production, $platform);
             echo "Done!";
         }
-        $this->_remove_folder(APPPATH . "tmp");
     }
 
     private function _goface_ios($json_arr, $production, $platform) {
