@@ -61,7 +61,7 @@ $(function () {
         portal: ['mei@astra.cloud', 'hoogle@astra.cloud'],
         gf: ['max@astra.cloud', 'milo@astra.cloud']
     };
-    const canModifyKey = canModifyKeyAcc[$('input[name=platform]').val()].indexOf($('input[name=email]').val()) > -1;
+    const canModifyKey = canModifyKeyAcc[$('input[name=platform]').val()] !== undefined && canModifyKeyAcc[$('input[name=platform]').val()].indexOf($('input[name=email]').val()) > -1;
     let curOrder = 'en-US';
     let keyValue = '';
     const autoXHR = {};
