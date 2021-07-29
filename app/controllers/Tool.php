@@ -116,12 +116,11 @@ class Tool extends MY_Controller {
         //Android
         if ($platform == "Android") {
             $this->_goface_android($json_arr, $production, $platform);
-            echo "Done!";
         } else {
             //iOS
             $this->_goface_ios($json_arr, $production, $platform);
-            echo "Done!";
         }
+        exit;
     }
 
     private function _goface_ios($json_arr, $production, $platform) {
