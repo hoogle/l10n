@@ -66,7 +66,11 @@
     <div class="row translateRow m-b-10">
         <form name="l10n_{id}" class="d-flex align-item-center">
         <input type="hidden" name="platform" value="<?php echo $platform; ?>"/>
+<?php if (isset($dot) && $dot === '1') : ?>
+        <div class="idCol">{id}<span style="color: red; font-weight:bold; font-size: 2rem;margin-left:3px;vertical-align: bottom;">•</span></div>
+<?php else : ?>
         <div class="idCol">{id}</div>
+<?php endif ?>
         <div class="translateCol keyCol">
             <input type="hidden" name="id" value="{id}">
             <textarea class="form-control text-center" name="keyword" title="{keyword}" readonly>{keyword}</textarea>
