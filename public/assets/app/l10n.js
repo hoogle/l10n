@@ -121,7 +121,7 @@ $(function () {
         const myformData = {};
         let needToUpdate = false;
         formData.map( item => {
-            // console.log(item.name, ':row modify name');
+            console.log(item.name, ':row modify name');
             // console.log(orRow, ':row origin name');
             if (item.name !== 'id' && item.name !== 'platform' && orRow[item.name] === item.value ) {
                 return;
@@ -204,7 +204,7 @@ $(function () {
                 });
                 targetInput.on('change keyup paste', function (e) {
                     // console.log(e, ':change');
-                    // console.log(row, ':row change');
+                    console.log(row, ':row change');
                     // console.log($(this).val());
                     // console.log($(this).attr('title'));
                     submitBtn.addClass('btn-warning');
@@ -216,7 +216,7 @@ $(function () {
                     }
                     if (autoXHR[row.id]) { clearTimeout(autoXHR[row.id]) }
                     autoXHR[row.id] = setTimeout(function () {
-                       autoUpdateLan( {id: row.id, [name]: val === '' ? ' ' : val, platform: row.platform }, row ) ;
+                       autoUpdateLan( {id: row.id, [name]: val === '' ? ' ' : val, platform: row.platform, production: row.production }, row ) ;
                     }, 500);
                 });
                 targetInput.on('focusout', function (e) {
