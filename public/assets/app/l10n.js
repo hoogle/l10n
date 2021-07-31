@@ -179,6 +179,10 @@ $(function () {
                 const targetInput = temp.find('textarea');
                 const targetCol = temp.find('.translateCol');
                 const submitBtn = temp.find('button[type=submit]');
+		const idCol = temp.find('.idCol');
+		if (row.dot && row.dot === '1') {
+			idCol.append('<span style="color: red; font-weight:bold; font-size: 2rem;margin-left:5px;vertical-align: bottom;">•</span>');
+		}
                 let mobile = false;
                 $translateList.append(temp);
                 targetInput.on('focus touchstart', function (e) {
