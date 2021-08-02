@@ -8,6 +8,9 @@
 <?php else : ?>
             <button class="btn btn-success waves-effect waves-light" id="downloadBtn"><i class="fa fa-download"></i> Download</button>
 <?php endif ?>
+<?php if ($pf_modified) : ?>
+            <b style="position: absolute; top: -8px; right: -8px; display: inline-block; width: 18px; height: 18px; border-radius: 50%; background-color: #ff5757; color:white; z-index:3; text-align:center; font-size: 9pt">!</b>
+<?php endif ?>
         </div>
         <h4 class="page-title">Environment : <span id="platform"><?php echo $production; ?> / <?php echo $platform; ?></span></h4>
         <ol class="breadcrumb"></ol>

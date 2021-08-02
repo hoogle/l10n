@@ -11,6 +11,7 @@ final class Translate_model extends MY_Model
 		parent::__construct();
 		$this->table = "translate";
 		$this->table_user = "l10n_user";
+		$this->table_platform = "platform";
 		$this->table_l10n_old = "l10n_old";
 	}
 
@@ -78,6 +79,7 @@ final class Translate_model extends MY_Model
     }
 
     public function update_translate($id, $data) {
+        $data["updated_at"] = date("Y-m-d H:i:s");
         foreach (["`en-US`", "`ja-JP`", "`zh-TW`", "`id-ID`", "`ms-MY`"] as $use_lang) {
             if (isset($data[$use_lang])) {
                 $data[$use_lang] = str_replace("'", "&#39;", $data[$use_lang]);
@@ -93,6 +95,29 @@ final class Translate_model extends MY_Model
         $DB = $this->_get_db();
         $DB->where("email", $email);
         $DB->update($this->table_user, $data);
+        return $DB->affected_rows();
+    }
+
+    public function get_platform_stat() {
+        $DB = $this->_get_db();
+        $data = $DB->get($this->table_platform)->result_array();
+        $return_data = [];
+        foreach ($data as $pf) {
+            $pf["modified"] = $pf["published_at"] < $pf["updated_at"] ? 1 : 0;
+            $return_data[$pf["production_platform"]] = $pf;
+        }
+        return $return_data;
+    }
+
+    public function update_platform($prod_pf, $type = "update") {
+        if ($type == "publish") {
+            $data = ["published_at" => date("Y-m-d H:i:s")];
+        } else {
+            $data = ["updated_at" => date("Y-m-d H:i:s")];
+        }
+        $DB = $this->_get_db();
+        $DB->where("production_platform", $prod_pf);
+        $DB->update($this->table_platform, $data);
         return $DB->affected_rows();
     }
 
@@ -140,9 +165,13 @@ final class Translate_model extends MY_Model
         return $data ?: FALSE;
     }
 
-    public function get_translate_by_page($limit_start, $limit_length, $pf, $orderby_arr = ["keyword", "DESC"], $key = "") {
+    public function get_translate_by_page($limit_start, $limit_length, $prod, $pf, $orderby_arr = ["keyword", "DESC"], $key = "") {
+        $p = $prod . "_" . $pf;
+        $pf_stat = $this->get_platform_stat();
+        $pf_published_at = $pf_stat[$p]["published_at"];
         $DB = $this->_get_db();
         $DB->from($this->table);
+        $DB->where("production", $prod);
         $DB->where("platform", $pf);
         list($order, $by) = $orderby_arr;
         if ( ! empty($key)) {
@@ -159,6 +188,9 @@ final class Translate_model extends MY_Model
         $DB->order_by($order, $by);
         $DB->limit($limit_length, $limit_start);
         $data = $DB->get()->result_array();
+        foreach ($data as &$row) {
+            $row["dot"] = $row["updated_at"] > $pf_published_at ? "1" : "0";
+        }
         log_message("INFO", "SQL : translate_model->get_translate_by_page() " . $DB->result_id->queryString);
         return $data ? ["data" => $data, "rows" => $num_rows] : [];
     }

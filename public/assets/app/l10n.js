@@ -62,7 +62,7 @@ $(function () {
         gf: ['max@astra.cloud', 'milo@astra.cloud']
     };
     const canModifyKey = canModifyKeyAcc[$('input[name=platform]').val()] !== undefined && canModifyKeyAcc[$('input[name=platform]').val()].indexOf($('input[name=email]').val()) > -1;
-    let curOrder = 'en-US';
+    let curOrder = 'updated_at';
     let keyValue = '';
     const autoXHR = {};
     // **********************
@@ -155,7 +155,7 @@ $(function () {
             p: platform,
             key: key,
             per_page: 20,
-            by: 'ASC'
+            by: 'DESC'
         };
         $translateList.find('button[type=submit]').prop('disabled', true);
         $.get(url, formData, function (rs) {
@@ -179,6 +179,10 @@ $(function () {
                 const targetInput = temp.find('textarea');
                 const targetCol = temp.find('.translateCol');
                 const submitBtn = temp.find('button[type=submit]');
+                const idCol = temp.find('.idCol');
+                if (row.dot && row.dot === '1') {
+                    idCol.append('<span style="position: relative; top: -9px; right: -2px; display: inline-block; width: 5px; height: 5px; border-radius: 100%; background-color: #ff5757;"></span>');
+                }
                 let mobile = false;
                 $translateList.append(temp);
                 targetInput.on('focus touchstart', function (e) {
@@ -216,7 +220,7 @@ $(function () {
                     }
                     if (autoXHR[row.id]) { clearTimeout(autoXHR[row.id]) }
                     autoXHR[row.id] = setTimeout(function () {
-                       autoUpdateLan( {id: row.id, [name]: val === '' ? ' ' : val, platform: row.platform }, row ) ;
+                       autoUpdateLan( {id: row.id, [name]: val === '' ? ' ' : val, platform: row.platform, production: row.production }, row ) ;
                     }, 500);
                 });
                 targetInput.on('focusout', function (e) {

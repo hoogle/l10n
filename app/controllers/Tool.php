@@ -98,7 +98,6 @@ class Tool extends MY_Controller {
     }
 
     public function download($p) {
-        $this->_remove_folder(APPPATH . "tmp");
         list($production, $platform) = explode("_", $p);
         if ( ! $db_data = $this->l10n_model->get_translate($p)) {
             echo "There is no any {$production} {$platform} translation string yet.";
@@ -120,6 +119,8 @@ class Tool extends MY_Controller {
             //iOS
             $this->_goface_ios($json_arr, $production, $platform);
         }
+        $this->translate_model->update_platform($p, "publish");
+        $this->_remove_folder(APPPATH . "tmp");
         exit;
     }
 
@@ -317,6 +318,7 @@ class Tool extends MY_Controller {
         }
         if ($resp["status"] == "ok") {
             AwsS3::get_instance()->pub_object($s3_config["bucket"]["L10N"], "{$production}/{$platform}/all_lang.json", json_encode($json_arr));
+            $this->translate_model->update_platform($p, "publish");
         }
 
         echo json_encode($resp, TRUE);

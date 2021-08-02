@@ -30,6 +30,7 @@ class Index extends MY_Controller {
 			$this->load->view("layout/layout_l10n_box", ["layout" => $layout]);
         } else {
             $data["platform_arr"] = $this->translate_model->get_platforms();
+            $data["pf_stat"] = $this->translate_model->get_platform_stat();
             $data["email"] = $_SESSION["l10n_email"];
             if ( ! $p = $this->input->get("p")) {
                 $layout["content"] = $this->load->view("/home", $data, TRUE);
@@ -41,6 +42,7 @@ class Index extends MY_Controller {
                     $s3_key = str_replace("_", "/", $p);
                     $data["s3_link"] = AwsS3::get_instance()->get_object($bucket, $s3_key . "/all_lang.json");
                 }
+                $data["pf_modified"] = $data["pf_stat"][$p]["modified"];
                 $layout["content"] = $this->load->view("/list", $data, TRUE);
             }
             $this->load->view("layout/layout_l10n", ["layout" => $layout, "data" => $data]);
@@ -50,7 +52,7 @@ class Index extends MY_Controller {
     public function page($page = 1) {
         $order = $this->input->get_post("order");
         $by = $this->input->get_post("by");
-        $order_arr = ["keyword", "en-US", "zh-TW", "ja-JP", "id-ID", "ms-MY"];
+        $order_arr = ["keyword", "en-US", "zh-TW", "ja-JP", "id-ID", "ms-MY", "updated_at"];
         $by_arr = ["ASC", "DESC"];
         if ( ! in_array($order, $order_arr)) $order = "keyword";
         if ( ! in_array($by, $by_arr)) $by = "ASC";
@@ -65,7 +67,7 @@ class Index extends MY_Controller {
         $config["base_url"] = $this->config->item("base_url") . "/index/page/";
         $limit_start = ($page - 1) * $per_page;
         $key = $this->input->get_post("key");
-        $db_data = $this->translate_model->get_translate_by_page($limit_start, $per_page, $platform, $orderby_arr, $key);
+        $db_data = $this->translate_model->get_translate_by_page($limit_start, $per_page, $production, $platform, $orderby_arr, $key);
         $config["total_rows"] = isset($db_data["rows"]) ? $db_data["rows"] : 0;
         $data = $db_data ? $db_data["data"] : [];
 
@@ -85,6 +87,8 @@ class Index extends MY_Controller {
         $lang_id = $this->input->post("idid");
         $lang_ms = $this->input->post("msmy");
         $keyword = $this->input->post("keyword");
+        //$production = $this->input->post("production");
+        $production = "goface";
         $platform = $this->input->post("platform");
         $db_data = $this->translate_model->get($id);
 
@@ -121,6 +125,7 @@ class Index extends MY_Controller {
             }
             $arr = ["last_update" => json_encode($last_updated_arr)];
             $this->translate_model->user_last_update($_SESSION["l10n_email"], $arr);
+            $this->translate_model->update_platform($production . "_" . $platform, "update");
             $resp["status"] = "ok";
         } else {
             $resp["status"] = "fail";
@@ -172,6 +177,7 @@ class Index extends MY_Controller {
             }
             $arr = ["last_update" => json_encode($last_updated_arr)];
             $this->translate_model->user_last_update($_SESSION["l10n_email"], $arr);
+            $this->translate_model->update_platform($production . "_" . $platform, "update");
             $resp["status"] = "ok";
         } else {
             $resp["status"] = "fail";
