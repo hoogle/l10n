@@ -78,11 +78,13 @@ final class Translate_model extends MY_Model
         return $DB->insert_id();
     }
 
-    public function update_translate($id, $data) {
+    public function update_translate($id, $data, $need_specialchar = 0) {
         $data["updated_at"] = date("Y-m-d H:i:s");
-        foreach (["`en-US`", "`ja-JP`", "`zh-TW`", "`id-ID`", "`ms-MY`"] as $use_lang) {
-            if (isset($data[$use_lang])) {
-                $data[$use_lang] = str_replace("'", "&#39;", $data[$use_lang]);
+        if ($need_specialchar) {
+            foreach (["`en-US`", "`ja-JP`", "`zh-TW`", "`id-ID`", "`ms-MY`"] as $use_lang) {
+                if (isset($data[$use_lang])) {
+                    $data[$use_lang] = str_replace("'", "&#39;", $data[$use_lang]);
+                }
             }
         }
         $DB = $this->_get_db();

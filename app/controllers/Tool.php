@@ -214,6 +214,9 @@ class Tool extends MY_Controller {
             $body_str = "";
             foreach ($json_arr[$curr_lang] as $key => $val) {
                 if ( ! empty($val)) {
+                    if (strstr($val, "'")) {
+                        $val = str_replace("'", "\'", $val);
+                    }
                     $body_str.= "    <string name=\"{$key}\">{$val}</string>\n";
                 }
             }

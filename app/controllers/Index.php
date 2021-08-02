@@ -87,8 +87,7 @@ class Index extends MY_Controller {
         $lang_id = $this->input->post("idid");
         $lang_ms = $this->input->post("msmy");
         $keyword = $this->input->post("keyword");
-        //$production = $this->input->post("production");
-        $production = "goface";
+        $production = $this->input->post("production");
         $platform = $this->input->post("platform");
         $db_data = $this->translate_model->get($id);
 
@@ -105,8 +104,10 @@ class Index extends MY_Controller {
             if ($platform == "iOS") $data["keyword"] = $lang_en;
         }
 
+        $need_specialchar = in_array($platform, ["portal"]) ? 1 : 0;
+
         $resp = [];
-        if ($this->translate_model->update_translate($id, $data)) {
+        if ($this->translate_model->update_translate($id, $data, $need_specialchar)) {
             $last_updated_arr = ["platform" => $platform];
             if (strcmp($lang_en, $db_data["en-US"])) {
                 $last_updated_arr["en-US"] = [$db_data["en-US"] => $lang_en];
