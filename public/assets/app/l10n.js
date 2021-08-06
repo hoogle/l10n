@@ -149,6 +149,7 @@ $(function () {
         const page = curpage !== undefined ? curpage : 1; 
         const key = curkey !== undefined ? curkey : keyValue;
         const destroyPagi = doDestroyPagi !== undefined ? doDestroyPagi : false;
+        const by = $('#col_'+ curOrder).data('by') && $('#col_'+ curOrder).data('by') === 'DESC' ? 'ASC' : 'DESC';
         let url = '/index/page/' + page;
         let formData = {};
         if (id) {
@@ -157,7 +158,7 @@ $(function () {
                 p: platform,
                 id: id,
                 per_page: 20,
-                by: 'DESC'
+                by: by 
             };
         } else {
             formData = {
@@ -165,12 +166,13 @@ $(function () {
                 p: platform,
                 key: key,
                 per_page: 20,
-                by: 'DESC'
+                by: by 
             };
         }
         $translateList.find('button[type=submit]').prop('disabled', true);
         $.get(url, formData, function (rs) {
             console.log(rs, 'fetchTranslate');
+            $('#col_'+ curOrder).data('by',by);
             if (rs.data.length < 1) {
                 $translateList.find('button[type=submit]').prop('disabled', false);
                 alert('Key not found');
