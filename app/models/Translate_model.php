@@ -180,11 +180,35 @@ final class Translate_model extends MY_Model
             $DB->group_start();
             $DB->like("keyword", $key);
             $DB->or_like("default_str", $key);
-            foreach (["`en-US`", "`ja-JP`", "`zh-TW`", "`id-ID`", "`ms-MY`"] as $lang) {
+            foreach (["`id`", "`en-US`", "`ja-JP`", "`zh-TW`", "`id-ID`", "`ms-MY`"] as $lang) {
                 $DB->or_like($lang, $key);
             }
             $DB->group_end();
         }
+        $tempdb = clone $DB;
+        $num_rows = $tempdb->count_all_results();
+        $DB->order_by($order, $by);
+        $DB->limit($limit_length, $limit_start);
+        $data = $DB->get()->result_array();
+        foreach ($data as &$row) {
+            $row["dot"] = $row["updated_at"] > $pf_published_at ? "1" : "0";
+        }
+        log_message("INFO", "SQL : translate_model->get_translate_by_page() " . $DB->result_id->queryString);
+        return $data ? ["data" => $data, "rows" => $num_rows] : [];
+    }
+
+    public function get_translate_by_id($limit_start, $limit_length, $prod, $pf, $orderby_arr = ["keyword", "DESC"], $key = "") {
+        $p = $prod . "_" . $pf;
+        $pf_stat = $this->get_platform_stat();
+        $pf_published_at = $pf_stat[$p]["published_at"];
+        $DB = $this->_get_db();
+        $DB->from($this->table);
+        $DB->where("production", $prod);
+        $DB->where("platform", $pf);
+        list($order, $by) = $orderby_arr;
+            $DB->group_start();
+            $DB->where("id", $key);
+            $DB->group_end();
         $tempdb = clone $DB;
         $num_rows = $tempdb->count_all_results();
         $DB->order_by($order, $by);

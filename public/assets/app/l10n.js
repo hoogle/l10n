@@ -145,18 +145,29 @@ $(function () {
         }, 'json');
     }
     //
-    const fetchTranslate = (curpage, curkey, doDestroyPagi) => {
+    const fetchTranslate = (curpage, curkey, doDestroyPagi, id) => {
         const page = curpage !== undefined ? curpage : 1; 
         const key = curkey !== undefined ? curkey : keyValue;
         const destroyPagi = doDestroyPagi !== undefined ? doDestroyPagi : false;
         let url = '/index/page/' + page;
-        const formData = {
-            order: curOrder,
-            p: platform,
-            key: key,
-            per_page: 20,
-            by: 'DESC'
-        };
+        let formData = {};
+        if (id) {
+            formData = {
+                order: curOrder,
+                p: platform,
+                id: id,
+                per_page: 20,
+                by: 'DESC'
+            };
+        } else {
+            formData = {
+                order: curOrder,
+                p: platform,
+                key: key,
+                per_page: 20,
+                by: 'DESC'
+            };
+        }
         $translateList.find('button[type=submit]').prop('disabled', true);
         $.get(url, formData, function (rs) {
             console.log(rs, 'fetchTranslate');
@@ -173,13 +184,25 @@ $(function () {
             }
             $translateList.empty();
             $('#mainColGroup').attr('data-sort', curOrder);
+            function copyUrl(value) {
+                var tempInput = document.createElement("input");
+                tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+                tempInput.value = value;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                alert("Copied the text: " + tempInput.value);
+                document.body.removeChild(tempInput);
+            }
             $.each(rs.data, function (i, row) {
+                row.url = location.origin + '/?p=' + platform + '&id=' + row.id;
                 const temp = $($.fn.replaceElString(transListRowTemp, row));
                 const form = temp.find('form');
                 const targetInput = temp.find('textarea');
                 const targetCol = temp.find('.translateCol');
                 const submitBtn = temp.find('button[type=submit]');
                 const idCol = temp.find('.idCol');
+                const urlCol = temp.find('.urlCol');
                 if (row.dot && row.dot === '1') {
                     idCol.append('<span style="position: relative; top: -9px; right: -2px; display: inline-block; width: 5px; height: 5px; border-radius: 100%; background-color: #ff5757;"></span>');
                 }
@@ -223,6 +246,11 @@ $(function () {
                        autoUpdateLan( {id: row.id, [name]: val === '' ? ' ' : val, platform: row.platform, production: row.production }, row ) ;
                     }, 500);
                 });
+                targetInput.on('focus', function (e) {
+                    if ($('.widescreen').hasClass('fixed-left')) {
+                        $('.button-menu-mobile').trigger('click');
+                    }
+                });
                 targetInput.on('focusout', function (e) {
                     console.log(e, ':focus out');
                     $(this).prop('readonly', true);
@@ -241,6 +269,10 @@ $(function () {
                     });
                     updateLan($(this).serializeArray(), submitBtn, row);
                 });
+                //
+                urlCol.on("click", function (e) {
+                   copyUrl($(this).find('input').val());
+                })
             });
             //init pagination
             if (destroyPagi) {
@@ -313,7 +345,12 @@ $(function () {
     });
 
     if( $translateList.length > 0) {
-        fetchTranslate(1, keyValue, true);
+        if (location.search.slice(1).split("&")[1] && location.search.slice(1).split("&")[1].split("id=")[1]) {
+            const id = location.search.slice(1).split("&")[1].split("id=")[1];
+            fetchTranslate(1, '', true, id);
+        } else {
+            fetchTranslate(1, keyValue, true);
+        }
     }
 
     if ($('#passwdUpdateForm').length > 0) {

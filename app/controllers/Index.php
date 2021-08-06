@@ -67,7 +67,12 @@ class Index extends MY_Controller {
         $config["base_url"] = $this->config->item("base_url") . "/index/page/";
         $limit_start = ($page - 1) * $per_page;
         $key = $this->input->get_post("key");
-        $db_data = $this->translate_model->get_translate_by_page($limit_start, $per_page, $production, $platform, $orderby_arr, $key);
+        $id = $this->input->get_post("id");
+        if ($id) {
+            $db_data = $this->translate_model->get_translate_by_id($limit_start, $per_page, $production, $platform, $orderby_arr, $id);
+        } else {
+            $db_data = $this->translate_model->get_translate_by_page($limit_start, $per_page, $production, $platform, $orderby_arr, $key);
+        }
         $config["total_rows"] = isset($db_data["rows"]) ? $db_data["rows"] : 0;
         $data = $db_data ? $db_data["data"] : [];
 

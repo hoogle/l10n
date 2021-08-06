@@ -58,6 +58,9 @@
         border: none;
         background: none;
     }
+    .urlCol i { position: relative;}
+    .urlCol i:hover { color: #5fbeaa;}
+    .urlCol i:hover::after { font-size: 9px; font-weight: bold; background: #666; padding: 3px 10px; border-radius: 3px; white-space: nowrap; position: absolute; right: 0; bottom: 20px; z-index: 9; content: 'Copy url here';}
     </style>
     <script src="/assets/js/modernizr.min.js"></script>
 </head>

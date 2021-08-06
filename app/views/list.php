@@ -90,6 +90,10 @@
         <div class="translateCol">
             <textarea class="form-control" name="msmy" title="{ms-MY}" readonly>{ms-MY}</textarea>
         </div>
+        <div class="urlCol">
+            <input type="hidden" value="{url}" />
+            <i class="ti ti-sharethis-alt" title="Copy url here" style="font-size: 2rem;"></i>
+        </div>
         <div class="translateSubmit hide">
             <button type="submit" class="btn btn-default waves-effect waves-light btn-md">Save</button>
         </div>
@@ -131,7 +135,7 @@
             <input type="hidden" name="platform" value="<?php echo $platform; ?>">
             <input type="hidden" name="keyword" value="">
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Default String</label>
+                    <label class="col-md-2 control-label">Description</label>
                     <div class="col-md-10">
                         <textarea name="d4str" class="form-control" rows="2"></textarea>
                     </div>
