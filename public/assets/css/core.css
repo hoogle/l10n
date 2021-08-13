@@ -2192,7 +2192,7 @@ body.fixed-left .side-menu.left {
   content: "\e646";
 }
 
-.flex-small { padding: 0 !important; flex: 0 0 100px !important;}
+.flex-small { padding-right: 1px !important; padding-left: 1px !important; flex: 0 0 100px !important;}
 .flex-small textarea { opacity: .5 !important;}
 .flex-small .hideColBtn { display: none;}
 .flex-small .showColBtn { display: inline-block !important;}
@@ -2229,6 +2229,8 @@ body.fixed-left .side-menu.left {
   color: #5ebeaa; 
   content: 'Shrink';
 }
+#mainColGroup div i.showColBtn:hover::after { content: 'show'; }
+
 .idCol {
   flex: 0 !important;
   min-width: 40px;

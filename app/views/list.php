@@ -1,16 +1,18 @@
 <div class="container">
     <div class="col-sm-12">
-        <div class="btn-group pull-right">
+        <div class="btn-group pull-right d-flex">
             <!-- Button trigger modal -->
             <button class="btn btn-primary waves-effect waves-light" id="NewKeyBtn" data-toggle="modal" data-target="#myAdd"><i class="fa fa-plus"></i> New Key</button>
+            <div>
+<?php if ($pf_modified) : ?>
+            <b style="position: absolute; top: -8px; right: -8px; display: inline-block; width: 18px; height: 18px; border-radius: 50%; background-color: #ff5757; color:white; z-index:3; text-align:center; font-size: 9pt">!</b>
+<?php endif ?>
 <?php if (isset($s3_link)) : ?>
             <button class="btn btn-warning waves-effect waves-light" data-toggle="modal" data-target="#myExport"><i class="fa fa-share"></i> Export</button>
 <?php else : ?>
             <button class="btn btn-success waves-effect waves-light" id="downloadBtn"><i class="fa fa-download"></i> Download</button>
 <?php endif ?>
-<?php if ($pf_modified) : ?>
-            <b style="position: absolute; top: -8px; right: -8px; display: inline-block; width: 18px; height: 18px; border-radius: 50%; background-color: #ff5757; color:white; z-index:3; text-align:center; font-size: 9pt">!</b>
-<?php endif ?>
+            </div>
         </div>
         <h4 class="page-title">Environment : <span id="platform"><?php echo $production; ?> / <?php echo $platform; ?></span></h4>
         <ol class="breadcrumb"></ol>
@@ -51,10 +53,10 @@
                         <div id="col_id" class="text-center ti- idCol">ID</div>
                         <div id="col_keyword" class="text-center ti- keyCol">KEY</div>
                         <div id="col_en-US" class="text-center ti-">en-US</div>
-                        <div id="col_ja-JP" class="text-center ti-"><i class="hideColBtn ti ti-shift-left-alt"></i>ja-JP<i class="showColBtn ti ti-shift-right-alt"></i></div>
-                        <div id="col_zh-TW" class="text-center ti-"><i class="hideColBtn ti ti-shift-left-alt"></i>zh-TW<i class="showColBtn ti ti-shift-right-alt"></i></div>
-                        <div id="col_id-ID" class="text-center ti-"><i class="hideColBtn ti ti-shift-left-alt"></i>id-ID<i class="showColBtn ti ti-shift-right-alt"></i></div>
-                        <div id="col_ms-MY" class="text-center ti-"><i class="hideColBtn ti ti-shift-left-alt"></i>ms-MY<i class="showColBtn ti ti-shift-right-alt"></i></div>
+                        <div id="col_ja-JP" class="text-center ti-"><i class="hideColBtn ti ti-shift-left"></i>ja-JP<i class="showColBtn ti ti-shift-right"></i></div>
+                        <div id="col_zh-TW" class="text-center ti-"><i class="hideColBtn ti ti-shift-left"></i>zh-TW<i class="showColBtn ti ti-shift-right"></i></div>
+                        <div id="col_id-ID" class="text-center ti-"><i class="hideColBtn ti ti-shift-left"></i>id-ID<i class="showColBtn ti ti-shift-right"></i></div>
+                        <div id="col_ms-MY" class="text-center ti-"><i class="hideColBtn ti ti-shift-left"></i>ms-MY<i class="showColBtn ti ti-shift-right"></i></div>
                         <div class="" style="flex: 0 0 24px;"></div>
                     </div>
                 </div>
