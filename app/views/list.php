@@ -19,17 +19,17 @@
     <div class="col-sm-12">
         <div class="card-box table-responsive" id="mainTable">
             <input type="hidden" name="email" value="<?php echo $email; ?>">
-            <h4 class="m-t-0 header-title"><b>Key List</b></h4>
+            <div class="row m-b-20">
+                <h4 class="m-t-0 header-title col-md-2 col-sm-12"><b>Key List</b></h4>
 <?php if (isset($s3_link)) : ?>
-            <div class="row">
-                <div class="col-sm-8 pull-left">
-                    <b style="color: #beaf5f">Export to S3 url: </b><br>
+                <div class="col-md-10 col-sm-12 text-right">
+                    <b style="color: #beaf5f">Export to S3 url: </b>
                     <i id="copy-url" style="font-size:13px;cursor:pointer;" class="fa" title="Copy S3 url to clipboard">&#xf0c5;</i>
                     <a id="s3-url" target="_blank" href="<?php echo $s3_link . "?t=" . time(); ?>"><?php echo $s3_link; ?></a>
                     <i style="font-size:9px" class="fa">&#xf064;</i>
                 </div>
-            </div>
 <?php endif ?>
+            </div>
             <div class="row">
                 <div class="col-xs-6 m-t-10">
                 <button type="button" class="btn btn-white btn-sm ti-eye btn-rounded" id="showKeyBtn"> Key</button>
@@ -51,11 +51,11 @@
                         <div id="col_id" class="text-center ti- idCol">ID</div>
                         <div id="col_keyword" class="text-center ti- keyCol">KEY</div>
                         <div id="col_en-US" class="text-center ti-">en-US</div>
-                        <div id="col_ja-JP" class="text-center ti-">ja-JP</div>
-                        <div id="col_zh-TW" class="text-center ti-">zh-TW</div>
-                        <div id="col_id-ID" class="text-center ti-">id-ID</div>
-                        <div id="col_ms-MY" class="text-center ti-">ms-MY</div>
-                        <div class="hide text-white translateSubmit">.</div>
+                        <div id="col_ja-JP" class="text-center ti-"><i class="hideColBtn ti ti-shift-left-alt"></i>ja-JP<i class="showColBtn ti ti-shift-right-alt"></i></div>
+                        <div id="col_zh-TW" class="text-center ti-"><i class="hideColBtn ti ti-shift-left-alt"></i>zh-TW<i class="showColBtn ti ti-shift-right-alt"></i></div>
+                        <div id="col_id-ID" class="text-center ti-"><i class="hideColBtn ti ti-shift-left-alt"></i>id-ID<i class="showColBtn ti ti-shift-right-alt"></i></div>
+                        <div id="col_ms-MY" class="text-center ti-"><i class="hideColBtn ti ti-shift-left-alt"></i>ms-MY<i class="showColBtn ti ti-shift-right-alt"></i></div>
+                        <div class="" style="flex: 0 0 24px;"></div>
                     </div>
                 </div>
                 <div id="translateList" class="col-sm-12"></div>
@@ -75,19 +75,19 @@
             <textarea class="form-control text-center" name="keyword" title="{keyword}" readonly>{keyword}</textarea>
 
         </div>
-        <div class="translateCol">
+        <div class="translateCol edit_en-US">
             <textarea class="form-control" name="enus" title="{en-US}" readonly>{en-US}</textarea>
         </div>
-        <div class="translateCol">
+        <div class="translateCol edit_ja-JP">
             <textarea class="form-control" name="jajp" title="{ja-JP}" readonly>{ja-JP}</textarea>
         </div>
-        <div class="translateCol">
+        <div class="translateCol edit_zh-TW">
             <textarea  class="form-control" name="zhtw" title="{zh-TW}" readonly>{zh-TW}</textarea>
         </div>
-        <div class="translateCol">
+        <div class="translateCol edit_id-ID">
             <textarea class="form-control" name="idid" title="{id-ID}" readonly>{id-ID}</textarea>
         </div>
-        <div class="translateCol">
+        <div class="translateCol edit_ms-MY">
             <textarea class="form-control" name="msmy" title="{ms-MY}" readonly>{ms-MY}</textarea>
         </div>
         <div class="urlCol">

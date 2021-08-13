@@ -55,6 +55,8 @@ $(function () {
     const myURL = new URL(window.location.href);
     const platform = myURL.searchParams.get('p') ? myURL.searchParams.get('p') : $('#platform').html();
     const $showKeyBtn = $('#showKeyBtn');
+    const $hideColBtn = $('.hideColBtn');
+    const $showColBtn = $('.showColBtn');
     const canModifyKeyAcc = {
         Android: ['ray@astra.cloud', 'hoogle@astra.cloud'],
         iOS: ['timmy@astra.cloud', 'hoogle@astra.cloud'],
@@ -65,6 +67,13 @@ $(function () {
     let curOrder = 'updated_at';
     let keyValue = '';
     const autoXHR = {};
+    const hideCol = {
+        'en-US': false,
+        'ja-JP': false,
+        'zh-TW': false,
+        'id-ID': false,
+        'ms-MY': false
+    }
     // **********************
     // initPagination
     // **********************
@@ -88,8 +97,30 @@ $(function () {
         });
     }
 
+    $hideColBtn.click(function (e) {
+        if ($('.widescreen').hasClass('fixed-left')) {
+            $('.button-menu-mobile').trigger('click');
+        }
+        e.stopPropagation();
+        const hideID = $(this).parent()[0].id.replace('col_', '');
+        hideCol[hideID] = true;
+        $(this).parent().addClass('flex-small');
+        $('.edit_' + hideID).addClass('flex-small');
+    });
+
+    $showColBtn.click(function (e) {
+        e.stopPropagation();
+        const showID = $(this).parent()[0].id.replace('col_', '');
+        hideCol[showID] = false;
+        $(this).parent().removeClass('flex-small');
+        $('.edit_' + showID).removeClass('flex-small');
+    });
+
     $('#mainColGroup div').click(function (e) {
-        console.log(e);
+        // e.stopPropagation();
+        if ($(this).hasClass('flex-small')) {
+            return;
+        }
         const order = e.currentTarget.id.replace('col_', '');
         curOrder = order;
         // $searchForm.find('input').val('');
@@ -209,6 +240,14 @@ $(function () {
                     idCol.append('<span style="position: relative; top: -9px; right: -2px; display: inline-block; width: 5px; height: 5px; border-radius: 100%; background-color: #ff5757;"></span>');
                 }
                 let mobile = false;
+                console.log(temp[0]);
+                Object.keys(hideCol).map( (lan) => {
+                    if ( !hideCol[lan] ) {
+                        temp.find('.edit_' + lan).removeClass('flex-small');
+                    } else {
+                        temp.find('.edit_' + lan).addClass('flex-small');
+                    }
+                })
                 $translateList.append(temp);
                 targetInput.on('focus touchstart', function (e) {
                     const name = $(this)[0].name;
@@ -221,7 +260,7 @@ $(function () {
                     if (name === 'id') {
                         return;
                     }
-                    $(this).parent().css('flex', '0 0 50%');
+                    $(this).parent().css('flex', '1 1 50%');
                     if (name === 'keyword') {
                         if (! canModifyKey) {
                             copyToClipboard($(this)[0]);
