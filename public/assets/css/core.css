@@ -2225,6 +2225,7 @@ body.fixed-left .side-menu.left {
 }
 #mainColGroup div.flex-small {
     color: rgba(0,0,0,.25);
+    padding: 0;
 }
 #mainColGroup i.showColBtn { display: none; }
 
