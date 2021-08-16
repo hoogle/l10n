@@ -267,7 +267,7 @@ $(function () {
                     if (name === 'id') {
                         return;
                     }
-                    $(this).parent().css('flex', '1 1 50%');
+                    $(this).parent().css('flex', '1 1 auto');
                     if (name === 'keyword') {
                         if (! canModifyKey) {
                             copyToClipboard($(this)[0]);
