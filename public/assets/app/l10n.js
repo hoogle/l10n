@@ -74,6 +74,13 @@ $(function () {
         'id-ID': false,
         'ms-MY': false
     }
+    const lanPropsMapping = {
+        'enus': 'en-US',
+        'jajp': 'ja-JP',
+        'idid': 'id-ID',
+        'msmy': 'ms-MY',
+        'zhtw': 'zh-TW',
+    }
     // **********************
     // initPagination
     // **********************
@@ -278,6 +285,15 @@ $(function () {
                     submitBtn.addClass('btn-warning');
                     const val = $(this).val();
                     const name = e.currentTarget.name;
+                    /*
+                    console.log(name, ':row name');
+                    console.log(row, ':row');
+                    */
+                    if (row[name] === undefined && row[lanPropsMapping[name]] === val) {
+                        console.log('The value is the same. Do not update.')
+                        return;
+                    }
+
                     if ( row[name] === val ) {
                         console.log('The value is the same. Do not update.')
                         return;
