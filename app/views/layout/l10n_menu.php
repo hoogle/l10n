@@ -14,9 +14,15 @@
 <?php else : ?>
 <?php foreach ($platform_arr as $pf) : ?>
 <?php
+        //////
+        if ($pf["platform"] == "email" && ! in_array($email, ["hoogle@astra.cloud", "mei@astra.cloud"])) {
+            continue;
+        }
+        //////
         $pf_str = $pf["production"] . "_" . $pf["platform"];
         $pen = '<i style="color:#ffa857" class="fa fa-pencil-square-o"></i>';
         $mod_icon = $pf_stat[$pf_str]["modified"] ? $pen : "";
+        $link = "/?p=" . $pf_str;
         switch ($pf["platform"]) {
             case "Android":
                 $tifa_icon = "ti-android";
@@ -28,7 +34,10 @@
                 $tifa_icon = "ti-mobile";
                 break;
             case "portal":
-                $tifa_icon = "fa fa-desktop";
+                $tifa_icon = "fa fa-tv";
+                break;
+            case "email":
+                $tifa_icon = "fa fa-envelope";
                 break;
             default:
                 $tifa_icon = "fa fa-globe";
@@ -36,7 +45,7 @@
         }
 ?>
                             <li class="">
-                                <a href="/?p=<?php echo $pf_str; ?>" class="waves-effect"><i class="<?php echo $tifa_icon; ?>"></i><span><?php echo $pf["production"] . " -> " . $pf["platform"]; ?></span><?php echo $mod_icon; ?></a>
+                                <a href="<?php echo $link; ?>" class="waves-effect"><i class="<?php echo $tifa_icon; ?>"></i><span><?php echo $pf["production"] . " -> " . $pf["platform"]; ?></span><?php echo $mod_icon; ?></a>
                             </li>
 <?php endforeach ?>
 <?php endif ?>

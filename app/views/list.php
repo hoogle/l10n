@@ -50,11 +50,11 @@
                     <div class="d-flex justify-content-around" id="mainColGroup">
                         <div id="col_id" class="text-center ti- idCol">ID</div>
                         <div id="col_keyword" class="text-center ti- keyCol">KEY</div>
-                        <div id="col_en-US" class="text-center ti-">en-US</div>
-                        <div id="col_ja-JP" class="text-center ti-">ja-JP</div>
-                        <div id="col_zh-TW" class="text-center ti-">zh-TW</div>
-                        <div id="col_id-ID" class="text-center ti-">id-ID</div>
-                        <div id="col_ms-MY" class="text-center ti-">ms-MY</div>
+<?php foreach ($lang_arr as $lang) : ?>
+<?php   if (in_array($lang, json_decode($user_data["using_lang"], TRUE))) : ?>
+                        <div id="col_<?php echo $lang; ?>" class="text-center ti-"><?php echo $lang; ?></div>
+<?php   endif ?>
+<?php endforeach ?>
                         <div class="hide text-white translateSubmit">.</div>
                     </div>
                 </div>
@@ -73,23 +73,15 @@
         <div class="translateCol keyCol">
             <input type="hidden" name="id" value="{id}">
             <textarea class="form-control text-center" name="keyword" title="{keyword}" readonly>{keyword}</textarea>
-
         </div>
+<?php foreach ($lang_arr as $lang) : ?>
+<?php   if (in_array($lang, json_decode($user_data["using_lang"], TRUE))) : ?>
+<?php       $input_name = strtolower(str_replace("-", "", $lang)); ?>
         <div class="translateCol">
-            <textarea class="form-control" name="enus" title="{en-US}" readonly>{en-US}</textarea>
+            <textarea class="form-control" name="<?php echo $input_name; ?>" title="{<?php echo $lang; ?>}" readonly>{<?php echo $lang; ?>}</textarea>
         </div>
-        <div class="translateCol">
-            <textarea class="form-control" name="jajp" title="{ja-JP}" readonly>{ja-JP}</textarea>
-        </div>
-        <div class="translateCol">
-            <textarea  class="form-control" name="zhtw" title="{zh-TW}" readonly>{zh-TW}</textarea>
-        </div>
-        <div class="translateCol">
-            <textarea class="form-control" name="idid" title="{id-ID}" readonly>{id-ID}</textarea>
-        </div>
-        <div class="translateCol">
-            <textarea class="form-control" name="msmy" title="{ms-MY}" readonly>{ms-MY}</textarea>
-        </div>
+<?php   endif ?>
+<?php endforeach ?>
         <div class="translateSubmit hide">
             <button type="submit" class="btn btn-default waves-effect waves-light btn-md">Save</button>
         </div>

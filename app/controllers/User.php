@@ -1,70 +1,66 @@
 <?php defined("BASEPATH") OR exit("No direct script access allowed");
 
+use Astra\Services\AwsS3;
+
 class User extends MY_Controller {
 
-	/**
-	 * [__construct description]
-	 */
-	public function __construct() {
-		parent::__construct();
+    /**
+     * [__construct description]
+     */
+    public function __construct() {
+        parent::__construct();
 
-		$this->load->library("form_validation");
-		$this->load->model("l10n_model");
-        session_start();
+        $this->load->helper("password_helper");
+        $this->load->model(["translate_model", "l10n_model"]);
+        $this->_lang_arr = ["en-US", "zh-TW", "ja-JP", "id-ID", "ms-MY"];
     }
 
-	/**
-	 * [index description]
-	 * @return [type] [description]
-	 */
-	public function password() {
+    public function index() {
+        $data = [
+            "title" => "Translation tool",
+        ];
         if ( ! isset($_SESSION["l10n_email"])) {
+            $gclient = new Google_Client();
+            $gclient->setAuthConfig(GL_OAUTH2_SECRET);
+            $gclient->addScope([Google_Service_Oauth2::USERINFO_EMAIL, Google_Service_Oauth2::USERINFO_PROFILE]);
+            $gclient->setRedirectUri($this->config->item("gl_redirect"));
+            $data["gl_login_url"] = $gclient->createAuthUrl();
             $redir = $this->input->get("redir");
             $data["redir"] = $redir;
             $layout["content"] = $this->load->view("login", $data, TRUE);
 			$this->load->view("layout/layout_l10n_box", ["layout" => $layout]);
         } else {
-            $platform = $this->input->get("platform");
-            $platform_arr = $this->l10n_model->get_platforms();
-            if ( ! in_array($platform, $platform_arr)) {
-                $platform = $platform_arr[0];
-            }
-            $data["platform"] = $platform;
-            $data["platform_arr"] = $platform_arr;
-            $data["title"] = "Change user password";
+            $data["platform_arr"] = $this->translate_model->get_platforms();
+            $data["pf_stat"] = $this->translate_model->get_platform_stat();
             $data["email"] = $_SESSION["l10n_email"];
-            $this->layout["js_files"] = [
-                "/assets/plugins/parsleyjs/parsley.min.js",
-                "/assets/plugins/bootstrap-sweetalert/sweet-alert.js",
-            ];
-		    $this->layout["css_files"] = ["/assets/plugins/bootstrap-sweetalert/sweet-alert.css"];
-            $this->layout["content"] = $this->load->view("passwd", $data, true);
-            $this->load->view("layout/layout_l10n", ["layout" => $this->layout]);
+            $data["user_data"] = $this->l10n_model->get_user_data($data["email"]);
+            $data["lang_arr"] = $this->_lang_arr;
+            $layout["content"] = $this->load->view("/user_edit", $data, TRUE);
+            $this->load->view("layout/layout_l10n", ["layout" => $layout, "data" => $data]);
         }
-	}
+    }
 
-	/**
-	 * [update description]
-	 * @return [type] [description]
-	 */
-	public function update_pwd() {
-		$this->form_validation->set_data($_POST);
-        $this->form_validation->set_rules("email", "email", ["required"]);
-		$this->form_validation->set_rules("passwd", "passwd", ["required", "min_length[5]", "max_length[20]"]);
-		if ($this->form_validation->run() == false) {
-			return $this->json(["errno" => 400, "errmsg" => "invalid rule parameter"]);
-		}
-
-		$vo = [];
-		$vo["passwd"] = password_hash($this->input->post("passwd"), PASSWORD_BCRYPT);
-        $vo["email"] = $this->input->post("email");
-		if ($this->l10n_model->update_user_data($vo)) {
-			return $this->json(["errno" => 0, "errmsg" => ""]);
-		} else {
-			return $this->json(["errno" => 500, "errmsg" => "failed to update data"]);
-		}
-	}
+    public function update() {
+        $email = $this->input->post("email");
+        $using_lang = $this->input->post("using_lang");
+        $resp = [];
+        if (empty($email)) {
+            $resp["status"] = "fail";
+        } elseif ( ! $using_lang) {
+            $resp["status"] = "fail";
+            $resp["message"] = "At least one language to been select";
+        } else {
+            $data = [
+                "email" => $email,
+                "using_lang" => json_encode($using_lang),
+            ];
+            $this->translate_model->update_user_data($data);
+            $resp["status"] = "ok";
+        }
+        echo json_encode($resp, TRUE);
+    }
 
 }
-/* End of file User.php */
-/* Location: ./app/controllers/User.php */
+
+/* End of file user.php */
+/* Location: ./app/controllers/user.php */

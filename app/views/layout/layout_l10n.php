@@ -94,6 +94,7 @@
                                 <li class="dropdown top-menu-item-xs">
                                     <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"><?php echo $_SESSION["name"]; ?>&nbsp;<img class="img-profile rounded-circle" src="<?php echo $_SESSION["picture_url"]; ?>"></a>
                                     <ul class="dropdown-menu">
+                                        <li><a id="userBtn" href="javascript:void(0)"><i class="ti-user m-r-10 text-danger"></i> User Profile</a></li>
                                         <li><a id="logoutBtn" href="javascript:void(0)"><i class="ti-power-off m-r-10 text-danger"></i> Logout</a></li>
                                     </ul>
                                 </li>
@@ -131,23 +132,21 @@ $this->load->view("layout/l10n_menu");
     </script>
 
     <!-- jQuery  -->
-        <!-- jQuery  -->
-        <script src="/assets/js/jquery.min.js"></script>
-        <script src="/assets/js/bootstrap.min.js"></script>
-        <script src="/assets/js/detect.js"></script>
-        <script src="/assets/js/fastclick.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/detect.js"></script>
+    <script src="/assets/js/fastclick.js"></script>
 
-        <script src="/assets/js/jquery.slimscroll.js"></script>
-        <script src="/assets/js/jquery.blockUI.js"></script>
-        <script src="/assets/js/waves.js"></script>
-        <script src="/assets/js/wow.min.js"></script>
-        <script src="/assets/js/jquery.nicescroll.js"></script>
-        <script src="/assets/js/jquery.scrollTo.min.js"></script>
-        <script src="/assets/plugins/pagination/jquery.twbsPagination.min.js"></script>
-        <script src="/assets/plugins/parsleyjs/parsley.min.js"></script>
-        <script src="/assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
+    <script src="/assets/js/jquery.slimscroll.js"></script>
+    <script src="/assets/js/jquery.blockUI.js"></script>
+    <script src="/assets/js/waves.js"></script>
+    <script src="/assets/js/wow.min.js"></script>
+    <script src="/assets/js/jquery.nicescroll.js"></script>
+    <script src="/assets/js/jquery.scrollTo.min.js"></script>
+    <script src="/assets/plugins/pagination/jquery.twbsPagination.min.js"></script>
+    <script src="/assets/plugins/parsleyjs/parsley.min.js"></script>
+    <script src="/assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
 
-    <!-- jQuery  -->
     <script src="/assets/js/jquery.core.js"></script>
     <script src="/assets/js/jquery.app.js"></script>
     <script src="/assets/app/l10n.js?v=<?php echo time(); ?>"></script>

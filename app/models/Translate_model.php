@@ -27,20 +27,60 @@ final class Translate_model extends MY_Model
 		return $data ?: FALSE;
 	}
 
+    /**
+     * ALTER TABLE `translate` DROP `default_str`;
+     * ALTER TABLE `translate` ADD `item` VARCHAR(50) NULL AFTER `platform`;
+     * ALTER TABLE `translate` DROP INDEX `prod_plat_key`, ADD UNIQUE `prod_plat_key` (`production`, `platform`, `item`, `keyword`) USING BTREE;
+     * ALTER TABLE `l10n_user` ADD `using_lang` JSON NULL DEFAULT NULL AFTER `email`;
+     * ALTER TABLE `l10n_user` DROP `passwd`;
+     * ALTER TABLE `l10n_user` CHANGE `last_update` `last_update` JSON NULL DEFAULT NULL;
+     */
+
 	/**
-	 * [fetchTranslation description]
-	 * @param  [type] $key [description]
-	 * @return [type]          [description]
+	 * [get_all_email description]
+	 * @param  [type] $production [description]
+	 * @param  [type] $platform   [description]
+	 * @return [type]             [description]
 	 */
-	public function fetchTranslation($platform, $view_path, $keyword) {
+	public function get_all_email_info($production, $platform) {
 		$db = $this->_get_db();
         $where_arr = [
+            "production" => $production,
             "platform" => $platform,
-            "view_path" => $view_path,
-            "keyword" => $keyword,
         ];
-		$db->where($where_arr);
-		$data = $db->get($this->table)->row_array();
+        $sql = "SELECT DISTINCT(`item`), MAX(`updated_at`) AS `last_updated_at` ";
+        $sql.= "FROM `translate` WHERE `production` = 'goface' AND `platform` = 'email' GROUP BY `item`";
+        $data = [];
+        foreach ($db->query($sql)->result_array() as $row) {
+            $arr = $this->get_email_data($production, $platform, $row["item"], "SUBJECT");
+            $arr["last_updated_at"] = $row["last_updated_at"];
+            $data[] = $arr;
+        }
+		return $data;
+	}
+
+	/**
+	 * [get_email_data description]
+	 * @param  [type] $production [description]
+	 * @param  [type] $platform   [description]
+	 * @param  [type] $item       [description]
+	 * @param  [type] [$keyword]  [description]
+	 * @return [type]             [description]
+	 */
+	public function get_email_data($production, $platform, $item, $keyword = "") {
+		$db = $this->_get_db();
+        $where_arr = [
+            "production" => $production,
+            "platform" => $platform,
+            "item" => $item,
+        ];
+        ! empty($keyword) && $where_arr["keyword"] = $keyword;
+        $db->where($where_arr);
+        if ( ! empty($keyword)) {
+            $data = $db->get($this->table)->row_array();
+        } else {
+            $data = $db->get($this->table)->result_array();
+        }
 		return $data ?: FALSE;
 	}
 
@@ -152,10 +192,15 @@ final class Translate_model extends MY_Model
     public function get_platforms()
     {
         $DB = $this->_get_db();
-        $DB->distinct();
-        $DB->select("production");
-        $DB->select("platform");
-        $data = $DB->get($this->table)->result_array();
+        $db_data = $DB->get($this->table_platform)->result_array();
+        $data = [];
+        foreach ($db_data as $raw) {
+            list($prod, $pf) = explode("_", $raw["production_platform"]);
+            $data[] = [
+                "production" => $prod,
+                "platform"   => $pf
+            ];
+        }
         return $data ?: FALSE;
     }
 
@@ -179,7 +224,6 @@ final class Translate_model extends MY_Model
         if ( ! empty($key)) {
             $DB->group_start();
             $DB->like("keyword", $key);
-            $DB->or_like("default_str", $key);
             foreach (["`en-US`", "`ja-JP`", "`zh-TW`", "`id-ID`", "`ms-MY`"] as $lang) {
                 $DB->or_like($lang, $key);
             }

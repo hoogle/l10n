@@ -44,6 +44,7 @@ $(function () {
     const $addkeyForm = $('form[name=addKey');
     const $chgPwdBtn = $('#chgPwdBtn');
     const $logoutBtn = $('#logoutBtn');
+    const $userBtn = $('#userBtn');
     const $translateList = $('#translateList');
     const $pagination = $('#pagination');
     const $copyURL = $('#copy-url');
@@ -284,6 +285,12 @@ $(function () {
         document.execCommand("copy");
         $temp.remove();
         alert("Copy S3 url to clipboard");
+    });
+
+    $userBtn.click(function (e) {
+        var link = document.createElement("a");
+        link.href = '/user';
+        link.click();
     });
 
     $logoutBtn.click(function (e) {

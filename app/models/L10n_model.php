@@ -13,6 +13,7 @@ final class L10n_model extends MY_Model
 		$this->table = "l10n";
 		$this->table_user = "l10n_user";
 		$this->table_translate = "translate";
+        $this->_lang_arr = ["en-US", "zh-TW", "ja-JP", "id-ID", "ms-MY"];
 	}
 
 	/**
@@ -115,11 +116,11 @@ final class L10n_model extends MY_Model
         return $data ?: FALSE;
     }
 
-    public function get_user_pwd($email) {
+    public function get_user_data($email) {
         $DB = $this->_get_db();
-        $DB->select("passwd");
+        $DB->select("email, using_lang, last_login_at");
         $data = $DB->get_where($this->table_user, ["email" => $email])->row_array();
-        return $data ? $data["passwd"] : FALSE;
+        return $data ?: FALSE;
     }
 
     public function update_user_data($data) {
@@ -128,7 +129,7 @@ final class L10n_model extends MY_Model
         if ( ! $user) {
             $data = [
                 "email" => $data["email"],
-                "last_update" => json_encode([], JSON_FORCE_OBJECT),
+                "using_lang" => json_encode($this->_lang_arr),
                 "created_at" => date("Y-m-d H:i:s"),
                 "last_login_at" => date("Y-m-d H:i:s"),
             ];

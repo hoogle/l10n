@@ -10,8 +10,9 @@ class Index extends MY_Controller {
     public function __construct() {
         parent::__construct();
 
-        $this->load->helper(["url", "password_helper"]);
-        $this->load->model(["translate_model"]);
+        $this->load->helper("password_helper");
+        $this->load->model(["translate_model", "l10n_model"]);
+        $this->_lang_arr = ["en-US", "zh-TW", "ja-JP", "id-ID", "ms-MY"];
     }
 
     public function index() {
@@ -36,6 +37,8 @@ class Index extends MY_Controller {
                 $layout["content"] = $this->load->view("/home", $data, TRUE);
             } else {
                 list($data["production"], $data["platform"]) = explode("_", $p);
+                $data["lang_arr"] = $this->_lang_arr;
+                $data["user_data"] = $this->l10n_model->get_user_data($data["email"]);
                 if ( ! in_array($data["platform"], ["Android", "iOS"])) {
                     $this->load->config("aws");
                     $bucket = $this->config->item("s3")["bucket"]["L10N"];
@@ -43,7 +46,12 @@ class Index extends MY_Controller {
                     $data["s3_link"] = AwsS3::get_instance()->get_object($bucket, $s3_key . "/all_lang.json");
                 }
                 $data["pf_modified"] = $data["pf_stat"][$p]["modified"];
-                $layout["content"] = $this->load->view("/list", $data, TRUE);
+                if ($data["platform"] == "email") {
+                    $data["email_data"] = $this->translate_model->get_all_email_info($data["production"], $data["platform"]);
+                    $layout["content"] = $this->load->view("/email_list", $data, TRUE);
+                } else {
+                    $layout["content"] = $this->load->view("/list", $data, TRUE);
+                }
             }
             $this->load->view("layout/layout_l10n", ["layout" => $layout, "data" => $data]);
         }
@@ -190,32 +198,6 @@ class Index extends MY_Controller {
         echo $this->translate_model->get_last_id();
     }
 
-    public function login() {
-        $email = $this->input->post("email");
-        $passwd = trim($this->input->post("passwd", FALSE));
-        $redir = $this->input->post("redir");
-        $db_pwd = $this->translate_model->get_user_pwd($email);
-
-        if ( ! password_verify($passwd, $db_pwd)) {
-            $resp = [
-                "status" => "error",
-                "data" => 4210
-            ];
-        } else {
-            $resp = [
-                "status" => "ok",
-                "data" => $redir ?: "/",
-            ];
-            $_SESSION["l10n_email"] = $email;
-        }
-        $upd_data = [
-            "email" => $email,
-            "last_login_at" => date("Y-m-d H:i:s"),
-        ];
-        $this->translate_model->update_user_data($upd_data);
-        echo json_encode($resp, TRUE);
-    }
-
     public function logout() {
         unset($_SESSION["l10n_email"]);
         $resp = [
@@ -223,30 +205,6 @@ class Index extends MY_Controller {
         ];
         echo json_encode($resp, TRUE);
     }
-
-    /**
-     * DEPRECATED
-    public function trans($platform = "goface") {
-        $db_data = $this->translate_model->get_l10n_old($platform);
-        foreach ($db_data as $row) {
-            $data = [
-                "production" => "goface",
-                "platform" => "portal",
-                "keyword" => $row["keyword"],
-                "default_str" => $row["default_str"],
-                "`en-US`" => $row["en-US"],
-                "`ja-JP`" => $row["ja-JP"],
-                "`zh-TW`" => $row["zh-TW"],
-                "`id-ID`" => $row["id-ID"],
-                "`ms-MY`" => $row["ms-MY"],
-                "last_editor" => "system",
-                "created_at" => date("Y-m-d H:i:s"),
-                "updated_at" => date("Y-m-d H:i:s"),
-            ];
-            $this->translate_model->add_translate($data);
-        }
-    }
-     */
 }
 
 /* End of file index.php */
