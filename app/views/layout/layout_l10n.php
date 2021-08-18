@@ -36,7 +36,7 @@
     <!--/page css-->
         <link href="/assets/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css">
         <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="/assets/css/core.css?v=0201" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/core.css?v=0816" rel="stylesheet" type="text/css" />
         <link href="/assets/css/components.css" rel="stylesheet" type="text/css" />
         <link href="/assets/css/icons.css" rel="stylesheet" type="text/css" />
         <link href="/assets/css/pages.css" rel="stylesheet" type="text/css" />
@@ -51,13 +51,6 @@
     <![endif]-->
 
     <style>
-    #translateList input[name="id"] {
-        border: none;
-    }
-    #translateList input[name="ja"][readonly], #translateList input[name="en"][readonly] {
-        border: none;
-        background: none;
-    }
     </style>
     <script src="/assets/js/modernizr.min.js"></script>
 </head>

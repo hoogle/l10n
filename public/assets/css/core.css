@@ -2177,7 +2177,7 @@ body.fixed-left .side-menu.left {
 .d-flex { display: flex;}
 .justify-content-around { justify-content: space-around; }
 .align-item-center { align-items: center;}
-.translateCol { padding: 6px 1px;  flex: 1;}
+.translateCol { padding: 6px 1px;  flex: 1;transition: all 0.2s ease;}
 .translateCol textarea { height: 20px; resize:vertical;}
 .translateCol textarea:hover { cursor: pointer; background-color:rgba(0, 150, 136, 0.3); border:none;}
 .translateCol textarea:focus { background-color:rgba(0, 150, 136, 0.7); border-color:rgba(0, 150, 136, 0) !important;}
@@ -2191,69 +2191,111 @@ body.fixed-left .side-menu.left {
 #mainTable[data-key = '1'] #showKeyBtn::before {
   content: "\e646";
 }
+
+.flex-small { padding-right: 1px !important; padding-left: 1px !important; flex: 0 0 100px !important;}
+.flex-small textarea { opacity: .5 !important;}
+.flex-small .hideColBtn { display: none;}
+.flex-small .showColBtn { display: inline-block !important;}
+
 #mainColGroup div {
   cursor: pointer;
   flex: 1;
-  padding: 7px 12px;
-  border-radius: 2px;
+  padding: 8px 12px;
+  border-radius: 5px;
   font-weight: bold;
   border: 1px solid white;
 }
-#mainColGroup div::after {
-  content: "   ";
+#mainColGroup div:not(:last-child)::after {
+  content: "";
+  padding: 2px;
+  margin: 0 0 0 5px;
 }
-#mainColGroup div:hover::after {
-  content: "\e71d";
+#mainColGroup div:not(:last-child):not(.flex-small):hover::after {
   color: #5ebeaa;
+  content: "\e71d sort";
 }
+
+#mainColGroup div i {
+    position: relative;
+    border-radius: 3px;
+    padding: 5px 15px 5px 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: rgba(0,0,0,.25);
+}
+#mainColGroup div.flex-small {
+    color: rgba(0,0,0,.25);
+    padding: 0;
+}
+#mainColGroup i.showColBtn { display: none; }
+
+#mainColGroup div i:hover {
+  color: #bdaf60;
+}
+#mainColGroup div i:hover::after {
+  font-size: 9px; font-weight: bold; background: #666; padding: 3px 10px; border-radius: 3px; white-space: nowrap; position: absolute; right: 0; bottom: 20px; z-index: 9;
+  color: #bdaf60;
+  content: 'Shrink';
+}
+#mainColGroup div i.showColBtn:hover::after { content: 'show'; }
+
 .idCol {
   flex: 0 !important;
   min-width: 40px;
 }
 #mainColGroup[data-sort='en-US'] #col_en-US::after {
   content: "\e71d";
-  padding: 6px;
 }
 #mainColGroup[data-sort='en-US'] #col_en-US {
   color: white;
   background: #98a6ad;
 }
+#mainColGroup[data-sort='en-US'] #col_en-US i {
+  display: none;
+}
 #mainColGroup[data-sort='ja-JP'] #col_ja-JP::after {
   content: "\e71d";
-  padding: 6px;
 }
 #mainColGroup[data-sort='ja-JP'] #col_ja-JP {
   color: white;
   background: #98a6ad;
 }
+#mainColGroup[data-sort='ja-JP'] #col_ja-JP i {
+  display: none;
+}
 #mainColGroup[data-sort='zh-TW'] #col_zh-TW::after {
   content: "\e71d";
-  padding: 6px;
 }
 #mainColGroup[data-sort='zh-TW'] #col_zh-TW {
   color: white;
   background: #98a6ad;
 }
+#mainColGroup[data-sort='zh-TW'] #col_zh-TW i {
+  display: none;
+}
 #mainColGroup[data-sort='id-ID'] #col_id-ID::after {
   content: "\e71d";
-  padding: 6px;
 }
 #mainColGroup[data-sort='id-ID'] #col_id-ID {
   color: white;
   background: #98a6ad;
 }
+#mainColGroup[data-sort='id-ID'] #col_id-ID i {
+  display: none;
+}
 #mainColGroup[data-sort='ms-MY'] #col_ms-MY::after {
   content: "\e71d";
-  padding: 6px;
 }
 #mainColGroup[data-sort='ms-MY'] #col_ms-MY {
   color: white;
   background: #98a6ad;
 }
+#mainColGroup[data-sort='ms-MY'] #col_ms-MY i {
+  display: none;
+}
 
 #mainColGroup[data-edit='enus'] #col_en-US::after {
   content: "\e61c";
-  padding: 6px;
 }
 #mainColGroup[data-edit='enus'] #col_en-US {
   color: #5ebeaa;
@@ -2261,7 +2303,6 @@ body.fixed-left .side-menu.left {
 }
 #mainColGroup[data-edit='jajp'] #col_ja-JP::after {
   content: "\e61c";
-  padding: 6px;
 }
 #mainColGroup[data-edit='jajp'] #col_ja-JP {
   color: #5ebeaa;
@@ -2269,7 +2310,6 @@ body.fixed-left .side-menu.left {
 }
 #mainColGroup[data-edit='zhtw'] #col_zh-TW::after {
   content: "\e61c";
-  padding: 6px;
 }
 #mainColGroup[data-edit='zhtw'] #col_zh-TW {
   color: #5ebeaa;
@@ -2277,7 +2317,6 @@ body.fixed-left .side-menu.left {
 }
 #mainColGroup[data-edit='idid'] #col_id-ID::after {
   content: "\e61c";
-  padding: 6px;
 }
 #mainColGroup[data-edit='idid'] #col_id-ID {
   color: #5ebeaa;
@@ -2285,7 +2324,6 @@ body.fixed-left .side-menu.left {
 }
 #mainColGroup[data-edit='msmy'] #col_ms-MY::after {
   content: "\e61c";
-  padding: 6px;
 }
 #mainColGroup[data-edit='msmy'] #col_ms-MY {
   color: #5ebeaa;
@@ -2293,12 +2331,22 @@ body.fixed-left .side-menu.left {
 }
 #mainColGroup[data-edit='keyword'] #col_keyword::after {
   content: "\e61c";
-  padding: 6px;
 }
 #mainColGroup[data-edit='keyword'] #col_keyword {
   color: #5ebeaa;
   background: #98a6ad5c;
 }
+
+    #translateList input[name="id"] {
+        border: none;
+    }
+    #translateList input[name="ja"][readonly], #translateList input[name="en"][readonly] {
+        border: none;
+        background: none;
+    }
+    .urlCol i { position: relative;}
+    .urlCol i:hover { color: #5fbeaa;}
+    .urlCol i:hover::after { font-size: 9px; font-weight: bold; background: #666; padding: 3px 10px; border-radius: 3px; white-space: nowrap; position: absolute; right: 0; bottom: 20px; z-index: 9; content: 'Copy url here';}
 /* =============
    Print css
 ============= */

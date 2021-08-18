@@ -1,16 +1,18 @@
 <div class="container">
     <div class="col-sm-12">
-        <div class="btn-group pull-right">
+        <div class="btn-group pull-right d-flex">
             <!-- Button trigger modal -->
             <button class="btn btn-primary waves-effect waves-light" id="NewKeyBtn" data-toggle="modal" data-target="#myAdd"><i class="fa fa-plus"></i> New Key</button>
+            <div>
+<?php if ($pf_modified) : ?>
+            <b style="position: absolute; top: -8px; right: -8px; display: inline-block; width: 18px; height: 18px; border-radius: 50%; background-color: #ff5757; color:white; z-index:3; text-align:center; font-size: 9pt">!</b>
+<?php endif ?>
 <?php if (isset($s3_link)) : ?>
             <button class="btn btn-warning waves-effect waves-light" data-toggle="modal" data-target="#myExport"><i class="fa fa-share"></i> Export</button>
 <?php else : ?>
             <button class="btn btn-success waves-effect waves-light" id="downloadBtn"><i class="fa fa-download"></i> Download</button>
 <?php endif ?>
-<?php if ($pf_modified) : ?>
-            <b style="position: absolute; top: -8px; right: -8px; display: inline-block; width: 18px; height: 18px; border-radius: 50%; background-color: #ff5757; color:white; z-index:3; text-align:center; font-size: 9pt">!</b>
-<?php endif ?>
+            </div>
         </div>
         <h4 class="page-title">Environment : <span id="platform"><?php echo $production; ?> / <?php echo $platform; ?></span></h4>
         <ol class="breadcrumb"></ol>
@@ -19,17 +21,17 @@
     <div class="col-sm-12">
         <div class="card-box table-responsive" id="mainTable">
             <input type="hidden" name="email" value="<?php echo $email; ?>">
-            <h4 class="m-t-0 header-title"><b>Key List</b></h4>
+            <div class="row m-b-20">
+                <h4 class="m-t-0 header-title col-md-2 col-sm-12"><b>Key List</b></h4>
 <?php if (isset($s3_link)) : ?>
-            <div class="row">
-                <div class="col-sm-8 pull-left">
-                    <b style="color: #beaf5f">Export to S3 url: </b><br>
+                <div class="col-md-10 col-sm-12 text-right">
+                    <b style="color: #beaf5f">Export to S3 url: </b>
                     <i id="copy-url" style="font-size:13px;cursor:pointer;" class="fa" title="Copy S3 url to clipboard">&#xf0c5;</i>
                     <a id="s3-url" target="_blank" href="<?php echo $s3_link . "?t=" . time(); ?>"><?php echo $s3_link; ?></a>
                     <i style="font-size:9px" class="fa">&#xf064;</i>
                 </div>
-            </div>
 <?php endif ?>
+            </div>
             <div class="row">
                 <div class="col-xs-6 m-t-10">
                 <button type="button" class="btn btn-white btn-sm ti-eye btn-rounded" id="showKeyBtn"> Key</button>
@@ -56,6 +58,7 @@
 <?php   endif ?>
 <?php endforeach ?>
                         <div class="hide text-white translateSubmit">.</div>
+                        <div class="" style="flex: 0 0 24px;"></div>
                     </div>
                 </div>
                 <div id="translateList" class="col-sm-12"></div>
@@ -77,11 +80,15 @@
 <?php foreach ($lang_arr as $lang) : ?>
 <?php   if (in_array($lang, json_decode($user_data["using_lang"], TRUE))) : ?>
 <?php       $input_name = strtolower(str_replace("-", "", $lang)); ?>
-        <div class="translateCol">
+        <div class="translateCol edit_<?php echo $lang; ?>">
             <textarea class="form-control" name="<?php echo $input_name; ?>" title="{<?php echo $lang; ?>}" readonly>{<?php echo $lang; ?>}</textarea>
         </div>
 <?php   endif ?>
 <?php endforeach ?>
+        <div class="urlCol">
+            <input type="hidden" value="{url}" />
+            <i class="ti ti-sharethis-alt" title="Copy url here" style="font-size: 2rem;"></i>
+        </div>
         <div class="translateSubmit hide">
             <button type="submit" class="btn btn-default waves-effect waves-light btn-md">Save</button>
         </div>
@@ -123,7 +130,7 @@
             <input type="hidden" name="platform" value="<?php echo $platform; ?>">
             <input type="hidden" name="keyword" value="">
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Default String</label>
+                    <label class="col-md-2 control-label">Description</label>
                     <div class="col-md-10">
                         <textarea name="d4str" class="form-control" rows="2"></textarea>
                     </div>

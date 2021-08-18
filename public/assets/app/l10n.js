@@ -56,6 +56,8 @@ $(function () {
     const myURL = new URL(window.location.href);
     const platform = myURL.searchParams.get('p') ? myURL.searchParams.get('p') : $('#platform').html();
     const $showKeyBtn = $('#showKeyBtn');
+    const $hideColBtn = $('.hideColBtn');
+    const $showColBtn = $('.showColBtn');
     const canModifyKeyAcc = {
         Android: ['ray@astra.cloud', 'hoogle@astra.cloud'],
         iOS: ['timmy@astra.cloud', 'hoogle@astra.cloud'],
@@ -66,6 +68,20 @@ $(function () {
     let curOrder = 'updated_at';
     let keyValue = '';
     const autoXHR = {};
+    const hideCol = {
+        'en-US': false,
+        'ja-JP': false,
+        'zh-TW': false,
+        'id-ID': false,
+        'ms-MY': false
+    }
+    const lanPropsMapping = {
+        'enus': 'en-US',
+        'jajp': 'ja-JP',
+        'idid': 'id-ID',
+        'msmy': 'ms-MY',
+        'zhtw': 'zh-TW',
+    }
     // **********************
     // initPagination
     // **********************
@@ -89,8 +105,30 @@ $(function () {
         });
     }
 
+    $hideColBtn.click(function (e) {
+        if ($('.widescreen').hasClass('fixed-left')) {
+            $('.button-menu-mobile').trigger('click');
+        }
+        e.stopPropagation();
+        const hideID = $(this).parent()[0].id.replace('col_', '');
+        hideCol[hideID] = true;
+        $(this).parent().addClass('flex-small');
+        $('.edit_' + hideID).addClass('flex-small');
+    });
+
+    $showColBtn.click(function (e) {
+        e.stopPropagation();
+        const showID = $(this).parent()[0].id.replace('col_', '');
+        hideCol[showID] = false;
+        $(this).parent().removeClass('flex-small');
+        $('.edit_' + showID).removeClass('flex-small');
+    });
+
     $('#mainColGroup div').click(function (e) {
-        console.log(e);
+        // e.stopPropagation();
+        if ($(this).hasClass('flex-small')) {
+            return;
+        }
         const order = e.currentTarget.id.replace('col_', '');
         curOrder = order;
         // $searchForm.find('input').val('');
@@ -146,21 +184,34 @@ $(function () {
         }, 'json');
     }
     //
-    const fetchTranslate = (curpage, curkey, doDestroyPagi) => {
+    const fetchTranslate = (curpage, curkey, doDestroyPagi, id) => {
         const page = curpage !== undefined ? curpage : 1; 
         const key = curkey !== undefined ? curkey : keyValue;
         const destroyPagi = doDestroyPagi !== undefined ? doDestroyPagi : false;
+        const by = ( curOrder !== 'updated_at' && ! $('#col_'+ curOrder).data('by') ) || ($('#col_'+ curOrder).data('by') && $('#col_'+ curOrder).data('by') === 'DESC') ? 'ASC' : 'DESC';
         let url = '/index/page/' + page;
-        const formData = {
-            order: curOrder,
-            p: platform,
-            key: key,
-            per_page: 20,
-            by: 'DESC'
-        };
+        let formData = {};
+        if (id) {
+            formData = {
+                order: curOrder,
+                p: platform,
+                id: id,
+                per_page: 20,
+                by: by 
+            };
+        } else {
+            formData = {
+                order: curOrder,
+                p: platform,
+                key: key,
+                per_page: 20,
+                by: by 
+            };
+        }
         $translateList.find('button[type=submit]').prop('disabled', true);
         $.get(url, formData, function (rs) {
             console.log(rs, 'fetchTranslate');
+            $('#col_'+ curOrder).data('by',by);
             if (rs.data.length < 1) {
                 $translateList.find('button[type=submit]').prop('disabled', false);
                 alert('Key not found');
@@ -174,17 +225,37 @@ $(function () {
             }
             $translateList.empty();
             $('#mainColGroup').attr('data-sort', curOrder);
+            function copyUrl(value) {
+                var tempInput = document.createElement("input");
+                tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+                tempInput.value = value;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                alert("Copied the text: " + tempInput.value);
+                document.body.removeChild(tempInput);
+            }
             $.each(rs.data, function (i, row) {
+                row.url = location.origin + '/?p=' + platform + '&id=' + row.id;
                 const temp = $($.fn.replaceElString(transListRowTemp, row));
                 const form = temp.find('form');
                 const targetInput = temp.find('textarea');
                 const targetCol = temp.find('.translateCol');
                 const submitBtn = temp.find('button[type=submit]');
                 const idCol = temp.find('.idCol');
+                const urlCol = temp.find('.urlCol');
                 if (row.dot && row.dot === '1') {
                     idCol.append('<span style="position: relative; top: -9px; right: -2px; display: inline-block; width: 5px; height: 5px; border-radius: 100%; background-color: #ff5757;"></span>');
                 }
                 let mobile = false;
+                console.log(temp[0]);
+                Object.keys(hideCol).map( (lan) => {
+                    if ( !hideCol[lan] ) {
+                        temp.find('.edit_' + lan).removeClass('flex-small');
+                    } else {
+                        temp.find('.edit_' + lan).addClass('flex-small');
+                    }
+                })
                 $translateList.append(temp);
                 targetInput.on('focus touchstart', function (e) {
                     const name = $(this)[0].name;
@@ -197,7 +268,7 @@ $(function () {
                     if (name === 'id') {
                         return;
                     }
-                    $(this).parent().css('flex', '0 0 50%');
+                    $(this).parent().css('flex', '1 1 auto');
                     if (name === 'keyword') {
                         if (! canModifyKey) {
                             copyToClipboard($(this)[0]);
@@ -215,6 +286,15 @@ $(function () {
                     submitBtn.addClass('btn-warning');
                     const val = $(this).val();
                     const name = e.currentTarget.name;
+                    /*
+                    console.log(name, ':row name');
+                    console.log(row, ':row');
+                    */
+                    if (row[name] === undefined && row[lanPropsMapping[name]] === val) {
+                        console.log('The value is the same. Do not update.')
+                        return;
+                    }
+
                     if ( row[name] === val ) {
                         console.log('The value is the same. Do not update.')
                         return;
@@ -223,6 +303,11 @@ $(function () {
                     autoXHR[row.id] = setTimeout(function () {
                        autoUpdateLan( {id: row.id, [name]: val === '' ? ' ' : val, platform: row.platform, production: row.production }, row ) ;
                     }, 500);
+                });
+                targetInput.on('focus', function (e) {
+                    if ($('.widescreen').hasClass('fixed-left')) {
+                        $('.button-menu-mobile').trigger('click');
+                    }
                 });
                 targetInput.on('focusout', function (e) {
                     console.log(e, ':focus out');
@@ -242,6 +327,10 @@ $(function () {
                     });
                     updateLan($(this).serializeArray(), submitBtn, row);
                 });
+                //
+                urlCol.on("click", function (e) {
+                   copyUrl($(this).find('input').val());
+                })
             });
             //init pagination
             if (destroyPagi) {
@@ -320,7 +409,12 @@ $(function () {
     });
 
     if( $translateList.length > 0) {
-        fetchTranslate(1, keyValue, true);
+        if (location.search.slice(1).split("&")[1] && location.search.slice(1).split("&")[1].split("id=")[1]) {
+            const id = location.search.slice(1).split("&")[1].split("id=")[1];
+            fetchTranslate(1, '', true, id);
+        } else {
+            fetchTranslate(1, keyValue, true);
+        }
     }
 
     if ($('#passwdUpdateForm').length > 0) {
