@@ -187,7 +187,7 @@ $(function () {
         const page = curpage !== undefined ? curpage : 1; 
         const key = curkey !== undefined ? curkey : keyValue;
         const destroyPagi = doDestroyPagi !== undefined ? doDestroyPagi : false;
-        const by = $('#col_'+ curOrder).data('by') && $('#col_'+ curOrder).data('by') === 'DESC' ? 'ASC' : 'DESC';
+        const by = ( curOrder !== 'updated_at' && ! $('#col_'+ curOrder).data('by') ) || ($('#col_'+ curOrder).data('by') && $('#col_'+ curOrder).data('by') === 'DESC') ? 'ASC' : 'DESC';
         let url = '/index/page/' + page;
         let formData = {};
         if (id) {
