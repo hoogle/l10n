@@ -1,8 +1,8 @@
 <div class="container">
     <div class="col-sm-12">
-        <div class="btn-group pull-right d-flex">
+        <div class="pull-right d-flex" style="position: relative;">
             <!-- Button trigger modal -->
-            <button class="btn btn-primary waves-effect waves-light" id="NewKeyBtn" data-toggle="modal" data-target="#myAdd"><i class="fa fa-plus"></i> New Key</button>
+            <button class="btn btn-primary waves-effect waves-light m-r-10" id="NewKeyBtn" data-toggle="modal" data-target="#myAdd"><i class="fa fa-plus"></i> New Key</button>
             <div>
 <?php if ($pf_modified) : ?>
             <b style="position: absolute; top: -8px; right: -8px; display: inline-block; width: 18px; height: 18px; border-radius: 50%; background-color: #ff5757; color:white; z-index:3; text-align:center; font-size: 9pt">!</b>
