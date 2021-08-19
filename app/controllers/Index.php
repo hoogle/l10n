@@ -17,7 +17,7 @@ class Index extends MY_Controller {
 
     public function index() {
         $data = [
-            "title" => "Translation tool",
+            "title" => "Astra Translation tool",
         ];
         if ( ! isset($_SESSION["l10n_email"])) {
             $gclient = new Google_Client();
@@ -58,36 +58,40 @@ class Index extends MY_Controller {
     }
 
     public function page($page = 1) {
-        $order = $this->input->get_post("order");
-        $by = $this->input->get_post("by");
-        $order_arr = ["keyword", "en-US", "zh-TW", "ja-JP", "id-ID", "ms-MY", "updated_at"];
-        $by_arr = ["ASC", "DESC"];
-        if ( ! in_array($order, $order_arr)) $order = "keyword";
-        if ( ! in_array($by, $by_arr)) $by = "ASC";
-        $orderby_arr = [$order, $by];
-        $p = $this->input->get_post("p");
-        list($production, $platform) = explode("_", $p);
-        if ( ! $per_page = $this->input->get_post("per_page")) {
-            $this->config->load("pagination");
-            $per_page = $this->config->item("per_page");
-        }
-        $config["per_page"] = $per_page;
-        $config["base_url"] = $this->config->item("base_url") . "/index/page/";
-        $limit_start = ($page - 1) * $per_page;
-        $key = $this->input->get_post("key");
         $id = $this->input->get_post("id");
         if ($id) {
-            $db_data = $this->translate_model->get_translate_by_id($limit_start, $per_page, $production, $platform, $orderby_arr, $id);
+            $db_data = $this->translate_model->get_translate_by_id($id);
+            $total_rows = 1;
+            $total_pages = 1;
         } else {
-            $db_data = $this->translate_model->get_translate_by_page($limit_start, $per_page, $production, $platform, $orderby_arr, $key);
+            $order = $this->input->get_post("order");
+            $by = $this->input->get_post("by");
+            $order_arr = ["keyword", "en-US", "zh-TW", "ja-JP", "id-ID", "ms-MY", "updated_at"];
+            $by_arr = ["ASC", "DESC"];
+            if ( ! in_array($order, $order_arr)) $order = "keyword";
+            if ( ! in_array($by, $by_arr)) $by = "ASC";
+            $orderby_arr = [$order, $by];
+            $p = $this->input->get_post("p");
+            list($production, $platform) = explode("_", $p);
+            if ( ! $per_page = $this->input->get_post("per_page")) {
+                $this->config->load("pagination");
+                $per_page = $this->config->item("per_page");
+            }
+            $config["per_page"] = $per_page;
+            $config["base_url"] = $this->config->item("base_url") . "/index/page/";
+            $limit_start = ($page - 1) * $per_page;
+            $key = $this->input->get_post("key");
+            $db_data = $this->translate_model->get_translate_by_page($limit_start, $per_page, $production, $platform, $order_arr, $key);
+            $config["total_rows"] = isset($db_data["rows"]) ? $db_data["rows"] : 0;
+            $total_pages = (int)ceil($config["total_rows"] / $per_page);
+            $total_rows = $config["total_rows"];
         }
-        $config["total_rows"] = isset($db_data["rows"]) ? $db_data["rows"] : 0;
         $data = $db_data ? $db_data["data"] : [];
 
         echo json_encode([
             "data"      => $data,
-            "pages"     => (int) ceil($config["total_rows"] / $per_page),
-            "rows"      => $config["total_rows"],
+            "pages"     => $total_pages,
+            "rows"      => $total_rows,
             "curr_page" => $page,
         ], JSON_PARTIAL_OUTPUT_ON_ERROR);
     }

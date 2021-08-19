@@ -3,6 +3,8 @@
 final class Translate_model extends MY_Model
 {
 
+    const LANG_ARR = ["en-US", "zh-TW", "ja-JP", "id-ID", "ms-MY"];
+
 	/**
 	 * [__construct description]
 	 */
@@ -241,30 +243,30 @@ final class Translate_model extends MY_Model
         return $data ? ["data" => $data, "rows" => $num_rows] : [];
     }
 
-    public function get_translate_by_id($limit_start, $limit_length, $prod, $pf, $orderby_arr = ["keyword", "DESC"], $key = "") {
-        $p = $prod . "_" . $pf;
-        $pf_stat = $this->get_platform_stat();
-        $pf_published_at = $pf_stat[$p]["published_at"];
+    public function get_translate_by_id($id) {
         $DB = $this->_get_db();
-        $DB->from($this->table);
-        $DB->where("production", $prod);
-        $DB->where("platform", $pf);
-        list($order, $by) = $orderby_arr;
-            $DB->group_start();
-            $DB->where("id", $key);
-            $DB->group_end();
-        $tempdb = clone $DB;
-        $num_rows = $tempdb->count_all_results();
-        $DB->order_by($order, $by);
-        $DB->limit($limit_length, $limit_start);
-        $data = $DB->get()->result_array();
-        foreach ($data as &$row) {
-            $row["dot"] = $row["updated_at"] > $pf_published_at ? "1" : "0";
-        }
-        log_message("INFO", "SQL : translate_model->get_translate_by_page() " . $DB->result_id->queryString);
-        return $data ? ["data" => $data, "rows" => $num_rows] : [];
+        $DB->where("id", $id);
+        $data = $DB->get($this->table)->result_array();
+        return $data ? ["data" => $data, "rows" => 1] : [];
     }
 
+    public function get_email_contents($prod, $plat, $item) {
+        $DB = $this->_get_db();
+        $where_arr = [
+            "production" => $prod,
+            "platform" => $plat,
+            "item" => $item,
+        ];
+        $DB->where($where_arr);
+        $DB->order_by("id", "ASC");
+        if ($data = $DB->get($this->table)->result_array()) {
+        }
+        return $data ?: FALSE;
+    }
+    /**
+     * DEPRECATED!!!!
+     */
+    /*
     public function get_translate($platform) {
         $DB = $this->_get_db();
         $DB->where("platform", $platform);
@@ -272,6 +274,7 @@ final class Translate_model extends MY_Model
         $data = $DB->get($this->table)->result_array();
         return $data ?: FALSE;
     }
+     */
 
     public function get_last_id() {
         $DB = $this->_get_db();
