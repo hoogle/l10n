@@ -58,7 +58,7 @@ class User extends MY_Controller {
             $_SESSION["user_langs"] = $using_lang;
             $resp["status"] = "ok";
         }
-        $this->response($resp);
+        echo json_encode($resp);
     }
 
 }

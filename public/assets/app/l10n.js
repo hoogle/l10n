@@ -239,7 +239,7 @@ $(function () {
                 document.body.removeChild(tempInput);
             }
             $.each(rs.data, function (i, row) {
-                row.url = location.origin + '/?p=' + platform + '&id=' + row.id;
+                row.url = location.origin + '/trans?p=' + platform + '&id=' + row.id;
                 const temp = $($.fn.replaceElString(transListRowTemp, row));
                 const form = temp.find('form');
                 const targetInput = temp.find('textarea');
