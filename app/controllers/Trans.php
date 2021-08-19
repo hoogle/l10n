@@ -2,7 +2,7 @@
 
 use Astra\Services\AwsS3;
 
-class Index extends MY_Controller {
+class Trans extends Admin_Controller {
 
     /**
      * [__construct description]
@@ -10,51 +10,37 @@ class Index extends MY_Controller {
     public function __construct() {
         parent::__construct();
 
+        $this->load->helper("url");
         $this->load->helper("password_helper");
         $this->load->model(["translate_model", "l10n_model"]);
-        $this->_lang_arr = ["en-US", "zh-TW", "ja-JP", "id-ID", "ms-MY"];
     }
 
     public function index() {
-        $data = [
-            "title" => "Astra Translation tool",
-        ];
-        if ( ! isset($_SESSION["l10n_email"])) {
-            $gclient = new Google_Client();
-            $gclient->setAuthConfig(GL_OAUTH2_SECRET);
-            $gclient->addScope([Google_Service_Oauth2::USERINFO_EMAIL, Google_Service_Oauth2::USERINFO_PROFILE]);
-            $gclient->setRedirectUri($this->config->item("gl_redirect"));
-            $data["gl_login_url"] = $gclient->createAuthUrl();
-            $redir = $this->input->get("redir");
-            $data["redir"] = $redir;
-            $layout["content"] = $this->load->view("login", $data, TRUE);
-			$this->load->view("layout/layout_l10n_box", ["layout" => $layout]);
+        $data = [];
+        $data["platform_arr"] = $this->translate_model->get_platforms();
+        $data["pf_stat"] = $this->translate_model->get_platform_stat();
+        $data["email"] = $_SESSION["email"];
+        if ( ! $p = $this->input->get("p")) {
+            $layout["content"] = $this->load->view("/home", $data, TRUE);
         } else {
-            $data["platform_arr"] = $this->translate_model->get_platforms();
-            $data["pf_stat"] = $this->translate_model->get_platform_stat();
-            $data["email"] = $_SESSION["l10n_email"];
-            if ( ! $p = $this->input->get("p")) {
-                $layout["content"] = $this->load->view("/home", $data, TRUE);
-            } else {
-                list($data["production"], $data["platform"]) = explode("_", $p);
-                $data["lang_arr"] = $this->_lang_arr;
-                $data["user_data"] = $this->l10n_model->get_user_data($data["email"]);
-                if ( ! in_array($data["platform"], ["Android", "iOS"])) {
-                    $this->load->config("aws");
-                    $bucket = $this->config->item("s3")["bucket"]["L10N"];
-                    $s3_key = str_replace("_", "/", $p);
-                    $data["s3_link"] = AwsS3::get_instance()->get_object($bucket, $s3_key . "/all_lang.json");
-                }
-                $data["pf_modified"] = $data["pf_stat"][$p]["modified"];
-                if ($data["platform"] == "email") {
-                    $data["email_data"] = $this->translate_model->get_all_email_info($data["production"], $data["platform"]);
-                    $layout["content"] = $this->load->view("/email_list", $data, TRUE);
-                } else {
-                    $layout["content"] = $this->load->view("/list", $data, TRUE);
-                }
+            list($data["production"], $data["platform"]) = explode("_", $p);
+            $data["lang_arr"] = $this->translate_model::LANG_ARR;
+            $data["user_langs"] = $_SESSION["user_langs"];
+            if ( ! in_array($data["platform"], ["Android", "iOS"])) {
+                $this->load->config("aws");
+                $bucket = $this->config->item("s3")["bucket"]["L10N"];
+                $s3_key = str_replace("_", "/", $p);
+                $data["s3_link"] = AwsS3::get_instance()->get_object($bucket, $s3_key . "/all_lang.json");
             }
-            $this->load->view("layout/layout_l10n", ["layout" => $layout, "data" => $data]);
+            $data["pf_modified"] = $data["pf_stat"][$p]["modified"];
+            if ($data["platform"] == "email") {
+                $data["email_data"] = $this->translate_model->get_all_email_info($data["production"], $data["platform"]);
+                $layout["content"] = $this->load->view("/email_list", $data, TRUE);
+            } else {
+                $layout["content"] = $this->load->view("/list", $data, TRUE);
+            }
         }
+        $this->load->view("layout/layout_l10n", ["layout" => $layout, "data" => $data]);
     }
 
     public function page($page = 1) {
@@ -66,7 +52,7 @@ class Index extends MY_Controller {
         } else {
             $order = $this->input->get_post("order");
             $by = $this->input->get_post("by");
-            $order_arr = ["id", "keyword", "en-US", "zh-TW", "ja-JP", "id-ID", "ms-MY", "updated_at"];
+            $order_arr = array_merge($this->translate_model::LANG_ARR, ["id", "updated_at"]);
             $by_arr = ["ASC", "DESC"];
             if ( ! in_array($order, $order_arr)) $order = "keyword";
             if ( ! in_array($by, $by_arr)) $by = "ASC";
@@ -109,7 +95,7 @@ class Index extends MY_Controller {
         $db_data = $this->translate_model->get($id);
 
         $data = [
-            "last_editor"  => $_SESSION["l10n_email"],
+            "last_editor"  => $_SESSION["email"],
         ];
         strlen($keyword) && $data["keyword"] = $keyword;
         strlen($lang_ja) && $data["`ja-JP`"] = $lang_ja;
@@ -142,13 +128,13 @@ class Index extends MY_Controller {
                 $last_updated_arr["ms-MY"] = [$db_data["ms-MY"] => $lang_ms];
             }
             $arr = ["last_update" => json_encode($last_updated_arr)];
-            $this->translate_model->user_last_update($_SESSION["l10n_email"], $arr);
+            $this->translate_model->user_last_update($_SESSION["email"], $arr);
             $this->translate_model->update_platform($production . "_" . $platform, "update");
             $resp["status"] = "ok";
         } else {
             $resp["status"] = "fail";
         }
-        echo json_encode($resp, TRUE);
+        $this->response($resp);
     }
 
     public function add() {
@@ -171,7 +157,7 @@ class Index extends MY_Controller {
             "`zh-TW`"  => $lang_zh,
             "`id-ID`"  => $lang_id,
             "`ms-MY`"  => $lang_ms,
-            "last_editor"  => $_SESSION["l10n_email"],
+            "last_editor"  => $_SESSION["email"],
             "created_at" => date("Y-m-d H:i:s"),
             "updated_at" => date("Y-m-d H:i:s"),
         ];
@@ -194,27 +180,19 @@ class Index extends MY_Controller {
                 $last_updated_arr["ms-MY"] = ["" => $lang_ms];
             }
             $arr = ["last_update" => json_encode($last_updated_arr)];
-            $this->translate_model->user_last_update($_SESSION["l10n_email"], $arr);
+            $this->translate_model->user_last_update($_SESSION["email"], $arr);
             $this->translate_model->update_platform($production . "_" . $platform, "update");
             $resp["status"] = "ok";
         } else {
             $resp["status"] = "fail";
         }
-        echo json_encode($resp, TRUE);
+        $this->response($resp);
     }
 
     public function get_last_id() {
         echo $this->translate_model->get_last_id();
     }
-
-    public function logout() {
-        unset($_SESSION["l10n_email"]);
-        $resp = [
-            "status" => "ok",
-        ];
-        echo json_encode($resp, TRUE);
-    }
 }
 
-/* End of file index.php */
-/* Location: ./app/controllers/index.php */
+/* End of file trans.php */
+/* Location: ./app/controllers/trans.php */

@@ -19,7 +19,7 @@ class User extends MY_Controller {
         $data = [
             "title" => "Translation tool",
         ];
-        if ( ! isset($_SESSION["l10n_email"])) {
+        if ( ! isset($_SESSION["email"])) {
             $gclient = new Google_Client();
             $gclient->setAuthConfig(GL_OAUTH2_SECRET);
             $gclient->addScope([Google_Service_Oauth2::USERINFO_EMAIL, Google_Service_Oauth2::USERINFO_PROFILE]);
@@ -32,7 +32,7 @@ class User extends MY_Controller {
         } else {
             $data["platform_arr"] = $this->translate_model->get_platforms();
             $data["pf_stat"] = $this->translate_model->get_platform_stat();
-            $data["email"] = $_SESSION["l10n_email"];
+            $data["email"] = $_SESSION["email"];
             $data["user_data"] = $this->l10n_model->get_user_data($data["email"]);
             $data["lang_arr"] = $this->_lang_arr;
             $layout["content"] = $this->load->view("/user_edit", $data, TRUE);
@@ -57,7 +57,7 @@ class User extends MY_Controller {
             $this->translate_model->update_user_data($data);
             $resp["status"] = "ok";
         }
-        echo json_encode($resp, TRUE);
+        $this->response($resp);
     }
 
 }

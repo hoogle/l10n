@@ -22,7 +22,7 @@
         $pf_str = $pf["production"] . "_" . $pf["platform"];
         $pen = '<i style="color:#ffa857" class="fa fa-pencil-square-o"></i>';
         $mod_icon = $pf_stat[$pf_str]["modified"] ? $pen : "";
-        $link = "/?p=" . $pf_str;
+        $link = "/trans?p=" . $pf_str;
         switch ($pf["platform"]) {
             case "Android":
                 $tifa_icon = "ti-android";

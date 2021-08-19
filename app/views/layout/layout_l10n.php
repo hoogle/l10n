@@ -11,7 +11,7 @@
 
     <link rel="shortcut icon" href="/assets/ntt_images/favicon_1.png" sizes="32x32">
 
-    <title><?php echo $title; ?></title>
+    <title>Astra Translation tool</title>
 
     <!--page css-->
         <?php

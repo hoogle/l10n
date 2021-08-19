@@ -54,7 +54,7 @@ $(function () {
     const $emailEditBtn = $('.emailEditBtn');
     const $emailPreviewBtn = $('.emailPreviewBtn');
     const transListRowTemp = $('#transListRowTemp').html();
-    const baseURL = '/index';
+    const baseURL = '/welcome';
     const myURL = new URL(window.location.href);
     const platform = myURL.searchParams.get('p') ? myURL.searchParams.get('p') : $('#platform').html();
     const $showKeyBtn = $('#showKeyBtn');
@@ -139,7 +139,7 @@ $(function () {
     });
     //
     const autoUpdateLan = (formData, orRow ) => {
-        const url = '/index/update';
+        const url = '/trans/update';
         $('.topbar').addClass('actionBar');
         $.post(url, formData, function (rs) {
             $('.topbar').removeClass('actionBar');
@@ -158,7 +158,7 @@ $(function () {
     const updateLan = (formData, eleBtn, orRow) => {
         eleBtn.prop('disabled', true);
         console.log(orRow, ':orRow');
-        let url = '/index/update';
+        let url = '/trans/update';
         const myformData = {};
         let needToUpdate = false;
         formData.map( item => {
@@ -191,7 +191,7 @@ $(function () {
         const key = curkey !== undefined ? curkey : keyValue;
         const destroyPagi = doDestroyPagi !== undefined ? doDestroyPagi : false;
         const by = ( curOrder !== 'updated_at' && ! $('#col_'+ curOrder).data('by') ) || ($('#col_'+ curOrder).data('by') && $('#col_'+ curOrder).data('by') === 'DESC') ? 'ASC' : 'DESC';
-        let url = '/index/page/' + page;
+        let url = '/trans/page/' + page;
         let formData = {};
         if (id) {
             formData = {
@@ -357,7 +357,7 @@ $(function () {
     });
 
     $newkeyBtn.click(function (e) {
-        $.get('/index/get_last_id', function(data) {
+        $.get('/trans/get_last_id', function(data) {
             $addkeyForm[0].keyword.value= data;
         });
     });
@@ -372,7 +372,7 @@ $(function () {
     $emailEditBtn.click(function (e) {
         var url = new URLSearchParams(window.location.search);
         var link = document.createElement("a");
-        link.href = '/email/?p=' + url.get('p') + '&item=' + $(this).data("id");
+        link.href = '/email?p=' + url.get('p') + '&item=' + $(this).data("id");
         link.click();
     });
 
@@ -393,7 +393,7 @@ $(function () {
 
     $logoutBtn.click(function (e) {
         e.preventDefault();
-        $.get( baseURL + '/logout', null, function (rs) {
+        $.get('/logout', null, function (rs) {
             if (rs.status === 'ok') {
                 location.href= baseURL;
                 return;
@@ -458,7 +458,7 @@ $(function () {
                                     type: "success",
                                 },
                                 function (isConfirm) {
-                                    $.getJSON(baseURL + "/logout").done(function (rs) {
+                                    $.getJSON("/logout").done(function (rs) {
                                         if (rs.status === 'ok') {
                                             location.href = baseURL;
                                         }
