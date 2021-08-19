@@ -54,7 +54,7 @@
                         <div id="col_keyword" class="text-center ti- keyCol">KEY</div>
 <?php foreach ($lang_arr as $lang) : ?>
 <?php   if (in_array($lang, json_decode($user_data["using_lang"], TRUE))) : ?>
-                        <div id="col_<?php echo $lang; ?>" class="text-center ti-"><?php echo $lang; ?></div>
+                        <div id="col_<?php echo $lang; ?>" class="text-center ti-"><i class="hideColBtn ti ti-shift-left"></i><?php echo $lang; ?><i class="showColBtn ti ti-shift-right"></i></div>
 <?php   endif ?>
 <?php endforeach ?>
                         <div class="hide text-white translateSubmit">.</div>
