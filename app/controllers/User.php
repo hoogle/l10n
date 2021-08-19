@@ -55,6 +55,7 @@ class User extends MY_Controller {
                 "using_lang" => json_encode($using_lang),
             ];
             $this->translate_model->update_user_data($data);
+            $_SESSION["user_langs"] = $using_lang;
             $resp["status"] = "ok";
         }
         $this->response($resp);
