@@ -37,7 +37,7 @@
                 $tifa_icon = "fa fa-tv";
                 break;
             case "email":
-                $tifa_icon = "fa fa-envelope";
+                $tifa_icon = "ti-email";
                 break;
             default:
                 $tifa_icon = "fa fa-globe";
