@@ -60,6 +60,7 @@ $(function () {
     const $showKeyBtn = $('#showKeyBtn');
     const $hideColBtn = $('.hideColBtn');
     const $showColBtn = $('.showColBtn');
+    const $usingLanForm = $('#usingLanForm');
     const canModifyKeyAcc = {
         Android: ['ray@astra.cloud', 'hoogle@astra.cloud'],
         iOS: ['timmy@astra.cloud', 'hoogle@astra.cloud'],
@@ -540,5 +541,18 @@ $(function () {
         const $targetTable = $('#mainTable');
         const val = $targetTable.attr('data-key') === '1' ? '0' : '1';
         $('#mainTable').attr('data-key', val);
+    });
+
+    $usingLanForm.change( function (e) {
+        e.preventDefault();
+        const url = e.currentTarget.action;
+        $.post(url, $(this).serializeArray(), function (rs) {
+            if (rs.status === 'ok') {
+                return;
+            } else {
+                alert(rs.message);
+                location.reload();
+            }
+        }, 'json')
     });
 });
