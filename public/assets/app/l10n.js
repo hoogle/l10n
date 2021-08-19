@@ -51,6 +51,8 @@ $(function () {
     const $s3URL = $('#s3-url');
     const $newkeyBtn = $('#NewKeyBtn');
     const $downloadBtn = $('#downloadBtn');
+    const $emailEditBtn = $('.emailEditBtn');
+    const $emailPreviewBtn = $('.emailPreviewBtn');
     const transListRowTemp = $('#transListRowTemp').html();
     const baseURL = '/index';
     const myURL = new URL(window.location.href);
@@ -364,6 +366,13 @@ $(function () {
         var url = new URLSearchParams(window.location.search);
         var link = document.createElement("a");
         link.href = '/tool/download/' + url.get('p');
+        link.click();
+    });
+
+    $emailEditBtn.click(function (e) {
+        var url = new URLSearchParams(window.location.search);
+        var link = document.createElement("a");
+        link.href = '/email/?p=' + url.get('p') + '&item=' + $(this).data("id");
         link.click();
     });
 

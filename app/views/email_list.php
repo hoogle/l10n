@@ -47,8 +47,8 @@
         </td>
         <td><?php echo $row["last_updated_at"] ?></td>
         <td>
-            <button class="btn btn-success"><i class="fa fa-tv"></i> Preview</button>
-            <button class="btn btn-primary"><i class="ti-pencil"></i> Edit</button>
+            <button class="emailPreviewBtn btn btn-success" data-id="<?php echo $row["item"]; ?>"><i class="fa fa-tv"></i> Preview</button>
+            <button class="emailEditBtn btn btn-primary" data-id="<?php echo $row["item"]; ?>"><i class="ti-pencil"></i> Edit</button>
         </td>
     </tr>
 <?php endforeach ?>
