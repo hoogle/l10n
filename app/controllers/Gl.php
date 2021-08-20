@@ -9,6 +9,8 @@ class Gl extends MY_Controller {
      */
     public function __construct() {
         parent::__construct();
+
+        $this->load->model("l10n_model");
     }
 
     /**
@@ -48,26 +50,27 @@ class Gl extends MY_Controller {
         }
 
         $data = [];
-        $data['uid'] = $profile->id;
-        $data['email'] = $profile->email;
-        $data['picture_url'] = $profile->picture;
-        $data['name'] = $profile->name;
+        $data["uid"] = $profile->id;
+        $data["email"] = $profile->email;
+        $data["name"] = $profile->name;
+        $data["picture_url"] = $profile->picture;
+        $user_langs_arr = $this->l10n_model->get_user_data($data["email"])["using_lang"];
+        $data["user_langs"] = json_decode($user_langs_arr, TRUE);
         if ( ! $this->saveSession($data)) {
             Logger::getInstance()->error("session write error", $data);
             redirect('/?error=session_error');
         }
 
-        $_SESSION["l10n_email"] = $profile->email;
+        $_SESSION["email"] = $profile->email;
         $upd_data = [
             "email" => $profile->email,
             "last_login_at" => date("Y-m-d H:i:s"),
         ];
-        $this->load->model(["l10n_model"]);
         $this->l10n_model->update_user_data($upd_data);
 
         Logger::getInstance()->info("gl account login", $data);
 
-        header("location: /");
+        redirect("/trans");
     }
 
 }

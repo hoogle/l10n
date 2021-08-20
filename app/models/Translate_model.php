@@ -29,15 +29,6 @@ final class Translate_model extends MY_Model
 		return $data ?: FALSE;
 	}
 
-    /**
-     * ALTER TABLE `translate` DROP `default_str`;
-     * ALTER TABLE `translate` ADD `item` VARCHAR(50) NULL AFTER `platform`;
-     * ALTER TABLE `translate` DROP INDEX `prod_plat_key`, ADD UNIQUE `prod_plat_key` (`production`, `platform`, `item`, `keyword`) USING BTREE;
-     * ALTER TABLE `l10n_user` ADD `using_lang` JSON NULL DEFAULT NULL AFTER `email`;
-     * ALTER TABLE `l10n_user` DROP `passwd`;
-     * ALTER TABLE `l10n_user` CHANGE `last_update` `last_update` JSON NULL DEFAULT NULL;
-     */
-
 	/**
 	 * [get_all_email description]
 	 * @param  [type] $production [description]
@@ -123,7 +114,7 @@ final class Translate_model extends MY_Model
     public function update_translate($id, $data, $need_specialchar = 0) {
         $data["updated_at"] = date("Y-m-d H:i:s");
         if ($need_specialchar) {
-            foreach (["`en-US`", "`ja-JP`", "`zh-TW`", "`id-ID`", "`ms-MY`"] as $use_lang) {
+            foreach ($this::LANG_ARR as $use_lang) {
                 if (isset($data[$use_lang])) {
                     $data[$use_lang] = str_replace("'", "&#39;", $data[$use_lang]);
                 }
@@ -226,7 +217,7 @@ final class Translate_model extends MY_Model
         if ( ! empty($key)) {
             $DB->group_start();
             $DB->like("keyword", $key);
-            foreach (["`id`", "`en-US`", "`ja-JP`", "`zh-TW`", "`id-ID`", "`ms-MY`"] as $lang) {
+            foreach ($this::LANG_ARR as $lang) {
                 $DB->or_like($lang, $key);
             }
             $DB->group_end();
@@ -259,10 +250,26 @@ final class Translate_model extends MY_Model
         ];
         $DB->where($where_arr);
         $DB->order_by("id", "ASC");
-        if ($data = $DB->get($this->table)->result_array()) {
-        }
+        $data = $DB->get($this->table)->result_array();
         return $data ?: FALSE;
     }
+
+    public function get_email_contents_by_lang($prod, $plat, $item, $user_langs = []) {
+        $lang_arr = [];
+        if ($arr = $this->get_email_contents($prod, $plat, $item)) {
+            $languages = $user_langs ?: $this::LANG_ARR;
+            foreach ($arr as $row) {
+                foreach ($languages as $lang) {
+                    $lang_arr[$lang][$row["keyword"]] = [
+                        "id" => $row["id"],
+                        "val" => $row[$lang],
+                    ];
+                }
+            }
+        }
+        return $lang_arr ?: FALSE;
+    }
+
     /**
      * DEPRECATED!!!!
      */

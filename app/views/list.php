@@ -52,10 +52,8 @@
                     <div class="d-flex justify-content-around" id="mainColGroup">
                         <div id="col_id" class="text-center ti- idCol">ID</div>
                         <div id="col_keyword" class="text-center ti- keyCol">KEY</div>
-<?php foreach ($lang_arr as $lang) : ?>
-<?php   if (in_array($lang, json_decode($user_data["using_lang"], TRUE))) : ?>
+<?php foreach ($user_langs as $lang) : ?>
                         <div id="col_<?php echo $lang; ?>" class="text-center ti-"><i class="hideColBtn ti ti-shift-left"></i><?php echo $lang; ?><i class="showColBtn ti ti-shift-right"></i></div>
-<?php   endif ?>
 <?php endforeach ?>
                         <div class="hide text-white translateSubmit">.</div>
                         <div class="" style="flex: 0 0 24px;"></div>
@@ -77,13 +75,11 @@
             <input type="hidden" name="id" value="{id}">
             <textarea class="form-control text-center" name="keyword" title="{keyword}" readonly>{keyword}</textarea>
         </div>
-<?php foreach ($lang_arr as $lang) : ?>
-<?php   if (in_array($lang, json_decode($user_data["using_lang"], TRUE))) : ?>
-<?php       $input_name = strtolower(str_replace("-", "", $lang)); ?>
+<?php foreach ($user_langs as $lang) : ?>
+<?php   $input_name = strtolower(str_replace("-", "", $lang)); ?>
         <div class="translateCol edit_<?php echo $lang; ?>">
             <textarea class="form-control" name="<?php echo $input_name; ?>" title="{<?php echo $lang; ?>}" readonly>{<?php echo $lang; ?>}</textarea>
         </div>
-<?php   endif ?>
 <?php endforeach ?>
         <div class="urlCol">
             <input type="hidden" value="{url}" />
