@@ -4,9 +4,7 @@
                     <!--- Divider -->
                     <div id="sidebar-menu">
                         <ul>
-
-                        	<li class="text-muted menu-title">Platform Edit</li>
-
+                        	<li class="text-muted menu-title">Platforms</li>
 <?php if ( ! $platform_arr) : ?>
                             <li class="">
                                 <a class="waves-effect"><i class="fa fa-info-circle"></i><span>No data yet</span></a>
@@ -49,9 +47,15 @@
                             </li>
 <?php endforeach ?>
 <?php endif ?>
-
-
                         </ul>
+<?php if ($pf["platform"] == "email" && in_array($email, ["hoogle@astra.cloud", "mei@astra.cloud"])) : ?>
+                        <ul>
+                            <li class="text-muted menu-title">Relationship</li>
+                            <li class="">
+                                <a href="/relation/?production=goface" class="waves-effect"><i class="fa fa-link"></i><span>Relationship</span><?php echo $mod_icon; ?></a>
+                            </li>
+                        </ul>
+<?php endif ?>
                         <div class="clearfix"></div>
                     </div>
                     <div class="clearfix"></div>

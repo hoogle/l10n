@@ -5,6 +5,10 @@ final class Translate_model extends MY_Model
 
     const LANG_ARR = ["en-US", "zh-TW", "ja-JP", "id-ID", "ms-MY"];
 
+    /*
+     * ALTER TABLE `translate` ADD `mapping_id` INT(11) UNSIGNED NULL AFTER `ms-MY`, ADD INDEX(`mapping_id`);
+     */
+
 	/**
 	 * [__construct description]
 	 */

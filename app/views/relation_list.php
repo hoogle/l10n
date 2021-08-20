@@ -1,20 +1,8 @@
 <div class="container">
     <div class="col-sm-12">
         <div class="pull-right d-flex" style="position: relative;">
-            <!-- Button trigger modal -->
-            <button class="btn btn-primary waves-effect waves-light m-r-10" id="NewKeyBtn" data-toggle="modal" data-target="#myAdd"><i class="fa fa-plus"></i> New Key</button>
-            <div>
-<?php if ($pf_modified) : ?>
-            <b style="position: absolute; top: -8px; right: -8px; display: inline-block; width: 18px; height: 18px; border-radius: 50%; background-color: #ff5757; color:white; z-index:3; text-align:center; font-size: 9pt">!</b>
-<?php endif ?>
-<?php if (isset($s3_link)) : ?>
-            <button class="btn btn-warning waves-effect waves-light" data-toggle="modal" data-target="#myExport"><i class="fa fa-share"></i> Export</button>
-<?php else : ?>
-            <button class="btn btn-success waves-effect waves-light" id="downloadBtn"><i class="fa fa-download"></i> Download</button>
-<?php endif ?>
-            </div>
         </div>
-        <h4 class="page-title">Environment : <span id="platform"><?php echo $production; ?> / <?php echo $platform; ?></span></h4>
+        <h4 class="page-title">Environment : <span id="platform"><?php echo $production; ?> - Relationship for Android / iOS</span></h4>
         <ol class="breadcrumb"></ol>
     </div>
      
@@ -23,20 +11,7 @@
             <input type="hidden" name="email" value="<?php echo $email; ?>">
             <div class="row m-b-20">
                 <h4 class="m-t-0 header-title col-md-2 col-sm-12"><b>Key List</b></h4>
-<?php if (isset($s3_link)) : ?>
-                <div class="col-md-10 col-sm-12 text-right">
-                    <b style="color: #beaf5f">Export to S3 url: </b>
-                    <i id="copy-url" style="font-size:13px;cursor:pointer;" class="fa" title="Copy S3 url to clipboard">&#xf0c5;</i>
-                    <a id="s3-url" target="_blank" href="<?php echo $s3_link . "?t=" . time(); ?>"><?php echo $s3_link; ?></a>
-                    <i style="font-size:9px" class="fa">&#xf064;</i>
-                </div>
-<?php endif ?>
-            </div>
-            <div class="row">
-                <div class="col-xs-6 m-t-10">
-                <button type="button" class="btn btn-white btn-sm ti-eye btn-rounded" id="showKeyBtn"> Key</button>
-                </div>
-                <div class="col-xs-6 pull-right">
+                <div class="col-md-6 col-sm-12 pull-right">
                     <form name="searchTranslate" class="form-horizontal" method="post">
                     <div class="form-group m-r-10">
                         <label class="col-md-4 control-label">Search:</label>
@@ -125,6 +100,12 @@
             <input type="hidden" name="production" value="<?php echo $production; ?>">
             <input type="hidden" name="platform" value="<?php echo $platform; ?>">
             <input type="hidden" name="keyword" value="">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Description</label>
+                    <div class="col-md-10">
+                        <textarea name="d4str" class="form-control" rows="2"></textarea>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">en-US</label>
                     <div class="col-md-10">
