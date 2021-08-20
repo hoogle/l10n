@@ -120,7 +120,7 @@
 <div id="myAdd" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabelAdd" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form name="addKey" class="form-horizontal" role="form" action="/index/add" data-parsley-validate novalidate>
+            <form name="addKey" class="form-horizontal" role="form" action="/trans/add" data-parsley-validate novalidate>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myModalLabelAdd">New Key</h4>

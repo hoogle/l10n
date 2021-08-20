@@ -136,7 +136,8 @@ class Trans extends Admin_Controller {
         } else {
             $resp["status"] = "fail";
         }
-        $this->response($resp);
+        //$this->response($resp);
+        echo json_encode($resp);
     }
 
     public function add() {
@@ -146,14 +147,14 @@ class Trans extends Admin_Controller {
         $lang_id = $this->input->post("idid");
         $lang_ms = $this->input->post("msmy");
         $keyword = $this->input->post("keyword");
-        $d4str   = $this->input->post("d4str");
+        $ui_key  = $this->input->post("uikey");
         $production = $this->input->post("production");
         $platform = $this->input->post("platform");
         $data = [
             "production" => $production,
             "platform" => $platform,
             "keyword"  => $keyword,
-            "default_str" => $d4str,
+            "ui_key"   => $ui_key,
             "`en-US`"  => $lang_en,
             "`ja-JP`"  => $lang_ja,
             "`zh-TW`"  => $lang_zh,
@@ -181,6 +182,9 @@ class Trans extends Admin_Controller {
             if (strlen($lang_ms)) {
                 $last_updated_arr["ms-MY"] = ["" => $lang_ms];
             }
+            if (strlen($ui_key)) {
+                $last_updated_arr["ui_key"] = ["" => $ui_key];
+            }
             $arr = ["last_update" => json_encode($last_updated_arr)];
             $this->translate_model->user_last_update($_SESSION["email"], $arr);
             $this->translate_model->update_platform($production . "_" . $platform, "update");
@@ -188,7 +192,8 @@ class Trans extends Admin_Controller {
         } else {
             $resp["status"] = "fail";
         }
-        $this->response($resp);
+        //$this->response($resp);
+        echo json_encode($resp);
     }
 
     public function get_last_id() {

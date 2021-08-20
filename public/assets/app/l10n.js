@@ -482,7 +482,7 @@ $(function () {
         e.preventDefault();
         const self = $(this);
         self.find('button[type=submit]').prop('disabled', true);
-        $.post('/index/add', self.serializeArray(), function(rs) {
+        $.post('/trans/add', self.serializeArray(), function(rs) {
             $('#myAdd').modal('hide');
             self[0].reset();
             self.find('button[type=submit]').prop('disabled', false);
