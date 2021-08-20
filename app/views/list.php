@@ -55,6 +55,7 @@
 <?php foreach ($user_langs as $lang) : ?>
                         <div id="col_<?php echo $lang; ?>" class="text-center ti-"><i class="hideColBtn ti ti-shift-left"></i><?php echo $lang; ?><i class="showColBtn ti ti-shift-right"></i></div>
 <?php endforeach ?>
+                        <div id="col_ui_key" class="text-center ti-"><i class="hideColBtn ti ti-shift-left"></i>UI Key<i class="showColBtn ti ti-shift-right"></i></div>
                         <div class="hide text-white translateSubmit">.</div>
                         <div class="" style="flex: 0 0 24px;"></div>
                     </div>
@@ -69,25 +70,28 @@
 <template id="transListRowTemp">
     <div class="row translateRow m-b-10">
         <form name="l10n_{id}" class="d-flex align-item-center">
-        <input type="hidden" name="platform" value="<?php echo $platform; ?>"/>
-        <div class="idCol">{id}</div>
-        <div class="translateCol keyCol">
-            <input type="hidden" name="id" value="{id}">
-            <textarea class="form-control text-center" name="keyword" title="{keyword}" readonly>{keyword}</textarea>
-        </div>
+            <input type="hidden" name="platform" value="<?php echo $platform; ?>"/>
+            <div class="idCol">{id}</div>
+            <div class="translateCol keyCol">
+                <input type="hidden" name="id" value="{id}">
+                <textarea class="form-control text-center" name="keyword" title="{keyword}" readonly>{keyword}</textarea>
+            </div>
 <?php foreach ($user_langs as $lang) : ?>
 <?php   $input_name = strtolower(str_replace("-", "", $lang)); ?>
-        <div class="translateCol edit_<?php echo $lang; ?>">
-            <textarea class="form-control" name="<?php echo $input_name; ?>" title="{<?php echo $lang; ?>}" readonly>{<?php echo $lang; ?>}</textarea>
-        </div>
+            <div class="translateCol edit_<?php echo $lang; ?>">
+                <textarea class="form-control" name="<?php echo $input_name; ?>" title="{<?php echo $lang; ?>}" readonly>{<?php echo $lang; ?>}</textarea>
+            </div>
 <?php endforeach ?>
-        <div class="urlCol">
-            <input type="hidden" value="{url}" />
-            <i class="ti ti-sharethis-alt" title="Copy url here" style="font-size: 2rem;"></i>
-        </div>
-        <div class="translateSubmit hide">
-            <button type="submit" class="btn btn-default waves-effect waves-light btn-md">Save</button>
-        </div>
+            <div class="translateCol edit_ui_key">
+                <textarea class="form-control" name="uikey" title="{ui_key}" readonly>{ui_key}</textarea>
+            </div>
+            <div class="urlCol">
+                <input type="hidden" value="{url}" />
+                <i class="ti ti-sharethis-alt" title="Copy url here" style="font-size: 2rem;"></i>
+            </div>
+            <div class="translateSubmit hide">
+                <button type="submit" class="btn btn-default waves-effect waves-light btn-md">Save</button>
+            </div>
         </form>
     </div>
 </template>
@@ -153,6 +157,12 @@
                     <label class="col-md-2 control-label">ms-MY</label>
                     <div class="col-md-10">
                         <textarea name="msmy" class="form-control" rows="2"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">UI Key</label>
+                    <div class="col-md-10">
+                        <textarea name="uikey" class="form-control" rows="2"></textarea>
                     </div>
                 </div>
             </div>

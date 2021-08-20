@@ -57,10 +57,36 @@ final class Translate_model extends MY_Model
 	}
 
 	/**
+	 * [get_relation_by_page description]
+	 * @return [type]             [description]
+	 */
+	public function get_relation_by_page($limit_start, $limit_length, $orderby_arr = ["id", "ASC"], $key = "") {
+		$db = $this->_get_db();
+        $db->from($this->table);
+        $db->where("`ui_key` IN", "(SELECT `ui_key` FROM `trans_relation`)", FALSE);
+        if ( ! empty($key)) {
+            $db->group_start();
+            $db->like("ui_key", $key);
+            foreach ($this::LANG_ARR as $lang) {
+                $db->or_like($lang, $key);
+            }
+            $db->group_end();
+        }
+        list($order, $by) = $orderby_arr;
+        $tempdb = clone $db;
+        $num_rows = $tempdb->count_all_results();
+        $db->order_by($order, $by);
+        $db->limit($limit_length, $limit_start);
+        $data = $trans_data = [];
+        $data = $db->get()->result_array();
+        return $data ? ["data" => $data, "rows" => $num_rows] : [];
+    }
+
+	/**
 	 * [get_relation_data description]
 	 * @return [type]             [description]
 	 */
-	public function get_relation_data($limit_start, $limit_length, $orderby_arr = ["id", "ASC"], $key = "") {
+	public function get_relation_by_page2($limit_start, $limit_length, $orderby_arr = ["id", "ASC"], $key = "") {
 		$db = $this->_get_db();
         $db->from($this->table_relation);
         if ( ! empty($key)) {

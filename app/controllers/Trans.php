@@ -52,7 +52,7 @@ class Trans extends Admin_Controller {
         } else {
             $order = $this->input->get_post("order");
             $by = $this->input->get_post("by");
-            $order_arr = array_merge($this->translate_model::LANG_ARR, ["id", "updated_at"]);
+            $order_arr = array_merge($this->translate_model::LANG_ARR, ["id", "updated_at", "ui_key"]);
             $by_arr = ["ASC", "DESC"];
             if ( ! in_array($order, $order_arr)) $order = "keyword";
             if ( ! in_array($by, $by_arr)) $by = "ASC";
@@ -89,6 +89,7 @@ class Trans extends Admin_Controller {
         $lang_zh = $this->input->post("zhtw");
         $lang_id = $this->input->post("idid");
         $lang_ms = $this->input->post("msmy");
+        $ui_key = $this->input->post("uikey");
         $keyword = $this->input->post("keyword");
         $production = $this->input->post("production");
         $platform = $this->input->post("platform");
@@ -97,6 +98,7 @@ class Trans extends Admin_Controller {
         $data = [
             "last_editor"  => $_SESSION["email"],
         ];
+        strlen($ui_key) && $data["ui_key"] = $ui_key;
         strlen($keyword) && $data["keyword"] = $keyword;
         strlen($lang_ja) && $data["`ja-JP`"] = $lang_ja;
         strlen($lang_zh) && $data["`zh-TW`"] = $lang_zh;

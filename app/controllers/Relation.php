@@ -35,12 +35,40 @@ class Relation extends Admin_Controller {
             $per_page = $this->config->item("per_page");
         }
         $order = $order ?: "ui_key";
+        $by = $by ?: "DESC";
+        $orderby_arr = [$order, $by];
+        $config["per_page"] = $per_page;
+        $config["base_url"] = $this->config->item("base_url") . "/relation/page/";
+        $limit_start = ($page - 1) * $per_page;
+        $db_data = $this->translate_model->get_relation_by_page($limit_start, $per_page, $orderby_arr, $key);
+        $config["total_rows"] = isset($db_data["rows"]) ? $db_data["rows"] : 0;
+        $total_pages = (int)ceil($config["total_rows"] / $per_page);
+        $total_rows = $config["total_rows"];
+        $data = $db_data ? $db_data["data"] : [];
+
+        echo json_encode([
+            "data"      => $data,
+            "pages"     => $total_pages,
+            "rows"      => $total_rows,
+            "curr_page" => $page,
+        ], JSON_PARTIAL_OUTPUT_ON_ERROR);
+    }
+
+    public function page2($page = 1) {
+        $order = $this->input->get_post("order");
+        $by = $this->input->get_post("by");
+        $key = $this->input->get_post("key");
+        if ( ! $per_page = $this->input->get_post("per_page")) {
+            $this->config->load("pagination");
+            $per_page = $this->config->item("per_page");
+        }
+        $order = $order ?: "ui_key";
         $by = $by ?: "ASC";
         $orderby_arr = [$order, $by];
         $config["per_page"] = $per_page;
         $config["base_url"] = $this->config->item("base_url") . "/relation/page/";
         $limit_start = ($page - 1) * $per_page;
-        $db_data = $this->translate_model->get_relation_data($limit_start, $per_page, $orderby_arr, $key);
+        $db_data = $this->translate_model->get_relation_by_page2($limit_start, $per_page, $orderby_arr, $key);
         $config["total_rows"] = isset($db_data["rows"]) ? $db_data["rows"] : 0;
         $total_pages = (int)ceil($config["total_rows"] / $per_page);
         $total_rows = $config["total_rows"];

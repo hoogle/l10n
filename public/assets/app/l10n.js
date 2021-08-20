@@ -76,7 +76,8 @@ $(function () {
         'ja-JP': false,
         'zh-TW': false,
         'id-ID': false,
-        'ms-MY': false
+        'ms-MY': false,
+        'ui-key': false
     }
     const lanPropsMapping = {
         'enus': 'en-US',
@@ -84,6 +85,7 @@ $(function () {
         'idid': 'id-ID',
         'msmy': 'ms-MY',
         'zhtw': 'zh-TW',
+        'uikey': 'ui-key'
     }
     // **********************
     // initPagination
