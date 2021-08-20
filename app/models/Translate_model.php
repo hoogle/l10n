@@ -4,9 +4,8 @@ final class Translate_model extends MY_Model
 {
 
     const LANG_ARR = ["en-US", "zh-TW", "ja-JP", "id-ID", "ms-MY"];
-
     /*
-     * ALTER TABLE `translate` ADD `mapping_id` INT(11) UNSIGNED NULL AFTER `ms-MY`, ADD INDEX(`mapping_id`);
+     * ALTER TABLE `trans_relation` ADD `ui_key` VARCHAR(20) NULL AFTER `id`;
      */
 
 	/**
@@ -18,6 +17,7 @@ final class Translate_model extends MY_Model
 		$this->table = "translate";
 		$this->table_user = "l10n_user";
 		$this->table_platform = "platform";
+		$this->table_relation = "trans_relation";
 		$this->table_l10n_old = "l10n_old";
 	}
 
@@ -55,6 +55,37 @@ final class Translate_model extends MY_Model
         }
 		return $data;
 	}
+
+	/**
+	 * [get_relation_data description]
+	 * @return [type]             [description]
+	 */
+	public function get_relation_data($limit_start, $limit_length, $orderby_arr = ["id", "ASC"], $key = "") {
+		$db = $this->_get_db();
+        $db->from($this->table_relation);
+        if ( ! empty($key)) {
+            $db->like("ui_key", $key);
+        }
+        list($order, $by) = $orderby_arr;
+        $tempdb = clone $db;
+        $num_rows = $tempdb->count_all_results();
+        $db->order_by($order, $by);
+        $db->limit($limit_length, $limit_start);
+        $data = $trans_data = [];
+        if ($arr = $db->get()->result_array()) {
+            foreach ($arr as $row) {
+                $id_arr = json_decode($row["trans_ids"], TRUE);
+                foreach ($id_arr as $os => $id) {
+                    $lang_data = $this->get($id);
+                    foreach ($this::LANG_ARR as $lang) {
+                        $trans_data[$row["id"]][$os][$id][$lang] = $lang_data[$lang];
+                    }
+                }
+            }
+            $data = $trans_data;
+        }
+        return $data ? ["data" => $data, "rows" => $num_rows] : [];
+    }
 
 	/**
 	 * [get_email_data description]

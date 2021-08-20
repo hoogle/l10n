@@ -64,7 +64,7 @@ class Trans extends Admin_Controller {
                 $per_page = $this->config->item("per_page");
             }
             $config["per_page"] = $per_page;
-            $config["base_url"] = $this->config->item("base_url") . "/index/page/";
+            $config["base_url"] = $this->config->item("base_url") . "/trans/page/";
             $limit_start = ($page - 1) * $per_page;
             $key = $this->input->get_post("key");
             $db_data = $this->translate_model->get_translate_by_page($limit_start, $per_page, $production, $platform, $orderby_arr, $key);
