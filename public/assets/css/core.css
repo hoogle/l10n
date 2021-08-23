@@ -809,7 +809,7 @@ textarea.form-control {
   width: 100%;
 }
 .tabs li.tab {
-  background-color: #ffffff;
+  background-color: #f4f8fb;
   display: block;
   float: left;
   margin: 0;
@@ -886,6 +886,8 @@ textarea.form-control {
 .nav.nav-tabs > li.active > a {
   background-color: #ffffff;
   border: 0;
+  border-top: 1px solid rgb(0 0 0 / 8%);
+  border-right: 1px solid rgb(0 0 0 / 8%);
 }
 .nav.nav-tabs > li > a,
 .nav.tabs-vertical > li > a {
@@ -2262,6 +2264,10 @@ body.fixed-left .side-menu.left {
 #mainTable[data-key = '1'] .keyCol {
   display: flex;
 }
+
+#mainTable .emailLanRow { flex-wrap: wrap;}
+#mainTable .emailLanRow div { padding: 5px 10px; text-align: left;}
+#mainTable .emailLanRow div:first-child { flex: 0 1 150px; }
 #mainColGroup div:not(:last-child)::after {
   content: "";
   padding: 2px;
@@ -2415,6 +2421,7 @@ body.fixed-left .side-menu.left {
     .urlCol i { position: relative;}
     .urlCol i:hover { color: #5fbeaa;}
     .urlCol i:hover::after { font-size: 9px; font-weight: bold; background: #666; padding: 3px 10px; border-radius: 3px; white-space: nowrap; position: absolute; right: 0; bottom: 20px; z-index: 9; content: 'Copy url here';}
+
 /* =============
    Print css
 ============= */

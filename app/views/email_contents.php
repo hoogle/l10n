@@ -7,9 +7,9 @@
         <div class="panel">
             <ul class="nav nav-tabs tabs" id="emailLanTab" role="tablist">
 <?php $i=0; foreach ($email_contents as $lang => $sections) : $i++;?>
-                <li class="nav-item tab" role="presentation">
+                <li class="nav-item tab <?php echo $i===1 ? 'active' : ''; ?>" role="presentation">
                     
-                    <a class="nav-link <?php echo $i===1 ? 'active' : ''; ?>" id="<?php echo $lang .'-tab'; ?>" data-toggle="tab" href="<?php echo '#' . $lang; ?>" role="tab" aria-controls="<?php echo $lang; ?>" aria-selected="true">
+                    <a class="nav-link" id="<?php echo $lang .'-tab'; ?>" data-toggle="tab" href="<?php echo '#' . $lang; ?>" role="tab" aria-controls="<?php echo $lang; ?>" aria-selected="true">
                    <i class="ti-pencil-alt"></i>
                    <?php echo $lang; ?></a>
                 </li>
