@@ -58,7 +58,8 @@ class Email extends Admin_Controller {
         } else {
             $resp["status"] = "fail";
         }
-        $this->response($resp);
+        // $this->response($resp);
+        echo json_encode($resp);
     }
 }
 

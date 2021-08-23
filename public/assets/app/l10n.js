@@ -39,6 +39,7 @@ function copyToClipboard(element) {
 }
   
 $(function () {
+    const $colGroup = $('#mainColGroup');
     const $signInForm = $('form[name=signIn]');
     const $searchForm = $('form[name=searchTranslate');
     const $addkeyForm = $('form[name=addKey');
@@ -61,6 +62,7 @@ $(function () {
     const $hideColBtn = $('.hideColBtn');
     const $showColBtn = $('.showColBtn');
     const $usingLanForm = $('#usingLanForm');
+    const $emailLanForm = $('form[name=emailLanForm]');
     const canModifyKeyAcc = {
         Android: ['ray@astra.cloud', 'hoogle@astra.cloud'],
         iOS: ['timmy@astra.cloud', 'hoogle@astra.cloud'],
@@ -68,16 +70,18 @@ $(function () {
         gf: ['max@astra.cloud', 'milo@astra.cloud']
     };
     const canModifyKey = canModifyKeyAcc[$('input[name=platform]').val()] !== undefined && canModifyKeyAcc[$('input[name=platform]').val()].indexOf($('input[name=email]').val()) > -1;
+    const $topbar = $('.topbar');
     let curOrder = 'updated_at';
     let keyValue = '';
     const autoXHR = {};
+    let showLanCount = 0;
     const hideCol = {
-        'en-US': false,
-        'ja-JP': false,
-        'zh-TW': false,
-        'id-ID': false,
-        'ms-MY': false,
-        'ui-key': false
+        'en-US': null,
+        'ja-JP': null,
+        'zh-TW': null,
+        'id-ID': null,
+        'ms-MY': null,
+        'ui-key':null 
     }
     const lanPropsMapping = {
         'enus': 'en-US',
@@ -104,7 +108,7 @@ $(function () {
             visiblePages: 6,
             initiateStartPageClick: false,
             onPageClick: function (event, page) {
-                console.log('page click');
+                // console.log('page click');
                 fetchTranslate(page, keyValue);
             }
         });
@@ -119,6 +123,8 @@ $(function () {
         hideCol[hideID] = true;
         $(this).parent().addClass('flex-small');
         $('.edit_' + hideID).addClass('flex-small');
+        showLanCount--;
+        $colGroup.attr('data-showCol', showLanCount);
     });
 
     $showColBtn.click(function (e) {
@@ -127,6 +133,8 @@ $(function () {
         hideCol[showID] = false;
         $(this).parent().removeClass('flex-small');
         $('.edit_' + showID).removeClass('flex-small');
+        showLanCount++;
+        $colGroup.attr('data-showCol', showLanCount);
     });
 
     $('#mainColGroup div').click(function (e) {
@@ -143,12 +151,12 @@ $(function () {
     //
     const autoUpdateLan = (formData, orRow ) => {
         const url = '/trans/update';
-        $('.topbar').addClass('actionBar');
+        $topbar.addClass('actionBar');
         $.post(url, formData, function (rs) {
-            $('.topbar').removeClass('actionBar');
+            $topbar.removeClass('actionBar');
             if (rs.status === 'ok') {
                 Object.assign(orRow, formData);
-                console.log(orRow, ':orRow');
+                // console.log(orRow, ':orRow');
                 autoXHR[formData.id] = null;
                 // eleBtn.removeClass('btn-warning').prop('disabled', false);
                 return;
@@ -160,7 +168,7 @@ $(function () {
     //**id, en, ja
     const updateLan = (formData, eleBtn, orRow) => {
         eleBtn.prop('disabled', true);
-        console.log(orRow, ':orRow');
+        // console.log(orRow, ':orRow');
         let url = '/trans/update';
         const myformData = {};
         let needToUpdate = false;
@@ -215,7 +223,7 @@ $(function () {
         }
         $translateList.find('button[type=submit]').prop('disabled', true);
         $.get(url, formData, function (rs) {
-            console.log(rs, 'fetchTranslate');
+            // console.log(rs, 'fetchTranslate');
             $('#col_'+ curOrder).data('by',by);
             if (rs.data.length < 1) {
                 $translateList.find('button[type=submit]').prop('disabled', false);
@@ -253,19 +261,26 @@ $(function () {
                     idCol.append('<span style="position: relative; top: -9px; right: -2px; display: inline-block; width: 5px; height: 5px; border-radius: 100%; background-color: #ff5757;"></span>');
                 }
                 let mobile = false;
-                console.log(temp[0]);
-                Object.keys(hideCol).map( (lan) => {
-                    if ( !hideCol[lan] ) {
-                        temp.find('.edit_' + lan).removeClass('flex-small');
-                    } else {
-                        temp.find('.edit_' + lan).addClass('flex-small');
-                    }
-                })
+                // console.log(temp[0]);
+                    Object.keys(hideCol).map((lan) => {
+                        if (i==0 && hideCol[lan] === null) {
+                            hideCol[lan] = !temp.find('.edit_' + lan)[0];
+                            $colGroup.attr('data-showCol', showLanCount);
+                            if (!hideCol[lan]) {
+                                showLanCount++;
+                            }
+                        }
+                        if (!hideCol[lan]) {
+                            temp.find('.edit_' + lan).removeClass('flex-small');
+                        } else {
+                            temp.find('.edit_' + lan).addClass('flex-small');
+                        }
+                    })
                 $translateList.append(temp);
                 targetInput.on('focus touchstart', function (e) {
                     const name = $(this)[0].name;
-                    console.log(e,':click event');
-                    console.log(name + ':click');
+                    // console.log(e,':click event');
+                    // console.log(name + ':click');
                     if (e.type === 'touchstart') {
                         mobile = true;
                         targetCol.parent().find('textarea:not([readOnly])').blur();
@@ -283,6 +298,7 @@ $(function () {
                     $(this).prop('readonly', false);
                     $('#mainColGroup').attr('data-edit', name);
                 });
+
                 targetInput.on('change keyup paste', function (e) {
                     // console.log(e, ':change');
                     // console.log(row, ':row change');
@@ -309,13 +325,14 @@ $(function () {
                        autoUpdateLan( {id: row.id, [name]: val === '' ? ' ' : val, platform: row.platform, production: row.production }, row ) ;
                     }, 500);
                 });
+                
                 targetInput.on('focus', function (e) {
                     if ($('.widescreen').hasClass('fixed-left')) {
                         $('.button-menu-mobile').trigger('click');
                     }
                 });
                 targetInput.on('focusout', function (e) {
-                    console.log(e, ':focus out');
+                    // console.log(e, ':focus out');
                     $(this).prop('readonly', true);
                     $(this).parent().css('flex', '1');
                     $('#mainColGroup').attr('data-edit', '');
@@ -413,7 +430,6 @@ $(function () {
         };
         $.post('/index/login', formData, function(rs) {
             if (rs.status === 'ok') {
-            console.log('ooo');
                 location.href= baseURL + window.location.search;
                 return;
             }
@@ -557,4 +573,84 @@ $(function () {
             }
         }, 'json')
     });
+
+    async function autoUpdateAction (formTarget, formData) {
+        console.log(formTarget.id.value, ':formTarget id');
+        if (!formTarget.id.value) {
+            alert('Need id to identify XHR');
+            return false;
+        }
+        const xhrID = formTarget.id.value;
+        if (autoXHR[xhrID]) {
+            clearTimeout(autoXHR[xhrID]);
+        }
+        autoXHR[xhrID] = setTimeout(function () {
+                const url = formTarget.action;
+                $topbar.addClass('actionBar');
+                async function doAjax() {
+                    try {
+                        let rs = await $.post(url, formData, function (rs) {
+                            const url = formTarget.action;
+                            $topbar.removeClass('actionBar');
+                            if (rs.status === 'ok') {
+                                // console.log(orRow, ':orRow');
+                                autoXHR[xhrID] = null;
+                                // eleBtn.removeClass('btn-warning').prop('disabled', false);
+                                return formData;
+                            }
+                            return false
+                        }, 'json');
+                        return rs;
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+                return doAjax();
+            }, 500)
+    }
+                $emailLanForm.find('textarea').on('change keyup paste', function (e) {
+                    // console.log(row, ':row change');
+                    // console.log($(this).val());
+                    // console.log($(this).attr('title'));
+                    const val = $(this).val();
+                    const name = e.currentTarget.name;
+                    const targetForm = $(this).parent()[0];
+                    const orVal = targetForm.orVal.value;
+                    console.log(val, ':val');
+                    console.log(orVal, ':orVal');
+                    if (orVal === val) {
+                        console.log('Value not changed');
+                        return;
+                    }
+                    function handler () {
+                        console.log(val, ':handle autoUpdateAction success');
+                        targetForm.orVal.value = val;
+                    }
+                    autoUpdateAction($(this).parent()[0], $(this).parent().serializeArray()).then( (data) => { handler(); console.log(data, "autoUpdateAction Done");} )
+                });
+
+
+
+
+
+
+
+                   
+
+                /*
+    $emailLanForm.change(function (e) {
+        e.preventDefault();
+        const url = e.currentTarget.action;
+        $topbar.addClass('actionBar');
+        $.post(url, $(this).serializeArray(), function (rs) {
+            $topbar.removeClass('actionBar');
+            if (rs.status === 'ok') {
+                return;
+            } else {
+                alert(rs.message);
+            }
+        }, 'json');
+        console.log(e.target.value, ':email lan form')
+    });
+    */
 });
