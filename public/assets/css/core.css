@@ -809,7 +809,6 @@ textarea.form-control {
   width: 100%;
 }
 .tabs li.tab {
-  background-color: #f4f8fb;
   display: block;
   float: left;
   margin: 0;
@@ -887,7 +886,8 @@ textarea.form-control {
   background-color: #ffffff;
   border: 0;
   border-top: 1px solid rgb(0 0 0 / 8%);
-  border-right: 1px solid rgb(0 0 0 / 8%);
+  border-right: 1px solid rgb(0 0 0 / 10%);
+  border-left: 1px solid rgb(0 0 0 / 5%);
 }
 .nav.nav-tabs > li > a,
 .nav.tabs-vertical > li > a {
@@ -918,6 +918,7 @@ textarea.form-control {
 .nav.nav-tabs {
   border-bottom: 0;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  background-color: #f4f8fb;
 }
 .navtab-bg {
   background-color: #f4f8fb;
