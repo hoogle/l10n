@@ -53,7 +53,15 @@
             </div>
             <div><?php echo $row["last_updated_at"] ?></div>
             <div>
-                <button class="emailPreviewBtn btn btn-success" data-id="<?php echo $row["item"]; ?>"><i class="fa fa-tv"></i> Preview</button>
+                <div class="dropdown">
+                    <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Preview
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+<?php foreach ($user_langs as $lang) : ?>
+                        <li><a href="/email/preview?p=<?php echo $p; ?>&item=<?php echo $row["item"]; ?>&lang=<?php echo $lang; ?>"><?php echo $lang; ?></a></li>
+<?php endforeach ?>
+                    </ul>
+                </div>
                 <button class="emailEditBtn btn btn-primary" data-id="<?php echo $row["item"]; ?>"><i class="ti-pencil"></i> Edit</button>
             </div>
         </div>

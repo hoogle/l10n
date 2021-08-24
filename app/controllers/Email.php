@@ -58,7 +58,6 @@ class Email extends Admin_Controller {
         } else {
             $resp["status"] = "fail";
         }
-        // $this->response($resp);
         echo json_encode($resp);
     }
 
@@ -68,11 +67,33 @@ class Email extends Admin_Controller {
         $lang = $this->input->get("lang");
         $item = $this->input->get("item");
         list($data["production"], $data["platform"]) = explode("_", $p);
+
+        //從S3 讀取的樣版
         $template_url = "https://l10n-ap-southeast-1.s3.ap-southeast-1.amazonaws.com/goface/email/email_template.html";
         $template_html = file_get_contents($template_url);
+
+        //處理template 最下方的link 的style
+        preg_match('/<!--a style="(.*?)"><\/a-->/i', $template_html, $link_style);
+
+        //載入各類資料
         $email_contents = $this->translate_model->get_email_contents_by_lang($data["production"], $data["platform"], $item, $_SESSION["user_langs"]);
+
         foreach ($email_contents[$lang] as $key => $row) {
-            $template_html = str_replace("{{" . $key . "}}", $row["val"], $template_html);
+            $val = nl2br($row["val"]);
+            //處理含有link name 的資料
+            if (preg_match("/<a\s+\[(.*?)\]>(.*?)<\/a>/i", $val, $link_url)) {
+                $url_str = trim($email_contents[$lang][$link_url[1]]["val"]);
+                $a_html = "<a href=\"{$url_str}\" style=\"{$link_style[1]}\">{$link_url[2]}</a>";
+                $val = preg_replace("/<a\s+\[(.*?)\]>(.*?)<\/a>/i", $a_html, $val);
+            }
+            //處理無link name 的資料
+            if (preg_match("/\[(.*)_LINK_URL\]/i", $val, $just_url)) {
+                $url_str = trim($email_contents[$lang][$just_url[1]."_LINK_URL"]["val"]);
+                $a_html = "<a href=\"{$url_str}\" style=\"{$link_style[1]}\">{$url_str}</a>";
+                $val = preg_replace("/\[(.*?)_LINK_URL\]/i", $a_html, $val);
+            }
+            $template_html = str_replace("{{COPYRIGHT_TO}}", date("Y"), $template_html);
+            $template_html = str_replace("{{{$key}}}", $val, $template_html);
         }
         echo $template_html;
     }

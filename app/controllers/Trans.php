@@ -24,6 +24,7 @@ class Trans extends Admin_Controller {
             $layout["content"] = $this->load->view("/home", $data, TRUE);
         } else {
             list($data["production"], $data["platform"]) = explode("_", $p);
+            $data["p"] = $p;
             $data["lang_arr"] = $this->translate_model::LANG_ARR;
             $data["user_langs"] = $_SESSION["user_langs"];
             if ( ! in_array($data["platform"], ["Android", "iOS"])) {
@@ -154,7 +155,6 @@ class Trans extends Admin_Controller {
             "production" => $production,
             "platform" => $platform,
             "keyword"  => $keyword,
-            "ui_key"   => $ui_key,
             "`en-US`"  => $lang_en,
             "`ja-JP`"  => $lang_ja,
             "`zh-TW`"  => $lang_zh,
@@ -164,6 +164,7 @@ class Trans extends Admin_Controller {
             "created_at" => date("Y-m-d H:i:s"),
             "updated_at" => date("Y-m-d H:i:s"),
         ];
+        strlen($ui_key) && $data["ui_key"] = $ui_key;
         $resp = [];
         if ($this->translate_model->add_translate($data)) {
             $last_updated_arr = ["platform" => $platform];

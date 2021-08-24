@@ -1,6 +1,6 @@
 <div class="container">
     <div class="col-sm-12">
-        <h4 class="page-title">Environment : <span id="platform"><?php echo $production; ?> / <?php echo $platform; ?></span></h4>
+        <h4 class="page-title">Environment : <span id="platform"><a href="/trans/?p=<?php echo $production . "_" . $platform; ?>"><?php echo $production; ?> / <?php echo $platform; ?></a></span></h4>
         <ol class="breadcrumb"></ol>
     </div>
     <div class="col-sm-12">
