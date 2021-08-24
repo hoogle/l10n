@@ -60,6 +60,21 @@ class Email extends Admin_Controller {
         }
         $this->response($resp);
     }
+
+    public function preview() {
+        $data = [];
+        $p = $this->input->get("p");
+        $lang = $this->input->get("lang");
+        $item = $this->input->get("item");
+        list($data["production"], $data["platform"]) = explode("_", $p);
+        $template_url = "https://l10n-ap-southeast-1.s3.ap-southeast-1.amazonaws.com/goface/email/email_template.html";
+        $template_html = file_get_contents($template_url);
+        $email_contents = $this->translate_model->get_email_contents_by_lang($data["production"], $data["platform"], $item, $_SESSION["user_langs"]);
+        foreach ($email_contents[$lang] as $key => $row) {
+            $template_html = str_replace("{{" . $key . "}}", $row["val"], $template_html);
+        }
+        echo $template_html;
+    }
 }
 
 /* End of file email.php */

@@ -379,6 +379,13 @@ $(function () {
         link.click();
     });
 
+    $emailPreviewBtn.click(function (e) {
+        var url = new URLSearchParams(window.location.search);
+        var link = document.createElement("a");
+        link.href = '/email/preview?p=' + url.get('p') + '&item=' + $(this).data("id");
+        link.click();
+    });
+
     $copyURL.click(function () {
         var $temp = $("<input>");
         $("body").append($temp);
