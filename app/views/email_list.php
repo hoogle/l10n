@@ -13,7 +13,6 @@
      
     <div class="col-sm-12">
     </div>
-</div>
 
 <div id="myExport" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabelExport" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
@@ -35,23 +34,34 @@
         </div>
     </div>
 </div>
-
+    <div class="col-sm-12">
+        <div class="card-box table-responsive" id="mainTable">
 <?php if ($email_data) : ?>
-<table border=0 width="100%">
-    <tr><td>Email category</td><td>Subject</td><td>Last update time</td><td>Action</td></tr>
+            <div class="row m-b-10" style="padding-bottom: 8px; font-weight: 600; vertical-align: bottom; border-bottom: 2px solid #ebeff2;">
+                <div class="d-flex emailLanRow">
+                    <div>Email category</div><div class="flex-fill">Subject</div><div>Last update time</div><div>Action</div>
+                </div>
+            </div>
+            <div id="emalLanList">
 <?php foreach ($email_data as $row) : ?>
-    <tr>
-        <td><?php echo $row["item"]; ?></td>
-        <td>
-            <?php echo $row["zh-TW"]; ?>
-        </td>
-        <td><?php echo $row["last_updated_at"] ?></td>
-        <td>
-            <button class="emailPreviewBtn btn btn-success" data-id="<?php echo $row["item"]; ?>"><i class="fa fa-tv"></i> Preview</button>
-            <button class="emailEditBtn btn btn-primary" data-id="<?php echo $row["item"]; ?>"><i class="ti-pencil"></i> Edit</button>
-        </td>
-    </tr>
+    <div class="row m-b-10">
+        <div class="d-flex justify-content-around align-item-center emailLanRow">
+
+            <div><?php echo $row["item"]; ?></div>
+            <div class="flex-fill">
+                <?php echo $row["zh-TW"]; ?>
+            </div>
+            <div><?php echo $row["last_updated_at"] ?></div>
+            <div>
+                <button class="emailPreviewBtn btn btn-success" data-id="<?php echo $row["item"]; ?>"><i class="fa fa-tv"></i> Preview</button>
+                <button class="emailEditBtn btn btn-primary" data-id="<?php echo $row["item"]; ?>"><i class="ti-pencil"></i> Edit</button>
+            </div>
+        </div>
+    </div>
 <?php endforeach ?>
-</table>
+</div>
 <?php endif ?>
+</div>
+</div>
+</div>
 

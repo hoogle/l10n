@@ -341,6 +341,15 @@ a:focus {
   vertical-align: middle;
 }
 /* Card Box */
+
+.card-body {
+  flex: 1 1 auto;
+  padding: 1rem 1rem;
+}
+
+.card-title {
+  margin-bottom: 0.5rem;
+}
 .card-box {
   padding: 20px;
   border: 1px solid rgba(54, 64, 74, 0.05);
@@ -591,12 +600,14 @@ textarea.form-control {
 }
 .form-control:focus {
   background-color: #FFFFFF;
-  border: 1px solid #AAAAAA;
+  border: 1px solid rgba(0, 150, 136, 0.7);
   -webkit-box-shadow: none;
   box-shadow: none;
   outline: 0 !important;
   color: #333333;
 }
+#emailLanTabContent .form-control { padding: 20px !important;}
+#emailLanTabContent .form-control:focus { background-color:rgba(0, 150, 136, 0.5); color: black !important; border-color:rgba(0, 150, 136, 0) !important;}
 .input-lg {
   height: 46px;
   padding: 10px 16px;
@@ -798,7 +809,6 @@ textarea.form-control {
   width: 100%;
 }
 .tabs li.tab {
-  background-color: #ffffff;
   display: block;
   float: left;
   margin: 0;
@@ -819,6 +829,7 @@ textarea.form-control {
 .tabs li.tab a.active {
   color: #5fbeaa !important;
 }
+
 .tabs .indicator {
   background-color: #5fbeaa;
   bottom: 0;
@@ -874,6 +885,9 @@ textarea.form-control {
 .nav.nav-tabs > li.active > a {
   background-color: #ffffff;
   border: 0;
+  border-top: 1px solid rgb(0 0 0 / 8%);
+  border-right: 1px solid rgb(0 0 0 / 10%);
+  border-left: 1px solid rgb(0 0 0 / 5%);
 }
 .nav.nav-tabs > li > a,
 .nav.tabs-vertical > li > a {
@@ -904,6 +918,7 @@ textarea.form-control {
 .nav.nav-tabs {
   border-bottom: 0;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  background-color: #f4f8fb;
 }
 .navtab-bg {
   background-color: #f4f8fb;
@@ -2250,6 +2265,10 @@ body.fixed-left .side-menu.left {
 #mainTable[data-key = '1'] .keyCol {
   display: flex;
 }
+
+#mainTable .emailLanRow { flex-wrap: wrap;}
+#mainTable .emailLanRow div { padding: 5px 10px; text-align: left;}
+#mainTable .emailLanRow div:first-child { flex: 0 1 150px; }
 #mainColGroup div:not(:last-child)::after {
   content: "";
   padding: 2px;
@@ -2293,6 +2312,9 @@ body.fixed-left .side-menu.left {
 .idCol {
   flex: 0 !important;
   min-width: 40px;
+}
+#mainColGroup[data-showCol='1'] i.hideColBtn {
+  display: none;
 }
 #mainColGroup[data-sort='id'] #col_id {
   color: white;
@@ -2400,6 +2422,7 @@ body.fixed-left .side-menu.left {
     .urlCol i { position: relative;}
     .urlCol i:hover { color: #5fbeaa;}
     .urlCol i:hover::after { font-size: 9px; font-weight: bold; background: #666; padding: 3px 10px; border-radius: 3px; white-space: nowrap; position: absolute; right: 0; bottom: 20px; z-index: 9; content: 'Copy url here';}
+
 /* =============
    Print css
 ============= */
