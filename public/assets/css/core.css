@@ -2267,8 +2267,8 @@ body.fixed-left .side-menu.left {
 }
 
 #mainTable .emailLanRow { flex-wrap: wrap;}
-#mainTable .emailLanRow div { padding: 5px 10px; text-align: left;}
-#mainTable .emailLanRow div:first-child { flex: 0 1 150px; }
+#mainTable .emailLanRow > div { padding: 5px 10px; text-align: left;}
+#mainTable .emailLanRow > div:first-child { flex: 0 1 150px; }
 #mainColGroup div:not(:last-child)::after {
   content: "";
   padding: 2px;
