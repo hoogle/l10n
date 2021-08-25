@@ -580,7 +580,7 @@ a:focus {
 }
 /* Form components */
 textarea.form-control {
-  min-height: 90px;
+  min-height: 80px;
 }
 .form-control {
   background-color: #FFFFFF;
@@ -2309,12 +2309,24 @@ body.fixed-left .side-menu.left {
 }
 #mainColGroup div i.showColBtn:hover::after { content: 'show'; }
 
-.idCol {
+.uiKeyCol, .idCol {
   flex: 0 !important;
   min-width: 40px;
 }
+.ptCol {
+  flex: 0 !important;
+  min-width: 60px;
+}
 #mainColGroup[data-showCol='1'] i.hideColBtn {
   display: none;
+}
+#mainColGroup[data-sort='ui_key'] #col_ui_key {
+  color: white;
+  background: #98a6ad;
+}
+#mainColGroup[data-sort='platform'] #col_platform {
+  color: white;
+  background: #98a6ad;
 }
 #mainColGroup[data-sort='id'] #col_id {
   color: white;
