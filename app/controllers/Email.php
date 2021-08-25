@@ -69,7 +69,10 @@ class Email extends Admin_Controller {
         list($data["production"], $data["platform"]) = explode("_", $p);
 
         //從S3 讀取的樣版
-        $template_url = "https://l10n-ap-southeast-1.s3.ap-southeast-1.amazonaws.com/goface/email/email_template.html";
+        $this->load->config("aws");
+        $s3_config = $this->config->item("s3");
+        $filepath = "goface/email/email_template.html";
+        $template_url = $s3_config["hostname"]["S3_HOSTNAME"] . "/" . $s3_config["bucket"]["L10N"] . "/" . $filepath;
         $template_html = file_get_contents($template_url);
 
         //處理template 最下方的link 的style
