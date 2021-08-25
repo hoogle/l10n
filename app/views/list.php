@@ -21,6 +21,7 @@
     <div class="col-sm-12">
         <div class="card-box table-responsive" id="mainTable">
             <input type="hidden" name="email" value="<?php echo $email; ?>">
+            <input type="hidden" name="production" value="<?php echo $production; ?>">
             <div class="row m-b-20">
                 <h4 class="m-t-0 header-title col-md-2 col-sm-12"><b>Key List</b></h4>
 <?php if (isset($s3_link)) : ?>

@@ -20,8 +20,9 @@ $.fn.replaceElString = function (target, value) {
     $.each(value, function ( i , item) {
         const nullVal = !item;
         var reg = new RegExp("{" + i + "}", "g");
-        //console.log(reg.exec(target));
-        //console.log("replace param:" + reg + ", value:" + item);
+        // console.log(reg.exec(target));
+        // console.log(target);
+        // console.log("replace param:" + reg + ", value:" + item);
 
         target = nullVal ? target.replace(reg, '') : target.replace(reg, escapeHtml(item));
     });
@@ -57,7 +58,7 @@ $(function () {
     const transListRowTemp = $('#transListRowTemp').html();
     const baseURL = '/welcome';
     const myURL = new URL(window.location.href);
-    const platform = myURL.searchParams.get('p') ? myURL.searchParams.get('p') : $('#platform').html();
+    const platform = myURL.searchParams.get('p') ? myURL.searchParams.get('p') : $('input[name=platform]').val();
     const $showKeyBtn = $('#showKeyBtn');
     const $hideColBtn = $('.hideColBtn');
     const $showColBtn = $('.showColBtn');
@@ -69,9 +70,10 @@ $(function () {
         portal: ['mei@astra.cloud', 'hoogle@astra.cloud'],
         gf: ['max@astra.cloud', 'milo@astra.cloud']
     };
-    const canModifyKey = canModifyKeyAcc[$('input[name=platform]').val()] !== undefined && canModifyKeyAcc[$('input[name=platform]').val()].indexOf($('input[name=email]').val()) > -1;
+    const canModifyKey = canModifyKeyAcc[platform] !== undefined && canModifyKeyAcc[$('input[name=platform]').val()].indexOf($('input[name=email]').val()) > -1;
     const $topbar = $('.topbar');
-    let curOrder = 'updated_at';
+    let curOrder = null;
+    let rowUrl = null;
     let keyValue = '';
     const autoXHR = {};
     let showLanCount = 0;
@@ -82,7 +84,7 @@ $(function () {
         'id-ID': null,
         'ms-MY': null,
         'ui-key':null 
-    }
+    };
     const lanPropsMapping = {
         'enus': 'en-US',
         'jajp': 'ja-JP',
@@ -90,7 +92,34 @@ $(function () {
         'msmy': 'ms-MY',
         'zhtw': 'zh-TW',
         'uikey': 'ui-key'
+    };
+    const pageUrl = {
+        'relation': '/relation/page/'
+    };
+    const curOrdersets = {
+        'relation': 'ui_key'
+    };
+
+    const rowUrlsets = {
+        // 'relation': [location.origin, '/relation/?production=', $('input[name=production]').val(), '&ui_key='].join('')
+        'relation': '' 
     }
+
+    const platformIconsets = {
+        'iOS' : 'apple',
+        'Android' : 'android'
+    };
+
+    // **********************
+    // init default param
+    // **********************
+    Object.keys(curOrdersets).map(function (c) {
+        curOrder = location.pathname.indexOf(c) > -1 ? curOrdersets[c] : 'updated_at';
+    });
+    Object.keys(rowUrlsets).map(function (c) {
+        rowUrl = location.pathname.indexOf(c) > -1 ? rowUrlsets[c] : [location.origin,'/trans?p=',platform,'&id='].join('');
+    });
+
     // **********************
     // initPagination
     // **********************
@@ -202,7 +231,10 @@ $(function () {
         const key = curkey !== undefined ? curkey : keyValue;
         const destroyPagi = doDestroyPagi !== undefined ? doDestroyPagi : false;
         const by = ( curOrder !== 'updated_at' && ! $('#col_'+ curOrder).data('by') ) || ($('#col_'+ curOrder).data('by') && $('#col_'+ curOrder).data('by') === 'DESC') ? 'ASC' : 'DESC';
-        let url = '/trans/page/' + page;
+        let url = '';
+        Object.keys(pageUrl).map(function(p) {
+            url = location.pathname.indexOf(p) > -1 ? pageUrl[p] + page : '/trans/page/' + page;
+        });
         let formData = {};
         if (id) {
             formData = {
@@ -249,7 +281,9 @@ $(function () {
                 document.body.removeChild(tempInput);
             }
             $.each(rs.data, function (i, row) {
-                row.url = location.origin + '/trans?p=' + platform + '&id=' + row.id;
+                row.url = rowUrl ? rowUrl + row.id : rowUrl;
+                row.platformIcon = platformIconsets[row.platform];
+                console.log(row, ':row');
                 const temp = $($.fn.replaceElString(transListRowTemp, row));
                 const form = temp.find('form');
                 const targetInput = temp.find('textarea');
