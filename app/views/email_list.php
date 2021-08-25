@@ -55,10 +55,10 @@
             <div class="d-flex" style="flex: 0 1 190px;">
                 <div class="btn-group dropdown">
                     <button class="btn btn-success dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
-                    <span class="fa fa-chevron-circle-left"></span>
+                    <span class="fa fa-chevron-circle-down"></span>
                     Preview
                     </button>
-                        <ul class="dropdown-menu" style="top: -40px; left: -160px;">
+                        <ul class="dropdown-menu" style="">
     <?php foreach ($user_langs as $lang) : ?>
                             <li><a href="/email/preview?p=<?php echo $p; ?>&item=<?php echo $row["item"]; ?>&lang=<?php echo $lang; ?>"><?php echo $lang; ?></a></li>
     <?php endforeach ?>

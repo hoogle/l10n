@@ -1355,7 +1355,7 @@ body.fixed-left .side-menu.left {
   overflow: hidden;
 }
 .content-page > .content {
-  margin-bottom: 60px;
+  margin-bottom: 100px;
   margin-top: 60px;
   padding: 20px 5px 15px 5px;
 }
@@ -2259,6 +2259,7 @@ body.fixed-left .side-menu.left {
   justify-content:center;
   align-items: center;
 }
+#mainTable { overflow: visible !important;}
 #mainTable .keyCol {
   display: none;
 }
