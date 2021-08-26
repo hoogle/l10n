@@ -315,34 +315,22 @@ final class Translate_model extends MY_Model
         return $data ?: FALSE;
     }
 
-    public function get_email_contents_by_lang($prod, $plat, $item, $user_langs = []) {
-        $lang_arr = [];
+    public function get_email_contents_by_lang($prod, $plat, $item, $use_lang) {
+        $data = [];
         if ($arr = $this->get_email_contents($prod, $plat, $item)) {
-            $languages = $user_langs ?: $this::LANG_ARR;
+            $languages = is_array($use_lang) ? $use_lang : [$use_lang];
             foreach ($arr as $row) {
                 foreach ($languages as $lang) {
-                    $lang_arr[$lang][$row["keyword"]] = [
+                    $data[$lang][$row["keyword"]] = [
                         "id" => $row["id"],
                         "val" => $row[$lang],
                     ];
                 }
             }
+            $data = is_array($use_lang) ? $data : $data[$use_lang];
         }
-        return $lang_arr ?: FALSE;
-    }
-
-    /**
-     * DEPRECATED!!!!
-     */
-    /*
-    public function get_translate($platform) {
-        $DB = $this->_get_db();
-        $DB->where("platform", $platform);
-        $DB->order_by("id", "ASC");
-        $data = $DB->get($this->table)->result_array();
         return $data ?: FALSE;
     }
-     */
 
     public function get_last_id() {
         $DB = $this->_get_db();
