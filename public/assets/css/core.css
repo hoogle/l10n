@@ -2314,6 +2314,12 @@ body.fixed-left .side-menu.left {
   flex: 0 !important;
   min-width: 40px;
 }
+div[data-uiKey='group']{
+  border-top:2px solid rgba(134, 134, 134, 0.4);
+}
+div[data-uiKey=''] .uiKeyCol{
+  color: white;
+}
 .ptCol {
   flex: 0 !important;
   min-width: 60px;

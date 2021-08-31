@@ -65,12 +65,13 @@ $(function () {
     const $usingLanForm = $('#usingLanForm');
     const $emailLanForm = $('form[name=emailLanForm]');
     const canModifyKeyAcc = {
-        Android: ['ray@astra.cloud', 'hoogle@astra.cloud'],
-        iOS: ['timmy@astra.cloud', 'hoogle@astra.cloud'],
-        portal: ['mei@astra.cloud', 'hoogle@astra.cloud'],
-        gf: ['max@astra.cloud', 'milo@astra.cloud']
+        'goface_Android': ['ray@astra.cloud', 'hoogle@astra.cloud'],
+        'goface_iOS': ['timmy@astra.cloud', 'hoogle@astra.cloud'],
+        'goface_portal': ['mei@astra.cloud', 'hoogle@astra.cloud'],
+        'goface_gf': ['max@astra.cloud', 'milo@astra.cloud'],
+        'goface_email': ['hoogle@astra.cloud', 'milo@astra.cloud']
     };
-    const canModifyKey = canModifyKeyAcc[platform] !== undefined && canModifyKeyAcc[$('input[name=platform]').val()].indexOf($('input[name=email]').val()) > -1;
+    const canModifyKey = canModifyKeyAcc[platform] !== undefined && canModifyKeyAcc[platform].indexOf($('input[name=email]').val()) > -1;
     const $topbar = $('.topbar');
     let curOrder = null;
     let rowUrl = null;
@@ -280,10 +281,16 @@ $(function () {
                 alert("Copied the text: " + tempInput.value);
                 document.body.removeChild(tempInput);
             }
+            let uk = '';
             $.each(rs.data, function (i, row) {
                 row.url = rowUrl ? rowUrl + row.id : rowUrl;
                 row.platformIcon = platformIconsets[row.platform];
-                console.log(row, ':row');
+                row.uiKeyGroup = 'none';
+                if (curOrder === 'ui_key') {
+                    row.uiKeyGroup = row.ui_key !== uk ? 'group': '';
+                }
+                uk = row.ui_key;
+                // console.log(row, ':row');
                 const temp = $($.fn.replaceElString(transListRowTemp, row));
                 const form = temp.find('form');
                 const targetInput = temp.find('textarea');
@@ -313,8 +320,8 @@ $(function () {
                 $translateList.append(temp);
                 targetInput.on('focus touchstart', function (e) {
                     const name = $(this)[0].name;
-                    // console.log(e,':click event');
-                    // console.log(name + ':click');
+                    console.log(e,':click event');
+                    console.log(name + ':click');
                     if (e.type === 'touchstart') {
                         mobile = true;
                         targetCol.parent().find('textarea:not([readOnly])').blur();
@@ -324,6 +331,8 @@ $(function () {
                     }
                     $(this).parent().css('flex', '1 1 auto');
                     if (name === 'keyword') {
+
+                        console.log(canModifyKey, ':canModifyKey');
                         if (! canModifyKey) {
                             copyToClipboard($(this)[0]);
                             return;
