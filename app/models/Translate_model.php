@@ -205,12 +205,13 @@ final class Translate_model extends MY_Model
         return $return_data;
     }
 
-    public function update_platform($prod_pf, $type = "update") {
+    public function update_platform($prod_pf, $type = "update", $email) {
         if ($type == "publish") {
             $data = ["published_at" => date("Y-m-d H:i:s")];
         } else {
             $data = ["updated_at" => date("Y-m-d H:i:s")];
         }
+        $data["last_publisher"] = $email;
         $DB = $this->_get_db();
         $DB->where("production_platform", $prod_pf);
         $DB->update($this->table_platform, $data);

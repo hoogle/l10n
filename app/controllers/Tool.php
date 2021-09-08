@@ -119,7 +119,7 @@ class Tool extends MY_Controller {
             //iOS
             $this->_goface_ios($json_arr, $production, $platform);
         }
-        $this->translate_model->update_platform($p, "publish");
+        $this->translate_model->update_platform($p, "publish", $_SESSION["email"]);
         $this->_remove_folder(APPPATH . "tmp");
         exit;
     }
@@ -321,7 +321,7 @@ class Tool extends MY_Controller {
         }
         if ($resp["status"] == "ok") {
             AwsS3::get_instance()->pub_object($s3_config["bucket"]["L10N"], "{$production}/{$platform}/all_lang.json", json_encode($json_arr));
-            $this->translate_model->update_platform($p, "publish");
+            $this->translate_model->update_platform($p, "publish", $_SESSION["email"]);
         }
 
         echo json_encode($resp, TRUE);

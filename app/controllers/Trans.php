@@ -132,7 +132,7 @@ class Trans extends Admin_Controller {
             }
             $arr = ["last_update" => json_encode($last_updated_arr)];
             $this->translate_model->user_last_update($_SESSION["email"], $arr);
-            $this->translate_model->update_platform($production . "_" . $platform, "update");
+            $this->translate_model->update_platform($production . "_" . $platform, "update", "");
             $resp["status"] = "ok";
         } else {
             $resp["status"] = "fail";
@@ -188,7 +188,7 @@ class Trans extends Admin_Controller {
             }
             $arr = ["last_update" => json_encode($last_updated_arr)];
             $this->translate_model->user_last_update($_SESSION["email"], $arr);
-            $this->translate_model->update_platform($production . "_" . $platform, "update");
+            $this->translate_model->update_platform($production . "_" . $platform, "update", "");
             $resp["status"] = "ok";
         } else {
             $resp["status"] = "fail";
