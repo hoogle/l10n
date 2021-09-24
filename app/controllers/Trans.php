@@ -101,14 +101,11 @@ class Trans extends Admin_Controller {
         ];
         strlen($ui_key) && $data["ui_key"] = $ui_key;
         strlen($keyword) && $data["keyword"] = $keyword;
+        strlen($lang_en) && $data["`en-US`"] = $lang_en;
         strlen($lang_ja) && $data["`ja-JP`"] = $lang_ja;
         strlen($lang_zh) && $data["`zh-TW`"] = $lang_zh;
         strlen($lang_id) && $data["`id-ID`"] = $lang_id;
         strlen($lang_ms) && $data["`ms-MY`"] = $lang_ms;
-        if (strlen($lang_en)) {
-            $data["`en-US`"] = $lang_en;
-            if ($platform == "iOS") $data["keyword"] = $lang_en;
-        }
 
         $need_specialchar = in_array($platform, ["portal"]) ? 1 : 0;
 
