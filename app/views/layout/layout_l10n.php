@@ -36,7 +36,7 @@
     <!--/page css-->
         <link href="/assets/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css">
         <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="/assets/css/core.css?v=0825" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/core.css?v=1001" rel="stylesheet" type="text/css" />
         <link href="/assets/css/components.css?v=0820" rel="stylesheet" type="text/css" />
         <link href="/assets/css/icons.css" rel="stylesheet" type="text/css" />
         <link href="/assets/css/pages.css" rel="stylesheet" type="text/css" />

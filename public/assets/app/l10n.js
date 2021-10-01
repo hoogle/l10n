@@ -324,12 +324,17 @@ $(function () {
                     console.log(name + ':click');
                     if (e.type === 'touchstart') {
                         mobile = true;
-                        targetCol.parent().find('textarea:not([readOnly])').blur();
+                        const prevEl=$translateList.find('.mobileEditStatus');
+                        prevEl.css('flex', '1').removeClass('mobileEditStatus');
+                        prevEl.find('textarea').prop('readonly', true);
                     }
                     if (name === 'id') {
                         return;
                     }
                     $(this).parent().css('flex', '1 1 auto');
+                    if (mobile) {
+                        $(this).parent().addClass('mobileEditStatus');
+                    }
                     if (name === 'keyword') {
 
                         console.log(canModifyKey, ':canModifyKey');
@@ -378,6 +383,7 @@ $(function () {
                     // console.log(e, ':focus out');
                     $(this).prop('readonly', true);
                     $(this).parent().css('flex', '1');
+                    $(this).parent().removeClass('mobileEditStatus');
                     $('#mainColGroup').attr('data-edit', '');
                 });
                 //

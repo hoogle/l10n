@@ -69,7 +69,7 @@
 </div>
 
 <template id="transListRowTemp">
-    <div class="row translateRow m-b-10">
+    <div class="row translateRow m-b-10" style="overflow:auto">
         <form name="l10n_{id}" class="d-flex align-item-center">
             <input type="hidden" name="platform" value="<?php echo $platform; ?>"/>
             <div class="idCol">{id}</div>
