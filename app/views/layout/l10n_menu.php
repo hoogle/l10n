@@ -12,11 +12,6 @@
 <?php else : ?>
 <?php foreach ($platform_arr as $pf) : ?>
 <?php
-        //////
-        if ($pf["platform"] == "email" && ! in_array($email, ["hoogle@astra.cloud", "mei@astra.cloud"])) {
-            continue;
-        }
-        //////
         $pf_str = $pf["production"] . "_" . $pf["platform"];
         $pen = '<i style="color:#ffa857" class="fa fa-pencil-square-o"></i>';
         $mod_icon = $pf_stat[$pf_str]["modified"] ? $pen : "";
