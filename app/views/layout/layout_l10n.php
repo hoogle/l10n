@@ -11,7 +11,7 @@
 
     <link rel="shortcut icon" href="/assets/ntt_images/favicon_1.png" sizes="32x32">
 
-    <title>Astra Translation tool</title>
+    <title>Localization Management</title>
 
     <!--page css-->
         <?php
@@ -66,7 +66,8 @@
                     <div class="text-center">
                         <a href="/" class="logo">
                             <i class="icon-c-logo"> <img src="/assets/ntt_images/logo_ntt_sm.png" height="42"/> </i>
-                            <span><img src="/assets/ntt_images/logo_ntt_lg.png" height="40"/></span>
+                            <!--span><img src="/assets/ntt_images/logo_ntt_lg.png" height="40"/></span-->
+                            <span style="font-family:Papyrus">Localization</span>
                         </a>
                     </div>
                 </div>

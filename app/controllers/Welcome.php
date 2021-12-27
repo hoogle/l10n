@@ -22,8 +22,7 @@ class Welcome extends MY_Controller {
         $data['gl_login_url'] = $gclient->createAuthUrl();
         $redir = $this->input->get("redir");
         $data["redir"] = $redir;
-        $layout["content"] = $this->load->view("login", $data, TRUE);
-        $this->load->view("layout/layout_l10n_box", ["layout" => $layout]);
+        $this->load->view('login', $data);
 	}
 
 }

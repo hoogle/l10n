@@ -89,5 +89,5 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
  */
 
 define('GL_OAUTH2_SECRET', APPPATH . '/config/secret/client_secret_l10n.goface.me.json');
-define('ALLOW_EMAIL_DOMAIN', ['astra.cloud']);
+define('ALLOW_EMAIL_DOMAIN', ['astra.cloud', 'gmail.com']);
 
